@@ -1,0 +1,44 @@
+///////////////////////////////////////////
+////////////  SASS VARIABLES  /////////////
+///////////////////////////////////////////
+
+$font-roboto: "roboto";
+
+$theme-black: #444;
+$theme-white: #fff;
+$theme-blue: #1790ff;
+$theme-blue-2: #001428;
+$theme-blue-3: #000b16;
+$theme-orange: #f7931e;
+$theme-orange-2: #b44606;
+$theme-dark-chocolate: #271002;
+$theme-red: #da4d4b;
+$theme-grey: #bbbbbd;
+$theme-yellow: #ffed14;
+$theme-green: #52c36f;
+$theme-purple: #c96f90;
+
+$primary-color: $theme-orange;
+$primary-color-2: $theme-orange-2;
+
+$background-grey: #f0f2f5;
+
+$screen-xs: 480px;
+$screen-xs-min: $screen-xs;
+$screen-sm: 576px;
+$screen-sm-min: $screen-sm;
+$screen-md: 768px;
+$screen-md-min: $screen-md;
+$screen-lg: 992px;
+$screen-lg-min: $screen-lg;
+$screen-xl: 1200px;
+$screen-xl-min: $screen-xl;
+$screen-xxl: 1600px;
+$screen-xxl-min: $screen-xxl;
+$screen-xs-max: ($screen-sm-min - 1px);
+$screen-sm-max: ($screen-md-min - 1px);
+$screen-md-max: ($screen-lg-min - 1px);
+$screen-lg-max: ($screen-xl-min - 1px);
+$screen-xl-max: ($screen-xxl-min - 1px);
+$layout-header-height: 64px;
+$layout-aside-width: 350px;

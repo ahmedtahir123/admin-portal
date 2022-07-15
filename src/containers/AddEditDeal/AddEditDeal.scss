@@ -1,0 +1,23 @@
+.edit-deal {
+  .change-password {
+    text-align: right;
+    margin-top: 10px;
+  }
+  .signup-location {
+    text-decoration: none;
+  }
+}
+
+.deal__usage-details {
+  border: 1px solid #999;
+  padding: 20px;
+}
+
+.edit-deal__brand-logo {
+  width: 100px;
+  height: 100px;
+  img {
+    width: inherit;
+    height: 100%;
+  }
+}

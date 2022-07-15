@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+    <style>
+      body,
+      button {
+        font-family: "Montserrat", sans-serif;
+      }
+
+      h2 {
+        font-weight: "bold";
+      }
+
+      .chevron-up {
+        height: 30px;
+        width: 30px;
+        display: inline-block;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-image: url("data:image/svg+xml;base64,PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgZm9jdXNhYmxlPSJmYWxzZSIgZGF0YS1wcmVmaXg9ImZhcyIgZGF0YS1pY29uPSJjaGV2cm9uLXVwIiBjbGFzcz0ic3ZnLWlubGluZS0tZmEgZmEtY2hldnJvbi11cCBmYS13LTE0IiByb2xlPSJpbWciIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDQ0OCA1MTIiPjxwYXRoIGZpbGw9IiMzNjM2MzYiIGQ9Ik0yNDAuOTcxIDEzMC41MjRsMTk0LjM0MyAxOTQuMzQzYzkuMzczIDkuMzczIDkuMzczIDI0LjU2OSAwIDMzLjk0MWwtMjIuNjY3IDIyLjY2N2MtOS4zNTcgOS4zNTctMjQuNTIyIDkuMzc1LTMzLjkwMS4wNEwyMjQgMjI3LjQ5NSA2OS4yNTUgMzgxLjUxNmMtOS4zNzkgOS4zMzUtMjQuNTQ0IDkuMzE3LTMzLjkwMS0uMDRsLTIyLjY2Ny0yMi42NjdjLTkuMzczLTkuMzczLTkuMzczLTI0LjU2OSAwLTMzLjk0MUwyMDcuMDMgMTMwLjUyNWM5LjM3Mi05LjM3MyAyNC41NjgtOS4zNzMgMzMuOTQxLS4wMDF6Ii8+PC9zdmc+");
+      }
+
+      .chevron-down {
+        height: 30px;
+        width: 30px;
+        display: inline-block;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-image: url("data:image/svg+xml;base64,PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgZm9jdXNhYmxlPSJmYWxzZSIgZGF0YS1wcmVmaXg9ImZhcyIgZGF0YS1pY29uPSJjaGV2cm9uLWRvd24iIGNsYXNzPSJzdmctaW5saW5lLS1mYSBmYS1jaGV2cm9uLWRvd24gZmEtdy0xNCIgcm9sZT0iaW1nIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NDggNTEyIj48cGF0aCBmaWxsPSIjMzYzNjM2IiBkPSJNMjA3LjAyOSAzODEuNDc2TDEyLjY4NiAxODcuMTMyYy05LjM3My05LjM3My05LjM3My0yNC41NjkgMC0zMy45NDFsMjIuNjY3LTIyLjY2N2M5LjM1Ny05LjM1NyAyNC41MjItOS4zNzUgMzMuOTAxLS4wNEwyMjQgMjg0LjUwNWwxNTQuNzQ1LTE1NC4wMjFjOS4zNzktOS4zMzUgMjQuNTQ0LTkuMzE3IDMzLjkwMS4wNGwyMi42NjcgMjIuNjY3YzkuMzczIDkuMzczIDkuMzczIDI0LjU2OSAwIDMzLjk0MUwyNDAuOTcxIDM4MS40NzZjLTkuMzczIDkuMzcyLTI0LjU2OSA5LjM3Mi0zMy45NDIgMHoiPjwvcGF0aD48L3N2Zz4=");
+      }
+
+      .collapsible {
+        cursor: pointer;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 13px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .content {
+        padding: 0 18px;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+        font-size: 11px;
+        border-bottom: 1px solid #e7e7e7;
+      }
+
+      .content a {
+        color: #f7941d;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h2>How can we help?</h2>
+
+    <button class="collapsible">
+      How to Redeem a Voucher
+      <span class="chevron-down" />
+    </button>
+    <div class="content">
+      <p>
+        Making Redemption through App is easy, Here’s how it goes:
+      </p>
+      <ol>
+        <li>Tap on the offer you want to redeem.</li>
+        <li>Ask the merchant to enter their PIN.</li>
+        <li>
+          You’ll get the smiley screen showing your estimated savings amount.
+        </li>
+        <li>Make sure to activate Bogo App first, <a href="www.google.com">Haven’t purchased it yet?</a></li>
+      </ol>
+    </div>
+    <button class="collapsible">
+      How to Activate my account
+      <span class="chevron-down" />
+    </button>
+    <div class="content">
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat.
+      </p>
+    </div>
+    <button class="collapsible">
+      I forgot my Password
+      <span class="chevron-down" />
+    </button>
+    <div class="content">
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat.
+      </p>
+    </div>
+
+    <script>
+      var coll = document.getElementsByClassName("collapsible");
+      var i;
+
+      for (i = 0; i < coll.length; i++) {
+        coll[i].onclick = function() {
+          if (this.classList.contains("active")) {
+            this.classList.remove("active");
+            this.firstElementChild.classList.remove("chevron-up");
+            this.firstElementChild.classList.add("chevron-down");
+            this.style.maxHeight = null;
+            this.nextElementSibling.style.maxHeight = null;
+          } else {
+            for (let j = 0; j < coll.length; j++) {
+              coll[j].classList.remove("active");
+              coll[j].style.maxHeight = null;
+              coll[j].nextElementSibling.style.maxHeight = null;
+              coll[j].firstElementChild.classList.remove("chevron-up");
+              coll[j].firstElementChild.classList.add("chevron-down");
+            }
+            this.classList.add("active");
+            this.firstElementChild.classList.remove("chevron-down");
+            this.firstElementChild.classList.add("chevron-up");
+            var panel = this.nextElementSibling;
+            panel.style.maxHeight = panel.scrollHeight + "px";
+          }
+        };
+      }
+    </script>
+  </body>
+</html>

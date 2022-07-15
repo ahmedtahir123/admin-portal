@@ -1,0 +1,19 @@
+.error-state {
+  justify-content: center;
+  padding-top: 100px;
+  color: gray;
+  font-size: 20px;
+  line-height: 1.4;
+  margin: 16px 0;
+}
+
+.error-state > .h2 {
+  color: "colors.neutral80";
+  font-size: 26px;
+  line-height: 1.23;
+  margin-top: 75px;
+}
+
+.error-state > img {
+  padding-left: 25px;
+}

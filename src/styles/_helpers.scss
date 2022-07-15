@@ -1,0 +1,510 @@
+@import "./_variables.scss";
+@import "./_mixins.scss";
+
+///////////////////////////////////////////
+/////////////////  BASE  //////////////////
+///////////////////////////////////////////
+
+a {
+  color: $theme-orange;
+}
+
+///////////////////////////////////////////
+////////////  HELPER CLASSES  /////////////
+///////////////////////////////////////////
+
+@for $i from 0 through 150 {
+  .pad-left-#{$i} {
+    padding-left: $i + px;
+  }
+  .pad-right-#{$i} {
+    padding-right: $i + px;
+  }
+  .pad-top-#{$i} {
+    padding-top: $i + px;
+  }
+  .pad-bottom-#{$i} {
+    padding-bottom: $i + px;
+  }
+
+  .pad-left-i-#{$i} {
+    padding-left: $i + px !important;
+  }
+  .pad-right-i-#{$i} {
+    padding-right: $i + px !important;
+  }
+  .pad-top-i-#{$i} {
+    padding-top: $i + px !important;
+  }
+  .pad-bottom-i-#{$i} {
+    padding-bottom: $i + px !important;
+  }
+
+  .pad-left-pc-#{$i} {
+    padding-left: percentage($i/100);
+  }
+  .pad-right-pc-#{$i} {
+    padding-right: percentage($i/100);
+  }
+  .pad-top-pc-#{$i} {
+    padding-top: percentage($i/100);
+  }
+  .pad-bottom-pc-#{$i} {
+    padding-bottom: percentage($i/100);
+  }
+
+  .pad-left-i-pc-#{$i} {
+    padding-left: percentage($i/100) !important;
+  }
+  .pad-right-i-pc-#{$i} {
+    padding-right: percentage($i/100) !important;
+  }
+  .pad-top-i-pc-#{$i} {
+    padding-top: percentage($i/100) !important;
+  }
+  .pad-bottom-i-pc-#{$i} {
+    padding-bottom: percentage($i/100) !important;
+  }
+
+  .mg-left-#{$i} {
+    margin-left: $i + px;
+  }
+  .mg-right-#{$i} {
+    margin-right: $i + px;
+  }
+  .mg-top-#{$i} {
+    margin-top: $i + px;
+  }
+  .mg-bottom-#{$i} {
+    margin-bottom: $i + px;
+  }
+
+  .mg-left-i-#{$i} {
+    margin-left: $i + px !important;
+  }
+  .mg-right-i-#{$i} {
+    margin-right: $i + px !important;
+  }
+  .mg-top-i-#{$i} {
+    margin-top: $i + px !important;
+  }
+  .mg-bottom-i-#{$i} {
+    margin-bottom: $i + px !important;
+  }
+
+  .mg-left-pc-#{$i} {
+    margin-left: percentage($i/100);
+  }
+  .mg-right-pc-#{$i} {
+    margin-right: percentage($i/100);
+  }
+  .mg-top-pc-#{$i} {
+    margin-top: percentage($i/100);
+  }
+  .mg-bottom-pc-#{$i} {
+    margin-bottom: percentage($i/100);
+  }
+
+  .mg-left-i-pc-#{$i} {
+    margin-left: percentage($i/100) !important;
+  }
+  .mg-right-i-pc-#{$i} {
+    margin-right: percentage($i/100) !important;
+  }
+  .mg-top-i-pc-#{$i} {
+    margin-top: percentage($i/100) !important;
+  }
+  .mg-bottom-i-pc-#{$i} {
+    margin-bottom: percentage($i/100) !important;
+  }
+}
+
+@for $i from 1 through 100 {
+  .font-#{$i} {
+    font-size: $i + px;
+  }
+  .font-#{$i}-p5 {
+    font-size: ($i + 0.5) + px;
+  }
+}
+
+@for $i from 1 through 100 {
+  .w-pc-#{$i} {
+    width: percentage($i/100);
+  }
+  .w-pc-i-#{$i} {
+    width: percentage($i/100) !important;
+  }
+}
+
+@for $i from 1 through 100 {
+  .h-pc-#{$i} {
+    height: percentage($i/100);
+  }
+  .h-pc-i-#{$i} {
+    height: percentage($i/100) !important;
+  }
+}
+
+@for $i from 1 through 100 {
+  .border-rad-#{$i} {
+    border-radius: $i + px;
+  }
+}
+
+@for $i from 1 through 500 {
+  .width-#{$i} {
+    width: $i + px;
+  }
+}
+
+@for $i from 1 through 50 {
+  .line-h-#{$i} {
+    line-height: $i + px;
+  }
+}
+
+.font-w-200 {
+  font-weight: 200;
+}
+
+.font-w-300 {
+  font-weight: 300;
+}
+
+.font-w-400 {
+  font-weight: 400;
+}
+
+.font-w-500 {
+  font-weight: 500;
+}
+
+.font-w-600 {
+  font-weight: 600;
+}
+
+.font-bold {
+  font-weight: bold;
+}
+
+.font-blue {
+  color: $theme-blue;
+}
+
+.arial-font {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.arial-font-all {
+  font-family: Arial, Helvetica, sans-serif;
+
+  *:not(.glyphicon):not(.fa) {
+    font-family: inherit;
+  }
+}
+
+.font-inherit {
+  font-size: inherit;
+}
+
+.mg-0-auto {
+  margin: 0 auto;
+}
+
+.mg-l-auto {
+  margin-left: auto;
+}
+
+.mg-r-auto {
+  margin-right: auto;
+}
+
+.w-auto {
+  width: auto;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.h-auto {
+  height: auto;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.i-block {
+  display: inline-block;
+
+  &.i-block-i {
+    display: inline-block !important;
+  }
+}
+
+.block {
+  display: block;
+}
+
+.i-table {
+  display: inline-table;
+
+  &.i-table-i {
+    display: inline-table !important;
+  }
+}
+
+.grid {
+  display: grid;
+
+  &.grid-i {
+    display: grid !important;
+  }
+}
+
+.hide {
+  display: none;
+}
+
+.color-black {
+  color: #333 !important;
+}
+
+.text-dark {
+  color: #000;
+}
+
+.btn-primary {
+  background-color: $primary-color;
+}
+
+button {
+  min-width: 150px;
+}
+
+.vertical-top {
+  vertical-align: top;
+}
+
+.vertical-middle {
+  vertical-align: middle;
+}
+
+.flex-valign-center {
+  display: flex;
+  align-items: center;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.decolorize {
+  filter: grayscale(100%);
+  -webkit-filter: grayscale(100%);
+  -moz-filter: grayscale(100%);
+}
+
+.clearfix,
+.clearfix::before,
+.clearfix::after {
+  clear: both;
+  float: none;
+}
+
+.clearfix-left {
+  clear: left;
+}
+
+.clearfix-right {
+  clear: right;
+}
+
+.float-right {
+  float: right;
+}
+
+.float-left {
+  float: left;
+}
+
+.color-black {
+  color: $theme-black;
+}
+
+.color-orange {
+  color: $theme-orange;
+}
+
+.color-white {
+  color: $theme-white;
+}
+
+.color-blue {
+  color: $theme-blue;
+}
+
+.bg-color-orange {
+  background: $theme-orange-2 !important;
+}
+
+.bg-color-chocolate {
+  background: $theme-dark-chocolate !important;
+}
+
+.color-primary {
+  color: $primary-color;
+}
+
+.bg-black {
+  background-color: $theme-black;
+}
+
+.bg-orange {
+  background-color: $theme-orange;
+}
+
+.bg-white {
+  background-color: $theme-white;
+}
+
+.bg-blue {
+  background-color: $theme-blue;
+}
+
+.bg-primary {
+  background-color: $primary-color;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+.text-capitalize {
+  text-transform: capitalize;
+}
+
+.status-btn {
+  width: 255px;
+}
+.status-col {
+  padding-right: 5px;
+}
+.user-img {
+  width: 510px;
+  height: 250px;
+  background-color: $theme-grey;
+  text-align: center;
+}
+.left-col {
+  margin-top: 40px;
+}
+.mid-section-left-col {
+  // padding-left: 0px !important;
+}
+///////////////////////////////////////////
+////////////  HEADER SECTION  /////////////
+///////////////////////////////////////////
+
+///////////////////////////////////////////
+////////////  BODY SECTION  /////////////
+///////////////////////////////////////////
+
+///////////////////////////////////////////
+////////////  FOOTER SECTION  /////////////
+///////////////////////////////////////////
+
+///////////////////////////////////////////
+/////////////////  PDF  ///////////////////
+///////////////////////////////////////////
+
+///////////////////////////////////////////
+////////////  MEDIA QUERIES  //////////////
+///////////////////////////////////////////
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .status-btn {
+    width: auto;
+  }
+  .status-col {
+    padding-right: 0px;
+  }
+  .user-img {
+    width: 240px;
+    height: 250px;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .status-btn {
+    width: 105px;
+  }
+  .status-col {
+    padding-right: 5px;
+  }
+  .user-img {
+    width: 220px;
+    height: 250px;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .status-btn {
+    width: 145px;
+  }
+  .status-col {
+    padding-right: 5px;
+  }
+  .user-img {
+    width: 300px;
+    height: 250px;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .status-btn {
+    width: 150px;
+  }
+  .status-col {
+    padding-right: 5px;
+  }
+  .user-img {
+    width: 320px;
+    height: 250px;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .status-btn {
+    width: 255px;
+  }
+  .status-col {
+    padding-right: 5px;
+  }
+  .user-img {
+    width: 510px;
+    height: 250px;
+  }
+}

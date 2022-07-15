@@ -1,0 +1,40 @@
+export const designer = {
+  content: [
+    {
+      swimlaneId: 1,
+      title: "Title",
+      isSeperateScreen: false,
+      cardType: "brand",
+      type: "book-recommendation",
+      presentationType: "small",
+      listItem: 3,
+    },
+    {
+      swimlaneId: 2,
+      title: "Title",
+      isSeperateScreen: true,
+      cardType: "partner",
+      type: "last-ordered",
+      presentationType: "normal",
+      listItem: 3,
+    },
+    {
+      swimlaneId: 3,
+      title: "Title",
+      isSeperateScreen: true,
+      cardType: "Internal Webpage",
+      type: "static",
+      presentationType: "big",
+      listItem: 3,
+    },
+    {
+      swimlaneId: 4,
+      title: "Title",
+      isSeperateScreen: true,
+      cardType: "External Webpage",
+      type: "static",
+      presentationType: "edge-to-edge",
+      listItem: 4,
+    },
+  ],
+};

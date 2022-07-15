@@ -1,0 +1,36 @@
+@import "../../styles/variables.scss";
+
+.app-sidebar {
+  z-index: 2;
+  box-shadow: 5px 0px 8px #666;
+}
+
+.app-sidebar__fixed {
+  position: fixed !important;
+  overflow: "auto";
+  left: 0;
+  height: 100%; /* Full-height: remove this if you want "auto" height */
+  width: $layout-aside-width; /* Set the width of the sidebar */
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  top: 0; /* Stay at the top */
+  left: 0;
+  overflow-x: hidden; /* Disable horizontal scroll */
+}
+
+// .menu__icon {
+//   font-size: 16px;
+// }
+
+.ant-layout-sider {
+  background: $primary-color;
+}
+
+.ant-menu.ant-menu-dark,
+.ant-menu.ant-menu-dark {
+  color: rgba(255, 255, 255, 0.65);
+  background: inherit !important;
+}
+
+// .ant-menu-dark .ant-menu-inline.ant-menu-sub {
+//   background: #000 !important;
+// }

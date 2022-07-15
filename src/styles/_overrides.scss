@@ -1,0 +1,57 @@
+/****************************/
+/***  Ant Overrides  ***/
+/****************************/
+
+// ANT LAYOUT //
+
+.ant-layout {
+  &.app-layout-wrap {
+    .public-route {
+      background: transparent;
+    }
+  }
+  .ant-divider.vertical-splitter {
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  .input-icon {
+    color: rgba(0, 0, 0, 0.25);
+  }
+}
+
+// Header //
+
+.ant-layout-header {
+  height: 55px;
+  line-height: 55px;
+  box-shadow: 0px 1px 5px #999;
+  letter-spacing: 1px;
+  padding: 0 5px !important;
+}
+
+.ant-layout-sider {
+  background: $theme-blue-2 !important;
+}
+
+////////////  FORMS  ///////////////
+
+.ant-form-item.ant-form-item-with-help {
+  margin-bottom: 5px;
+}
+
+.ant-cascader-menu {
+  height: auto;
+}
+
+/////////// ANT MESSAGE ////////////
+
+.ant-message {
+  top: 50px;
+  left: 210px;
+  width: calc(100% - 210px);
+}
+
+.ant-table-cell a {
+  color: $primary-color !important;
+}

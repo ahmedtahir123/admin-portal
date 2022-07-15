@@ -1,0 +1,74 @@
+@import "../../styles/variables.scss";
+
+.grid-item__selected {
+  border: 4px solid $primary-color !important;
+}
+.grid-item {
+  max-height: 150px;
+  overflow: hidden;
+  > img {
+    width: 100%;
+    height: 150px;
+  }
+}
+.grid__list {
+  max-height: 250px;
+  overflow: hidden;
+}
+
+.container {
+  .grid__file-container {
+    transition-property: background-color;
+    transition-duration: 0.5s, 0.5s;
+    transition-timing-function: ease-in;
+    border-radius: 3px;
+    flex-direction: column;
+    display: flex;
+    > img {
+      max-width: 100%;
+      height: 100px;
+    }
+    > span {
+      text-align: center;
+    }
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .downloadIcon {
+    visibility: hidden;
+    position: absolute;
+    font-size: 38px;
+    left: 38%;
+    top: 35%;
+  }
+}
+
+.container {
+  &.show-download:hover {
+    position: relative;
+    .grid__file-container {
+      background-color: $theme-grey;
+      opacity: 0.9;
+      border-radius: 3px;
+      transition-property: background-color;
+      transition-duration: 0.3s;
+      transition-timing-function: ease-in;
+      > img {
+        opacity: 0.1;
+      }
+      > span {
+        color: white;
+      }
+    }
+
+    .downloadIcon {
+      visibility: visible;
+      color: white;
+    }
+  }
+}
+
+.default-img-size {
+  width: 150px;
+}

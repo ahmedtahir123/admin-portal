@@ -1,0 +1,10 @@
+.main-layout {
+  min-height: 100vh;
+
+  .main-layout__content-wrap {
+    padding: 30px;
+    background: #fff;
+    min-height: 80vh;
+    overflow: initial;
+  }
+}

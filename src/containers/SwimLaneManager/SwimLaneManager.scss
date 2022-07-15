@@ -1,0 +1,19 @@
+.card-img {
+  width: 100px;
+  height: 100px;
+}
+.cards-style {
+  height: 120px;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+.carousel-div {
+  display: flex;
+  justify-content: space-between;
+}
+.grid__carousel-list {
+  .ant-row {
+    overflow: scroll;
+    flex-flow: nowrap;
+  }
+}

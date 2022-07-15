@@ -1,0 +1,62 @@
+.app-sidebar {
+  .user-image-wrap__user-image {
+    border-radius: 100px;
+    img {
+      border-radius: inherit;
+      max-width: 70px;
+      max-height: 70px;
+    }
+  }
+
+  // Ant Override for this sidebar menu
+  .ant-menu-item:hover,
+  .ant-menu-item-active,
+  .ant-menu:not(.ant-menu-inline) .ant-menu-submenu-open,
+  .ant-menu-submenu-active,
+  .ant-menu-submenu-title:hover {
+    color: $theme-white;
+    background: lighten($theme-white, 95%);
+  }
+
+  .ant-menu-dark .ant-menu-inline.ant-menu-sub {
+    // background: darken(#1f0c00, 5%);
+  }
+
+  // .ant-menu.ant-menu-dark .ant-menu-item-selected,
+  // .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected {
+  //   background-color: $primary-color-2;
+  // }
+
+  a {
+    letter-spacing: 0.5px;
+  }
+
+  .ant-menu-item:hover,
+  .ant-menu-item-active,
+  .ant-menu:not(.ant-menu-inline) .ant-menu-submenu-open,
+  .ant-menu-submenu-active,
+  .ant-menu-submenu-title:hover {
+    color: #fff;
+    background: $primary-color;
+  }
+
+  .ant-menu-submenu-title > span {
+    vertical-align: -2px;
+  }
+}
+
+// Vertical SubMenu Popup
+.ant-menu-submenu.ant-menu-submenu-popup {
+  .ant-menu-item-active {
+    background: rgba($theme-white, 0.1%) !important;
+  }
+  .ant-menu-item-selected {
+    background: $primary-color !important;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+  }
+  .ant-menu-item {
+    margin-top: 1px !important;
+    margin-bottom: 1px !important;
+  }
+}
