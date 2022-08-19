@@ -16,7 +16,9 @@ const AuthLayout = ({ children }) => (
     <Row type="flex" className="fields-row" gutter={0}>
       <Col span={0} xs={0} sm={0} md={0} lg={13} className="left-vertical-split">
         <div className="text-center h-pc-100">
-          <h1 className="color-white logo font-42 text-uppercase pad-left-15 pad-right-15">Welcome to Bogo Admin</h1>
+          <h1 className="color-white logo font-42 text-uppercase pad-left-15 pad-right-15">
+            Welcome to Baitussalam Admin
+          </h1>
           {/* <img src={logo} alt="" className="logo" /> */}
         </div>
       </Col>

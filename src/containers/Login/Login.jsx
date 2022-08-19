@@ -44,7 +44,7 @@ const LoginContainer = ({ login, history, loading }) => {
         form={form}
         layout="vertical"
         name="nest-messages"
-        initialValues={{ userType: "MERCHANT" }}
+        initialValues={{ userType: "MUSALLI" }}
         onFinish={onFormFinish}
         validateMessages={VALIDATE_FORM_MESSAGES_TEMPLATE}
       >
@@ -54,8 +54,9 @@ const LoginContainer = ({ login, history, loading }) => {
           rules={[{ require: true, message: "Please select user type!" }]}
         >
           <Radio.Group>
-            <Radio.Button value="MERCHANT">Merchant</Radio.Button>
+            <Radio.Button value="MUSALLI">Musalli</Radio.Button>
             <Radio.Button value="ADMIN">Admin</Radio.Button>
+            <Radio.Button value="BAITUSSALAM">Baitussalam</Radio.Button>
           </Radio.Group>
         </Form.Item>
         <Form.Item

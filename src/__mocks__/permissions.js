@@ -147,6 +147,44 @@ export const permissions = {
   // TEMP
   RestaurantManagement_Item_Add: true,
   RestaurantManagement_Item_Edit: true,
+
+  MusalliManagement_View: true,
+
+  MusalliManagement_Musalli_Add: true,
+  MusalliManagement_Musalli_Edit: true,
+  MusalliManagement_Musalli_List: true,
+  MusalliManagement_Musalli_EditStatus: true,
+  MusalliManagement_Musalli_Delete: true,
+
+  MusalliManagement_Participant_Add: true,
+  MusalliManagement_Participant_Edit: true,
+  MusalliManagement_Participant_List: true,
+  MusalliManagement_Participant_EditStatus: true,
+  MusalliManagement_Participant_Delete: true,
+
+  MusalliManagement_Volunteer_Add: true,
+  MusalliManagement_Volunteer_Edit: true,
+  MusalliManagement_Volunteer_List: true,
+  MusalliManagement_Volunteer_EditStatus: true,
+  MusalliManagement_Volunteer_Delete: true,
+
+  MusalliManagement_Mosque_Add: true,
+  MusalliManagement_Mosque_Edit: true,
+  MusalliManagement_Mosque_List: true,
+  MusalliManagement_Mosque_EditStatus: true,
+  MusalliManagement_Mosque_Delete: true,
+
+  MusalliManagement_Session_Add: true,
+  MusalliManagement_Session_Edit: true,
+  MusalliManagement_Session_List: true,
+  MusalliManagement_Session_EditStatus: true,
+  MusalliManagement_Session_Delete: true,
+
+  MusalliManagement_Payment_Add: true,
+  MusalliManagement_Payment_Edit: true,
+  MusalliManagement_Payment_List: true,
+  MusalliManagement_Payment_EditStatus: true,
+  MusalliManagement_Payment_Delete: true,
 };
 
 export const merchantPermission = {
@@ -246,4 +284,106 @@ export const merchantAssociatePermission = {
   VoucherRedemptionManagement_VoucherRedemption_List: true,
   VoucherRedemptionManagement_VoucherRedemption_Add: true,
   VoucherRedemptionManagement_VoucherRedemption_Edit: true,
+};
+
+export const baitussalamWebAppPermission = {
+  Home_View: true,
+
+  // Phase-1 work | change permission to true to enable  Merchant dashboard
+  // MerchantHome_View: true,
+  Profile_View: true,
+  ChangePassword_View: true,
+
+  Web_AppManagement_View: true,
+
+  Web_AppManagement_Projects_Add: true,
+  Web_AppManagement_Projects_Edit: true,
+  Web_AppManagement_Projects_List: true,
+
+  Web_AppManagement_Events_Add: true,
+  Web_AppManagement_Events_Edit: true,
+  Web_AppManagement_Events_List: true,
+
+  Web_AppManagement_Naat_Competition_Users_Edit: true,
+  Web_AppManagement_Naat_Competition_Users_List: true,
+
+  Web_AppManagement_Galleries_Add: true,
+  Web_AppManagement_Galleries_Edit: true,
+  Web_AppManagement_Galleries_List: true,
+
+  Web_AppManagement_News_Add: true,
+  Web_AppManagement_News_Edit: true,
+  Web_AppManagement_News_List: true,
+
+  Web_AppManagement_Bayanat_Category_Add: true,
+  Web_AppManagement_Bayanat_Category_Edit: true,
+  Web_AppManagement_Bayanat_Category_List: true,
+
+  Web_AppManagement_Bayanats_Add: true,
+  Web_AppManagement_Bayanats_Edit: true,
+  Web_AppManagement_Bayanats_List: true,
+
+  Web_AppManagement_Publication_Category_Add: true,
+  Web_AppManagement_Publication_Category_Edit: true,
+  Web_AppManagement_Publication_Category_List: true,
+
+  Web_AppManagement_Publications_Add: true,
+  Web_AppManagement_Publications_Edit: true,
+  Web_AppManagement_Publications_List: true,
+
+  Web_AppManagement_Guides_Add: true,
+  Web_AppManagement_Guides_Edit: true,
+  Web_AppManagement_Guides_List: true,
+
+  Web_AppManagement_Partners_Add: true,
+  Web_AppManagement_Partners_Edit: true,
+  Web_AppManagement_Partners_List: true,
+
+  Web_AppManagement_Newsletters_Subscribe_Users_List: true,
+
+  Web_AppManagement_Admin_Users_Add: true,
+  Web_AppManagement_Admin_Users_Edit: true,
+  Web_AppManagement_Admin_Users_List: true,
+
+  Web_AppManagement_Volunteers_Edit: true,
+  Web_AppManagement_Volunteers_List: true,
+
+  Web_AppManagement_Videos_Add: true,
+  Web_AppManagement_Videos_Edit: true,
+  Web_AppManagement_Videos_List: true,
+
+  Web_AppManagement_Dua_Categories_Add: true,
+  Web_AppManagement_Dua_Categories_Edit: true,
+  Web_AppManagement_Dua_Categories_List: true,
+
+  Web_AppManagement_Duas_Add: true,
+  Web_AppManagement_Duas_Edit: true,
+  Web_AppManagement_Duas_List: true,
+
+  Web_AppManagement_Featured_Videos_Add: true,
+  Web_AppManagement_Featured_Videos_Edit: true,
+  Web_AppManagement_Featured_Videos_List: true,
+
+  Web_AppManagement_Featured_Banners_Add: true,
+  Web_AppManagement_Featured_Banners_Edit: true,
+  Web_AppManagement_Featured_Banners_List: true,
+
+  Web_AppManagement_Online_Charities_Edit: true,
+  Web_AppManagement_Online_Charities_List: true,
+
+  Web_AppManagement_Donation_Categories_Add: true,
+  Web_AppManagement_Donation_Categories_Edit: true,
+  Web_AppManagement_Donation_Categories_List: true,
+
+  Web_AppManagement_Customers_Edit: true,
+  Web_AppManagement_Customers_List: true,
+
+  Web_AppManagement_Hijri_Dates_List: true,
+
+  Web_AppManagement_Saiban_Submissions_Edit: true,
+  Web_AppManagement_Saiban_Submissions_List: true,
+
+  Web_AppManagement_Settings_Add: true,
+  Web_AppManagement_Settings_Edit: true,
+  Web_AppManagement_Settings_List: true,
 };

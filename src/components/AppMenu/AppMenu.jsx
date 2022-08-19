@@ -124,7 +124,7 @@ class AppMenu extends React.Component {
         <Link to="profile">
           <div className="user-image-wrap text-center mg-top-15 mg-bottom-15">
             <div className="user-image-wrap__user-image i-block mg-0-auto">
-              <img src={AppLogo} alt="User" />
+              <img src={AppLogo} alt="User" width={170} />
             </div>
           </div>
         </Link>

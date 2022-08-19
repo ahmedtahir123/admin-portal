@@ -27,8 +27,8 @@ const MainLayout = ({
   useEffect(() => {
     const _user = getUser();
     updateUserInStore(_user);
-    getStates();
-    getCities();
+    // getStates();
+    // getCities();
   }, []);
 
   const onBreakPoint = isBreak => {
@@ -65,7 +65,7 @@ const MainLayout = ({
             <div className="main-layout__content-wrap">
               <Switch>
                 {/* !isLoggedIn() && props.history.replace("/login"); */}
-                {!isLoggedIn() && <Redirect to="/login" />}
+                {/* {!isLoggedIn() && <Redirect to="/login" />} */}
                 {routes &&
                   routes.map(({ component, path, exact, category, subCategory, action }) => (
                     <PrivateRoute

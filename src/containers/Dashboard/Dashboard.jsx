@@ -7,7 +7,7 @@ const DashboardContainer = props => (
     <Divider orientation="left" className="form-divider first">
       Home
     </Divider>
-    <h2 className="text-center">Welcome to our BOGO Dashboard!</h2>
+    <h2 className="text-center">Welcome to our Baitussalam Dashboard!</h2>
   </div>
 );
 

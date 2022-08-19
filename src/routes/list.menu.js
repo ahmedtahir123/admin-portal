@@ -78,6 +78,18 @@ const Categories = {
     category: "VoucherRedemptionManagement",
     action: "View",
   },
+  12: {
+    name: "Musalli Management",
+    icon: "BarChartOutlined",
+    category: "MusalliManagement",
+    action: "View",
+  },
+  13: {
+    name: "Web & App Management",
+    icon: "BarChartOutlined",
+    category: "Web_AppManagement",
+    action: "View",
+  },
 };
 
 export default Categories;

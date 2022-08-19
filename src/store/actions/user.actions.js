@@ -6,7 +6,12 @@ import { throwError, to, toastMessage } from "../../utils/utils";
 import { setUser, removeUser } from "../../utils/auth.utils";
 import permissionsUtil from "../../utils/permissions.util";
 import ROUTES from "../../routes/constant.route";
-import { permissions, merchantPermission, merchantAssociatePermission } from "../../__mocks__/permissions";
+import {
+  permissions,
+  merchantPermission,
+  merchantAssociatePermission,
+  baitussalamWebAppPermission,
+} from "../../__mocks__/permissions";
 import { SUCCESS_MESSAGE, ERROR_MESSAGE, USER_ROLES } from "../../utils/constants";
 import { getPartnerById } from "./partner.actions";
 import PartnerService from "../../services/partner.service";
@@ -44,27 +49,27 @@ export function login(userInfo) {
     // email: admin@test.com
     // pass: admin123
     const clientId = userInfo.userType === "MERCHANT" ? "merchant-client" : "bgn-admin-client";
-    delete userInfo.userType;
+    // delete userInfo.userType;
     let partner, err, response;
     try {
-      [err, response] = await to(UserService.login(userInfo, clientId));
-      if (err || !response) {
-        throwError(err);
-      }
-      // const response = {
-      //   userId: "bf18c7b4-2d82-4ca9-b08b-9d54b888809b",
-      //   emailAddress: "asfar@bgn.com",
-      //   firstName: "Asfar",
-      //   lastName: "Ali",
-      //   userRole: "ADMIN",
-      //   fullName: "Asfar Ali",
-      //   userCapabilities: {
-      //     changePassword: "enable",
-      //     viewDeals: "enable",
-      //     redeemDeals: "enable",
-      //     dealsGift: "disable",
-      //   },
-      // };
+      // [err, response] = await to(UserService.login(userInfo, clientId));
+      // if (err || !response) {
+      //   throwError(err);
+      // }
+      response = {
+        userId: "bf18c7b4-2d82-4ca9-b08b-9d54b888809b",
+        emailAddress: "asfar@bgn.com",
+        firstName: "Asfar",
+        lastName: "Ali",
+        userRole: userInfo.userType,
+        fullName: "Asfar Ali",
+        userCapabilities: {
+          changePassword: "enable",
+          viewDeals: "enable",
+          redeemDeals: "enable",
+          dealsGift: "disable",
+        },
+      };
       setUser({ ...response });
 
       console.log("logged in user ==>", response);
@@ -83,7 +88,10 @@ export function login(userInfo) {
         } else if (response.userSubRole === USER_ROLES.MERCHANT_MANAGER) {
           setUser({ ...response, permissions: merchantPermission, partner });
           permissionsUtil.setPermissions(merchantPermission);
-        }
+        } 
+      } else if (response.userRole === "BAITUSSALAM") {
+        setUser({ ...response, permissions: baitussalamWebAppPermission }); // Add 2nd argument "TOKEN 123" if you wanna skip auth work
+        permissionsUtil.setPermissions(baitussalamWebAppPermission);
       } else {
         // setUser({ ...response, permissions }, "TOKEN 123"); // uncomment this if you wanna skip auth work
         setUser({ ...response, permissions }); // Add 2nd argument "TOKEN 123" if you wanna skip auth work

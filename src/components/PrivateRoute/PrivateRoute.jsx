@@ -46,14 +46,14 @@ const PrivateRoute = ({
           );
         }
 
-        // return (
-        //   <Redirect
-        //     to={{
-        //       pathname: "/login",
-        //       state: { from: location },
-        //     }}
-        //   />
-        // );
+        return (
+          <Redirect
+            to={{
+              pathname: "/login",
+              state: { from: location },
+            }}
+          />
+        );
       }}
     />
   );

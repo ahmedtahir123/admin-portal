@@ -6,7 +6,7 @@ const { Footer } = Layout;
 
 const AppFooter = ({ isFixedLayout }) => (
   <Footer className={`app-footer text-center ${isFixedLayout ? " app-footer__fixed" : ""}`}>
-    BOGO © 2020 - All Rights Reserved
+    BAITUSSALAM © 2020 - All Rights Reserved
   </Footer>
 );
 
