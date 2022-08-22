@@ -11,7 +11,7 @@ import CustomIcon from "../../components/CustomIcon/CustomIcon";
 
 const columns = [
   {
-    title: "Title",
+    title: "Name",
     dataIndex: "Name",
     key: "Name",
     sorter: true,
@@ -19,20 +19,55 @@ const columns = [
   },
   {
     title: "Description",
-    dataIndex: "fatherName",
-    key: "fatherName",
+    dataIndex: "description",
+    key: "description",
+  },
+  {
+    title: "Video Link",
+    dataIndex: "videoLink",
+    key: "videoLink",
+  },
+  {
+    title: "Thumbnail",
+    dataIndex: "thumbnail",
+    key: "thumbnail",
+  },
+  {
+    title: "Display At Home Screen",
+    dataIndex: "display",
+    key: "display",
+  },
+  {
+    title: "Sort Order",
+    dataIndex: "SortOrder",
+    key: "SortOrder",
+  },
+  {
+    title: "Created At",
+    dataIndex: "createdAt",
+    key: "createdAt",
+  },
+  {
+    title: "Created By",
+    dataIndex: "createdBy",
+    key: "createdBy",
+  },
+  {
+    title: "Updated At",
+    dataIndex: "updatedAt",
+    key: "updatedAt",
+  },
+  {
+    title: "Updated By",
+    dataIndex: "updatedBy",
+    key: "updatedBy",
+  },
+  {
+    title: "Status",
+    dataIndex: "userMetaData",
+    key: "status",
     sorter: true,
-    render: (text, record) => <Link to={`${ROUTES.EDIT_ADMIN_USER.path}/${record.userId}`}>{record.fullName}</Link>,
-  },
-  {
-    title: "Order No",
-    dataIndex: "emailAddress",
-    key: "emailAddress",
-  },
-  {
-    title: "Image",
-    dataIndex: "Image",
-    key: "Image",
+    render: d => d.status,
   },
   {
     title: "Action",
@@ -59,7 +94,7 @@ const columns = [
   },
 ];
 
-function BaitussalamWebAndAppProjectManagement(props) {
+function BaitussalamWebAndAppFeaturedVideosManagement(props) {
   const { loading, enableDisableAdmin, pagination, getAdminUsers, deleteAdminUsers, list } = props;
   const getList = async query => {
     await getAdminUsers(query);
@@ -82,7 +117,7 @@ function BaitussalamWebAndAppProjectManagement(props) {
   });
 
   const addButton = {
-    text: "Add Projects",
+    text: "Add Featured Videos",
     route: ROUTES.ADD_MUSALLI_PARTICIPANT_USER.path,
   };
 
@@ -107,7 +142,7 @@ function BaitussalamWebAndAppProjectManagement(props) {
 
   return (
     <>
-      <PageTitle title="All Projects" />
+      <PageTitle title="All Featured Videos" />
       <ListView
         dataSource={list}
         columns={columns}
@@ -127,7 +162,7 @@ function BaitussalamWebAndAppProjectManagement(props) {
   );
 }
 
-BaitussalamWebAndAppProjectManagement.propTypes = {
+BaitussalamWebAndAppFeaturedVideosManagement.propTypes = {
   getAdminUsers: PropTypes.func,
   list: PropTypes.array,
   deleteAdminUsers: PropTypes.func,
@@ -136,4 +171,4 @@ BaitussalamWebAndAppProjectManagement.propTypes = {
   enableDisableAdmin: PropTypes.func,
 };
 
-export default BaitussalamWebAndAppProjectManagement;
+export default BaitussalamWebAndAppFeaturedVideosManagement;

@@ -90,6 +90,18 @@ const Categories = {
     category: "Web_AppManagement",
     action: "View",
   },
+  14: {
+    name: "Users Management",
+    icon: "BarChartOutlined",
+    category: "UsersManagement",
+    action: "View",
+  },
+  15: {
+    name: "Content Management",
+    icon: "BarChartOutlined",
+    category: "ContentManagement",
+    action: "View",
+  },
 };
 
 export default Categories;

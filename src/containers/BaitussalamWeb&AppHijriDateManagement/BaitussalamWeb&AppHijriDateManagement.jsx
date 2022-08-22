@@ -11,28 +11,51 @@ import CustomIcon from "../../components/CustomIcon/CustomIcon";
 
 const columns = [
   {
-    title: "Title",
+    title: "Name",
     dataIndex: "Name",
     key: "Name",
     sorter: true,
     render: (text, record) => <Link to={`${ROUTES.EDIT_ADMIN_USER.path}/${record.userId}`}>{record.fullName}</Link>,
   },
   {
-    title: "Description",
+    title: "Father Name",
     dataIndex: "fatherName",
     key: "fatherName",
     sorter: true,
     render: (text, record) => <Link to={`${ROUTES.EDIT_ADMIN_USER.path}/${record.userId}`}>{record.fullName}</Link>,
   },
   {
-    title: "Order No",
+    title: "Email Address",
     dataIndex: "emailAddress",
     key: "emailAddress",
+    sorter: (a, b) => a.emailAddress.length - b.emailAddress.length,
+    sortDirections: ["descend", "ascend"],
   },
   {
-    title: "Image",
-    dataIndex: "Image",
-    key: "Image",
+    title: "Contact",
+    dataIndex: "cellPhoneNumber",
+    key: "cellPhoneNumber",
+  },
+  {
+    title: "Date Of Birth",
+    dataIndex: "dob",
+    key: "dob",
+    sorter: (a, b) => a.emailAddress.length - b.emailAddress.length,
+    sortDirections: ["descend", "ascend"],
+  },
+  {
+    title: "Document Submission Status",
+    dataIndex: "documentSubmissionStatus",
+    key: "documentSubmissionStatus",
+    sorter: (a, b) => a.emailAddress.length - b.emailAddress.length,
+    sortDirections: ["descend", "ascend"],
+  },
+  {
+    title: "Status",
+    dataIndex: "userMetaData",
+    key: "status",
+    sorter: true,
+    render: d => d.status,
   },
   {
     title: "Action",
@@ -59,7 +82,7 @@ const columns = [
   },
 ];
 
-function BaitussalamWebAndAppProjectManagement(props) {
+function BaitussalamWebAndAppHijriDateManagement(props) {
   const { loading, enableDisableAdmin, pagination, getAdminUsers, deleteAdminUsers, list } = props;
   const getList = async query => {
     await getAdminUsers(query);
@@ -82,7 +105,7 @@ function BaitussalamWebAndAppProjectManagement(props) {
   });
 
   const addButton = {
-    text: "Add Projects",
+    text: "Add Participants",
     route: ROUTES.ADD_MUSALLI_PARTICIPANT_USER.path,
   };
 
@@ -127,7 +150,7 @@ function BaitussalamWebAndAppProjectManagement(props) {
   );
 }
 
-BaitussalamWebAndAppProjectManagement.propTypes = {
+BaitussalamWebAndAppHijriDateManagement.propTypes = {
   getAdminUsers: PropTypes.func,
   list: PropTypes.array,
   deleteAdminUsers: PropTypes.func,
@@ -136,4 +159,4 @@ BaitussalamWebAndAppProjectManagement.propTypes = {
   enableDisableAdmin: PropTypes.func,
 };
 
-export default BaitussalamWebAndAppProjectManagement;
+export default BaitussalamWebAndAppHijriDateManagement;

@@ -12,27 +12,47 @@ import CustomIcon from "../../components/CustomIcon/CustomIcon";
 const columns = [
   {
     title: "Title",
-    dataIndex: "Name",
-    key: "Name",
+    dataIndex: "title",
+    key: "title",
     sorter: true,
     render: (text, record) => <Link to={`${ROUTES.EDIT_ADMIN_USER.path}/${record.userId}`}>{record.fullName}</Link>,
   },
   {
-    title: "Description",
-    dataIndex: "fatherName",
-    key: "fatherName",
-    sorter: true,
-    render: (text, record) => <Link to={`${ROUTES.EDIT_ADMIN_USER.path}/${record.userId}`}>{record.fullName}</Link>,
-  },
-  {
-    title: "Order No",
-    dataIndex: "emailAddress",
-    key: "emailAddress",
+    title: "File",
+    dataIndex: "file",
+    key: "file",
   },
   {
     title: "Image",
-    dataIndex: "Image",
-    key: "Image",
+    dataIndex: "image",
+    key: "image",
+  },
+  {
+    title: "Created At",
+    dataIndex: "createdAt",
+    key: "createdAt",
+  },
+  {
+    title: "Created By",
+    dataIndex: "createdBy",
+    key: "createdBy",
+  },
+  {
+    title: "Updated At",
+    dataIndex: "updatedAt",
+    key: "updatedAt",
+  },
+  {
+    title: "Updated By",
+    dataIndex: "updatedBy",
+    key: "updatedBy",
+  },
+  {
+    title: "Status",
+    dataIndex: "userMetaData",
+    key: "status",
+    sorter: true,
+    render: d => d.status,
   },
   {
     title: "Action",
@@ -59,7 +79,7 @@ const columns = [
   },
 ];
 
-function BaitussalamWebAndAppProjectManagement(props) {
+function BaitussalamWebAndAppGuidesManagement(props) {
   const { loading, enableDisableAdmin, pagination, getAdminUsers, deleteAdminUsers, list } = props;
   const getList = async query => {
     await getAdminUsers(query);
@@ -82,7 +102,7 @@ function BaitussalamWebAndAppProjectManagement(props) {
   });
 
   const addButton = {
-    text: "Add Projects",
+    text: "Add Guide",
     route: ROUTES.ADD_MUSALLI_PARTICIPANT_USER.path,
   };
 
@@ -107,7 +127,7 @@ function BaitussalamWebAndAppProjectManagement(props) {
 
   return (
     <>
-      <PageTitle title="All Projects" />
+      <PageTitle title="All Guides" />
       <ListView
         dataSource={list}
         columns={columns}
@@ -127,7 +147,7 @@ function BaitussalamWebAndAppProjectManagement(props) {
   );
 }
 
-BaitussalamWebAndAppProjectManagement.propTypes = {
+BaitussalamWebAndAppGuidesManagement.propTypes = {
   getAdminUsers: PropTypes.func,
   list: PropTypes.array,
   deleteAdminUsers: PropTypes.func,
@@ -136,4 +156,4 @@ BaitussalamWebAndAppProjectManagement.propTypes = {
   enableDisableAdmin: PropTypes.func,
 };
 
-export default BaitussalamWebAndAppProjectManagement;
+export default BaitussalamWebAndAppGuidesManagement;

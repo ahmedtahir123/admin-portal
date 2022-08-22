@@ -11,28 +11,79 @@ import CustomIcon from "../../components/CustomIcon/CustomIcon";
 
 const columns = [
   {
-    title: "Title",
+    title: "Name",
     dataIndex: "Name",
     key: "Name",
     sorter: true,
     render: (text, record) => <Link to={`${ROUTES.EDIT_ADMIN_USER.path}/${record.userId}`}>{record.fullName}</Link>,
   },
   {
-    title: "Description",
+    title: "Father Name",
     dataIndex: "fatherName",
     key: "fatherName",
     sorter: true,
     render: (text, record) => <Link to={`${ROUTES.EDIT_ADMIN_USER.path}/${record.userId}`}>{record.fullName}</Link>,
   },
   {
-    title: "Order No",
-    dataIndex: "emailAddress",
-    key: "emailAddress",
+    title: "Contact",
+    dataIndex: "cellPhoneNumber",
+    key: "cellPhoneNumber",
   },
   {
-    title: "Image",
-    dataIndex: "Image",
-    key: "Image",
+    title: "Address",
+    dataIndex: "address",
+    key: "address",
+  },
+  {
+    title: "Date Of Birth",
+    dataIndex: "dob",
+    key: "dob",
+    sorter: (a, b) => a.emailAddress.length - b.emailAddress.length,
+    sortDirections: ["descend", "ascend"],
+  },
+  {
+    title: "Province",
+    dataIndex: "province",
+    key: "province",
+  },
+  {
+    title: "City",
+    dataIndex: "city",
+    key: "city",
+  },
+  {
+    title: "Tehseel",
+    dataIndex: "Tehseel",
+    key: "Tehseel",
+  },
+  {
+    title: "Zila",
+    dataIndex: "zila",
+    key: "zila",
+  },
+  {
+    title: "Is International",
+    dataIndex: "is_International",
+    key: "is_International",
+  },
+  {
+    title: "Competition Name",
+    dataIndex: "competitionName",
+    key: "competitionName",
+  },
+  {
+    title: "ShortList Status",
+    dataIndex: "shortListStatus",
+    key: "shortListStatus",
+    sorter: true,
+    render: d => d.status,
+  },
+  {
+    title: "ShortList Date",
+    dataIndex: "shortListDate",
+    key: "shortListDate",
+    sorter: true,
+    render: d => d.status,
   },
   {
     title: "Action",
@@ -59,7 +110,7 @@ const columns = [
   },
 ];
 
-function BaitussalamWebAndAppProjectManagement(props) {
+function BaitussalamWebAndAppNaatUsersManagement(props) {
   const { loading, enableDisableAdmin, pagination, getAdminUsers, deleteAdminUsers, list } = props;
   const getList = async query => {
     await getAdminUsers(query);
@@ -82,7 +133,7 @@ function BaitussalamWebAndAppProjectManagement(props) {
   });
 
   const addButton = {
-    text: "Add Projects",
+    text: "Add Naat User",
     route: ROUTES.ADD_MUSALLI_PARTICIPANT_USER.path,
   };
 
@@ -107,7 +158,7 @@ function BaitussalamWebAndAppProjectManagement(props) {
 
   return (
     <>
-      <PageTitle title="All Projects" />
+      <PageTitle title="All Naat Competition Users" />
       <ListView
         dataSource={list}
         columns={columns}
@@ -127,7 +178,7 @@ function BaitussalamWebAndAppProjectManagement(props) {
   );
 }
 
-BaitussalamWebAndAppProjectManagement.propTypes = {
+BaitussalamWebAndAppNaatUsersManagement.propTypes = {
   getAdminUsers: PropTypes.func,
   list: PropTypes.array,
   deleteAdminUsers: PropTypes.func,
@@ -136,4 +187,4 @@ BaitussalamWebAndAppProjectManagement.propTypes = {
   enableDisableAdmin: PropTypes.func,
 };
 
-export default BaitussalamWebAndAppProjectManagement;
+export default BaitussalamWebAndAppNaatUsersManagement;

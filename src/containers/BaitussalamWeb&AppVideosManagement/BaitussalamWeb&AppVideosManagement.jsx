@@ -18,21 +18,11 @@ const columns = [
     render: (text, record) => <Link to={`${ROUTES.EDIT_ADMIN_USER.path}/${record.userId}`}>{record.fullName}</Link>,
   },
   {
-    title: "Description",
+    title: "Department",
     dataIndex: "fatherName",
     key: "fatherName",
     sorter: true,
     render: (text, record) => <Link to={`${ROUTES.EDIT_ADMIN_USER.path}/${record.userId}`}>{record.fullName}</Link>,
-  },
-  {
-    title: "Order No",
-    dataIndex: "emailAddress",
-    key: "emailAddress",
-  },
-  {
-    title: "Image",
-    dataIndex: "Image",
-    key: "Image",
   },
   {
     title: "Action",
@@ -59,7 +49,7 @@ const columns = [
   },
 ];
 
-function BaitussalamWebAndAppProjectManagement(props) {
+function BaitussalamWebAndAppVideosManagement(props) {
   const { loading, enableDisableAdmin, pagination, getAdminUsers, deleteAdminUsers, list } = props;
   const getList = async query => {
     await getAdminUsers(query);
@@ -82,7 +72,7 @@ function BaitussalamWebAndAppProjectManagement(props) {
   });
 
   const addButton = {
-    text: "Add Projects",
+    text: "Add Videos",
     route: ROUTES.ADD_MUSALLI_PARTICIPANT_USER.path,
   };
 
@@ -107,7 +97,7 @@ function BaitussalamWebAndAppProjectManagement(props) {
 
   return (
     <>
-      <PageTitle title="All Projects" />
+      <PageTitle title="All Videos" />
       <ListView
         dataSource={list}
         columns={columns}
@@ -127,7 +117,7 @@ function BaitussalamWebAndAppProjectManagement(props) {
   );
 }
 
-BaitussalamWebAndAppProjectManagement.propTypes = {
+BaitussalamWebAndAppVideosManagement.propTypes = {
   getAdminUsers: PropTypes.func,
   list: PropTypes.array,
   deleteAdminUsers: PropTypes.func,
@@ -136,4 +126,4 @@ BaitussalamWebAndAppProjectManagement.propTypes = {
   enableDisableAdmin: PropTypes.func,
 };
 
-export default BaitussalamWebAndAppProjectManagement;
+export default BaitussalamWebAndAppVideosManagement;

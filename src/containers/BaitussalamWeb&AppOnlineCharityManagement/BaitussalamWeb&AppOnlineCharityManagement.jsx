@@ -11,28 +11,85 @@ import CustomIcon from "../../components/CustomIcon/CustomIcon";
 
 const columns = [
   {
-    title: "Title",
-    dataIndex: "Name",
-    key: "Name",
+    title: "Code",
+    dataIndex: "code",
+    key: "code",
+  },
+  {
+    title: "Transaction No",
+    dataIndex: "transactionNo",
+    key: "transactionNo",
+  },
+  {
+    title: "Transaction Date",
+    dataIndex: "transactionDate",
+    key: "transactionDate",
+  },
+  {
+    title: "Customer Name",
+    dataIndex: "customerName",
+    key: "customerName",
+  },
+  {
+    title: "Payment Methhod",
+    dataIndex: "paymentMethod",
+    key: "paymentMethod",
+  },
+  {
+    title: "Total Amount",
+    dataIndex: "totalAmount",
+    key: "totalAmount",
+  },
+  {
+    title: "Currency",
+    dataIndex: "Currency",
+    key: "Currency",
+  },
+  {
+    title: "Platform",
+    dataIndex: "Platform",
+    key: "Platform",
+    sorter: (a, b) => a.emailAddress.length - b.emailAddress.length,
+    sortDirections: ["descend", "ascend"],
+  },
+  {
+    title: "QMS Booking Id",
+    dataIndex: "QMS_Id",
+    key: "QMS_Id",
+  },
+  {
+    title: "Transaction Status",
+    dataIndex: "transactionStatus",
+    key: "transactionStatus",
     sorter: true,
-    render: (text, record) => <Link to={`${ROUTES.EDIT_ADMIN_USER.path}/${record.userId}`}>{record.fullName}</Link>,
+    render: d => d.status,
   },
   {
-    title: "Description",
-    dataIndex: "fatherName",
-    key: "fatherName",
+    title: "Status",
+    dataIndex: "status",
+    key: "status",
     sorter: true,
-    render: (text, record) => <Link to={`${ROUTES.EDIT_ADMIN_USER.path}/${record.userId}`}>{record.fullName}</Link>,
+    render: d => d.status,
   },
   {
-    title: "Order No",
-    dataIndex: "emailAddress",
-    key: "emailAddress",
+    title: "Created At",
+    dataIndex: "createdAt",
+    key: "createdAt",
   },
   {
-    title: "Image",
-    dataIndex: "Image",
-    key: "Image",
+    title: "Created By",
+    dataIndex: "createdBy",
+    key: "createdBy",
+  },
+  {
+    title: "Updated At",
+    dataIndex: "updatedAt",
+    key: "updatedAt",
+  },
+  {
+    title: "Updated By",
+    dataIndex: "updatedBy",
+    key: "updatedBy",
   },
   {
     title: "Action",
@@ -59,7 +116,7 @@ const columns = [
   },
 ];
 
-function BaitussalamWebAndAppProjectManagement(props) {
+function BaitussalamWebAndAppOnlineCharityManagement(props) {
   const { loading, enableDisableAdmin, pagination, getAdminUsers, deleteAdminUsers, list } = props;
   const getList = async query => {
     await getAdminUsers(query);
@@ -82,7 +139,7 @@ function BaitussalamWebAndAppProjectManagement(props) {
   });
 
   const addButton = {
-    text: "Add Projects",
+    text: "Add Participants",
     route: ROUTES.ADD_MUSALLI_PARTICIPANT_USER.path,
   };
 
@@ -107,7 +164,7 @@ function BaitussalamWebAndAppProjectManagement(props) {
 
   return (
     <>
-      <PageTitle title="All Projects" />
+      <PageTitle title="All Online Charity" />
       <ListView
         dataSource={list}
         columns={columns}
@@ -127,7 +184,7 @@ function BaitussalamWebAndAppProjectManagement(props) {
   );
 }
 
-BaitussalamWebAndAppProjectManagement.propTypes = {
+BaitussalamWebAndAppOnlineCharityManagement.propTypes = {
   getAdminUsers: PropTypes.func,
   list: PropTypes.array,
   deleteAdminUsers: PropTypes.func,
@@ -136,4 +193,4 @@ BaitussalamWebAndAppProjectManagement.propTypes = {
   enableDisableAdmin: PropTypes.func,
 };
 
-export default BaitussalamWebAndAppProjectManagement;
+export default BaitussalamWebAndAppOnlineCharityManagement;

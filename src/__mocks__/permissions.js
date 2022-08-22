@@ -295,6 +295,8 @@ export const baitussalamWebAppPermission = {
   ChangePassword_View: true,
 
   Web_AppManagement_View: true,
+  UsersManagement_View: true,
+  ContentManagement_View: true,
 
   Web_AppManagement_Projects_Add: true,
   Web_AppManagement_Projects_Edit: true,
@@ -304,36 +306,36 @@ export const baitussalamWebAppPermission = {
   Web_AppManagement_Events_Edit: true,
   Web_AppManagement_Events_List: true,
 
-  Web_AppManagement_Naat_Competition_Users_Edit: true,
-  Web_AppManagement_Naat_Competition_Users_List: true,
+  UsersManagement_Naat_Competition_Users_Edit: true,
+  UsersManagement_Naat_Competition_Users_List: true,
 
-  Web_AppManagement_Galleries_Add: true,
-  Web_AppManagement_Galleries_Edit: true,
-  Web_AppManagement_Galleries_List: true,
+  ContentManagement_Galleries_Add: true,
+  ContentManagement_Galleries_Edit: true,
+  ContentManagement_Galleries_List: true,
 
   Web_AppManagement_News_Add: true,
   Web_AppManagement_News_Edit: true,
   Web_AppManagement_News_List: true,
 
-  Web_AppManagement_Bayanat_Category_Add: true,
-  Web_AppManagement_Bayanat_Category_Edit: true,
-  Web_AppManagement_Bayanat_Category_List: true,
+  ContentManagement_Bayanat_Category_Add: true,
+  ContentManagement_Bayanat_Category_Edit: true,
+  ContentManagement_Bayanat_Category_List: true,
 
-  Web_AppManagement_Bayanats_Add: true,
-  Web_AppManagement_Bayanats_Edit: true,
-  Web_AppManagement_Bayanats_List: true,
+  ContentManagement_Bayanats_Add: true,
+  ContentManagement_Bayanats_Edit: true,
+  ContentManagement_Bayanats_List: true,
 
-  Web_AppManagement_Publication_Category_Add: true,
-  Web_AppManagement_Publication_Category_Edit: true,
-  Web_AppManagement_Publication_Category_List: true,
+  ContentManagement_Publication_Category_Add: true,
+  ContentManagement_Publication_Category_Edit: true,
+  ContentManagement_Publication_Category_List: true,
 
-  Web_AppManagement_Publications_Add: true,
-  Web_AppManagement_Publications_Edit: true,
-  Web_AppManagement_Publications_List: true,
+  ContentManagement_Publications_Add: true,
+  ContentManagement_Publications_Edit: true,
+  ContentManagement_Publications_List: true,
 
-  Web_AppManagement_Guides_Add: true,
-  Web_AppManagement_Guides_Edit: true,
-  Web_AppManagement_Guides_List: true,
+  ContentManagement_Guides_Add: true,
+  ContentManagement_Guides_Edit: true,
+  ContentManagement_Guides_List: true,
 
   Web_AppManagement_Partners_Add: true,
   Web_AppManagement_Partners_Edit: true,
@@ -341,32 +343,32 @@ export const baitussalamWebAppPermission = {
 
   Web_AppManagement_Newsletters_Subscribe_Users_List: true,
 
-  Web_AppManagement_Admin_Users_Add: true,
-  Web_AppManagement_Admin_Users_Edit: true,
-  Web_AppManagement_Admin_Users_List: true,
+  UsersManagement_Admin_Users_Add: true,
+  UsersManagement_Admin_Users_Edit: true,
+  UsersManagement_Admin_Users_List: true,
 
-  Web_AppManagement_Volunteers_Edit: true,
-  Web_AppManagement_Volunteers_List: true,
+  UsersManagement_Volunteers_Edit: true,
+  UsersManagement_Volunteers_List: true,
 
-  Web_AppManagement_Videos_Add: true,
-  Web_AppManagement_Videos_Edit: true,
-  Web_AppManagement_Videos_List: true,
+  ContentManagement_Videos_Add: true,
+  ContentManagement_Videos_Edit: true,
+  ContentManagement_Videos_List: true,
 
-  Web_AppManagement_Dua_Categories_Add: true,
-  Web_AppManagement_Dua_Categories_Edit: true,
-  Web_AppManagement_Dua_Categories_List: true,
+  ContentManagement_Dua_Categories_Add: true,
+  ContentManagement_Dua_Categories_Edit: true,
+  ContentManagement_Dua_Categories_List: true,
 
-  Web_AppManagement_Duas_Add: true,
-  Web_AppManagement_Duas_Edit: true,
-  Web_AppManagement_Duas_List: true,
+  ContentManagement_Duas_Add: true,
+  ContentManagement_Duas_Edit: true,
+  ContentManagement_Duas_List: true,
 
-  Web_AppManagement_Featured_Videos_Add: true,
-  Web_AppManagement_Featured_Videos_Edit: true,
-  Web_AppManagement_Featured_Videos_List: true,
+  ContentManagement_Featured_Videos_Add: true,
+  ContentManagement_Featured_Videos_Edit: true,
+  ContentManagement_Featured_Videos_List: true,
 
-  Web_AppManagement_Featured_Banners_Add: true,
-  Web_AppManagement_Featured_Banners_Edit: true,
-  Web_AppManagement_Featured_Banners_List: true,
+  ContentManagement_Featured_Banners_Add: true,
+  ContentManagement_Featured_Banners_Edit: true,
+  ContentManagement_Featured_Banners_List: true,
 
   Web_AppManagement_Online_Charities_Edit: true,
   Web_AppManagement_Online_Charities_List: true,
@@ -375,13 +377,13 @@ export const baitussalamWebAppPermission = {
   Web_AppManagement_Donation_Categories_Edit: true,
   Web_AppManagement_Donation_Categories_List: true,
 
-  Web_AppManagement_Customers_Edit: true,
-  Web_AppManagement_Customers_List: true,
+  UsersManagement_Customers_Edit: true,
+  UsersManagement_Customers_List: true,
 
   Web_AppManagement_Hijri_Dates_List: true,
 
-  Web_AppManagement_Saiban_Submissions_Edit: true,
-  Web_AppManagement_Saiban_Submissions_List: true,
+  UsersManagement_Saiban_Submissions_Edit: true,
+  UsersManagement_Saiban_Submissions_List: true,
 
   Web_AppManagement_Settings_Add: true,
   Web_AppManagement_Settings_Edit: true,

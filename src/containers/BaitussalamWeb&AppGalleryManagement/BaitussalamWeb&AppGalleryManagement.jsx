@@ -11,28 +11,21 @@ import CustomIcon from "../../components/CustomIcon/CustomIcon";
 
 const columns = [
   {
-    title: "Title",
-    dataIndex: "Name",
-    key: "Name",
-    sorter: true,
-    render: (text, record) => <Link to={`${ROUTES.EDIT_ADMIN_USER.path}/${record.userId}`}>{record.fullName}</Link>,
-  },
-  {
-    title: "Description",
-    dataIndex: "fatherName",
-    key: "fatherName",
-    sorter: true,
-    render: (text, record) => <Link to={`${ROUTES.EDIT_ADMIN_USER.path}/${record.userId}`}>{record.fullName}</Link>,
-  },
-  {
-    title: "Order No",
-    dataIndex: "emailAddress",
-    key: "emailAddress",
-  },
-  {
     title: "Image",
-    dataIndex: "Image",
-    key: "Image",
+    dataIndex: "image",
+    key: "image",
+    sorter: true,
+    render: (text, record) => <Link to={`${ROUTES.EDIT_ADMIN_USER.path}/${record.userId}`}>{record.fullName}</Link>,
+  },
+  {
+    title: "Album",
+    dataIndex: "album",
+    key: "album",
+  },
+  {
+    title: "Department",
+    dataIndex: "department",
+    key: "department",
   },
   {
     title: "Action",
@@ -59,7 +52,7 @@ const columns = [
   },
 ];
 
-function BaitussalamWebAndAppProjectManagement(props) {
+function BaitussalamWebAndAppGalleryManagement(props) {
   const { loading, enableDisableAdmin, pagination, getAdminUsers, deleteAdminUsers, list } = props;
   const getList = async query => {
     await getAdminUsers(query);
@@ -82,7 +75,7 @@ function BaitussalamWebAndAppProjectManagement(props) {
   });
 
   const addButton = {
-    text: "Add Projects",
+    text: "Add To Gallery",
     route: ROUTES.ADD_MUSALLI_PARTICIPANT_USER.path,
   };
 
@@ -107,7 +100,7 @@ function BaitussalamWebAndAppProjectManagement(props) {
 
   return (
     <>
-      <PageTitle title="All Projects" />
+      <PageTitle title="All Gallery Items" />
       <ListView
         dataSource={list}
         columns={columns}
@@ -127,7 +120,7 @@ function BaitussalamWebAndAppProjectManagement(props) {
   );
 }
 
-BaitussalamWebAndAppProjectManagement.propTypes = {
+BaitussalamWebAndAppGalleryManagement.propTypes = {
   getAdminUsers: PropTypes.func,
   list: PropTypes.array,
   deleteAdminUsers: PropTypes.func,
@@ -136,4 +129,4 @@ BaitussalamWebAndAppProjectManagement.propTypes = {
   enableDisableAdmin: PropTypes.func,
 };
 
-export default BaitussalamWebAndAppProjectManagement;
+export default BaitussalamWebAndAppGalleryManagement;
