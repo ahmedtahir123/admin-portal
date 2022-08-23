@@ -1,9 +1,9 @@
-import React from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
-import PropTypes from "prop-types";
-import { Card, Divider, Row, Col, Layout } from "antd";
 // import { isLoggedIn } from "../../utils/auth.utils";
+import { Card, Col, Divider, Layout, Row } from "antd";
+import PropTypes from "prop-types";
+import React from "react";
 import logo from "../../images/bogo_logo.png";
+import CarouselComp from "../Carousel/CarouselComp";
 
 // const LoginProvider = React.lazy(() => import("../../providers/login.provider"));
 // const ForgotPasswordProvider = React.lazy(() => import("../../providers/forgotPassword.provider"));
@@ -11,16 +11,22 @@ import logo from "../../images/bogo_logo.png";
 
 // const authentication = () => (isLoggedIn() ? <Redirect to="/portal/home" /> : <Redirect to="/login" />);
 
+const contentStyle = {
+  height: "100vh",
+  color: "#fff",
+  lineHeight: "160px",
+  textAlign: "center",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  backgroundColor: "black",
+};
+
 const AuthLayout = ({ children }) => (
-  <div className="public-route">
+  <>
     <Row type="flex" className="fields-row" gutter={0}>
       <Col span={0} xs={0} sm={0} md={0} lg={13} className="left-vertical-split">
-        <div className="text-center h-pc-100">
-          <h1 className="color-white logo font-42 text-uppercase pad-left-15 pad-right-15">
-            Welcome to Baitussalam Admin
-          </h1>
-          {/* <img src={logo} alt="" className="logo" /> */}
-        </div>
+        <CarouselComp contentStyle={contentStyle} />
       </Col>
 
       <Col span={0} xs={0} md={0} lg={0}>
@@ -55,8 +61,9 @@ const AuthLayout = ({ children }) => (
         </Layout>
       </Col>
     </Row>
-  </div>
+  </>
 );
+
 AuthLayout.propTypes = {
   //   match: PropTypes.object,
   children: PropTypes.object,
