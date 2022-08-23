@@ -62,23 +62,23 @@ function BaitussalamWebAndAppVolunteerManagement(props) {
 
   const canAddUser = permissionsUtil.checkAuth({
     category: "Web_AppManagement",
-    subCategory: "Baitussalam-Web&App",
+    subCategory: "Settings",
     action: "Add",
   });
   const canDeleteUser = permissionsUtil.checkAuth({
     category: "Web_AppManagement",
-    subCategory: "Baitussalam-Web&App",
+    subCategory: "Settings",
     action: "Delete",
   });
   const canChangeStatus = permissionsUtil.checkAuth({
     category: "Web_AppManagement",
-    subCategory: "Baitussalam-Web&App",
+    subCategory: "Settings",
     action: "EditStatus",
   });
 
   const addButton = {
     text: "Add Settings",
-    route: ROUTES.ADD_MUSALLI_PARTICIPANT_USER.path,
+    route: ROUTES.ADD_BAITUSSALAM_WEB_AND_APP_SETTINGS.path,
   };
 
   // useEffect(() => {

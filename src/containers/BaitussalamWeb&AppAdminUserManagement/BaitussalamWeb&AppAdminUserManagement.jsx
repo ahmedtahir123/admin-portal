@@ -71,24 +71,24 @@ function BaitussalamWebAndAppAdminUserManagement(props) {
   };
 
   const canAddUser = permissionsUtil.checkAuth({
-    category: "Web_AppManagement",
-    subCategory: "Baitussalam-Web&App",
+    category: "UsersManagement",
+    subCategory: "Admin_Users",
     action: "Add",
   });
   const canDeleteUser = permissionsUtil.checkAuth({
-    category: "Web_AppManagement",
-    subCategory: "Baitussalam-Web&App",
+    category: "UsersManagement",
+    subCategory: "Admin_Users",
     action: "Delete",
   });
   const canChangeStatus = permissionsUtil.checkAuth({
-    category: "Web_AppManagement",
-    subCategory: "Baitussalam-Web&App",
+    category: "UsersManagement",
+    subCategory: "Admin_Users",
     action: "EditStatus",
   });
 
   const addButton = {
     text: "Add Admin User",
-    route: ROUTES.ADD_MUSALLI_PARTICIPANT_USER.path,
+    route: ROUTES.ADD_BAITUSSALAM_WEB_AND_APP_ADMIN_USER.path,
   };
 
   // useEffect(() => {

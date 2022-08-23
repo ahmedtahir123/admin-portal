@@ -70,23 +70,23 @@ function BaitussalamWebAndAppNewsManagement(props) {
 
   const canAddUser = permissionsUtil.checkAuth({
     category: "Web_AppManagement",
-    subCategory: "Baitussalam-Web&App",
+    subCategory: "News",
     action: "Add",
   });
   const canDeleteUser = permissionsUtil.checkAuth({
     category: "Web_AppManagement",
-    subCategory: "Baitussalam-Web&App",
+    subCategory: "News",
     action: "Delete",
   });
   const canChangeStatus = permissionsUtil.checkAuth({
     category: "Web_AppManagement",
-    subCategory: "Baitussalam-Web&App",
+    subCategory: "News",
     action: "EditStatus",
   });
 
   const addButton = {
     text: "Add News",
-    route: ROUTES.ADD_MUSALLI_PARTICIPANT_USER.path,
+    route: ROUTES.ADD_BAITUSSALAM_WEB_AND_APP_NEWS.path,
   };
 
   // useEffect(() => {

@@ -90,17 +90,17 @@ function BaitussalamWebAndAppPartnerManagement(props) {
 
   const canAddUser = permissionsUtil.checkAuth({
     category: "Web_AppManagement",
-    subCategory: "Baitussalam-Web&App",
+    subCategory: "Partners",
     action: "Add",
   });
   const canDeleteUser = permissionsUtil.checkAuth({
     category: "Web_AppManagement",
-    subCategory: "Baitussalam-Web&App",
+    subCategory: "Partners",
     action: "Delete",
   });
   const canChangeStatus = permissionsUtil.checkAuth({
     category: "Web_AppManagement",
-    subCategory: "Baitussalam-Web&App",
+    subCategory: "Partners",
     action: "EditStatus",
   });
 

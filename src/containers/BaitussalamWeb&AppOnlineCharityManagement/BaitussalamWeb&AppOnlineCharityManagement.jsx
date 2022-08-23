@@ -124,17 +124,17 @@ function BaitussalamWebAndAppOnlineCharityManagement(props) {
 
   const canAddUser = permissionsUtil.checkAuth({
     category: "Web_AppManagement",
-    subCategory: "Baitussalam-Web&App",
+    subCategory: "Online_Charities",
     action: "Add",
   });
   const canDeleteUser = permissionsUtil.checkAuth({
     category: "Web_AppManagement",
-    subCategory: "Baitussalam-Web&App",
+    subCategory: "Online_Charities",
     action: "Delete",
   });
   const canChangeStatus = permissionsUtil.checkAuth({
     category: "Web_AppManagement",
-    subCategory: "Baitussalam-Web&App",
+    subCategory: "Online_Charities",
     action: "EditStatus",
   });
 

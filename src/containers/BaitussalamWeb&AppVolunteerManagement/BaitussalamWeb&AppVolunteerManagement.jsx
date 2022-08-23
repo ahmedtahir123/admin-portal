@@ -66,24 +66,24 @@ function BaitussalamWebAndAppVolunteerManagement(props) {
   };
 
   const canAddUser = permissionsUtil.checkAuth({
-    category: "Web_AppManagement",
-    subCategory: "Baitussalam-Web&App",
+    category: "UsersManagement",
+    subCategory: "Volunteers",
     action: "Add",
   });
   const canDeleteUser = permissionsUtil.checkAuth({
-    category: "Web_AppManagement",
-    subCategory: "Baitussalam-Web&App",
+    category: "UsersManagement",
+    subCategory: "Volunteers",
     action: "Delete",
   });
   const canChangeStatus = permissionsUtil.checkAuth({
-    category: "Web_AppManagement",
-    subCategory: "Baitussalam-Web&App",
+    category: "UsersManagement",
+    subCategory: "Volunteers",
     action: "EditStatus",
   });
 
   const addButton = {
     text: "Add Volunteer",
-    route: ROUTES.ADD_MUSALLI_PARTICIPANT_USER.path,
+    route: ROUTES.BAITUSSALAM_WEB_AND_APP_VOLUNTEERS_MANAGEMENT.path,
   };
 
   // useEffect(() => {

@@ -88,24 +88,24 @@ function BaitussalamWebAndAppDuasManagement(props) {
   };
 
   const canAddUser = permissionsUtil.checkAuth({
-    category: "Web_AppManagement",
-    subCategory: "Baitussalam-Web&App",
+    category: "ContentManagement",
+    subCategory: "Duas",
     action: "Add",
   });
   const canDeleteUser = permissionsUtil.checkAuth({
-    category: "Web_AppManagement",
-    subCategory: "Baitussalam-Web&App",
+    category: "ContentManagement",
+    subCategory: "Duas",
     action: "Delete",
   });
   const canChangeStatus = permissionsUtil.checkAuth({
-    category: "Web_AppManagement",
-    subCategory: "Baitussalam-Web&App",
+    category: "ContentManagement",
+    subCategory: "Duas",
     action: "EditStatus",
   });
 
   const addButton = {
     text: "Add Duas",
-    route: ROUTES.ADD_MUSALLI_PARTICIPANT_USER.path,
+    route: ROUTES.ADD_BAITUSSALAM_WEB_AND_APP_DUAS.path,
   };
 
   // useEffect(() => {

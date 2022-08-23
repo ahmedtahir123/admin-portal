@@ -79,18 +79,18 @@ function BaitussalamWebAndAppAdminUserManagement(props) {
   };
 
   const canAddUser = permissionsUtil.checkAuth({
-    category: "Web_AppManagement",
-    subCategory: "Baitussalam-Web&App",
+    category: "UsersManagement",
+    subCategory: "Saiban_Submissions",
     action: "Add",
   });
   const canDeleteUser = permissionsUtil.checkAuth({
-    category: "Web_AppManagement",
-    subCategory: "Baitussalam-Web&App",
+    category: "UsersManagement",
+    subCategory: "Saiban_Submissions",
     action: "Delete",
   });
   const canChangeStatus = permissionsUtil.checkAuth({
-    category: "Web_AppManagement",
-    subCategory: "Baitussalam-Web&App",
+    category: "UsersManagement",
+    subCategory: "Saiban_Submissions",
     action: "EditStatus",
   });
 

@@ -93,24 +93,24 @@ function BaitussalamWebAndAppFeaturedVideosManagement(props) {
   };
 
   const canAddUser = permissionsUtil.checkAuth({
-    category: "Web_AppManagement",
-    subCategory: "Baitussalam-Web&App",
+    category: "ContentManagement",
+    subCategory: "Featured_Banners",
     action: "Add",
   });
   const canDeleteUser = permissionsUtil.checkAuth({
-    category: "Web_AppManagement",
-    subCategory: "Baitussalam-Web&App",
+    category: "ContentManagement",
+    subCategory: "Featured_Banners",
     action: "Delete",
   });
   const canChangeStatus = permissionsUtil.checkAuth({
-    category: "Web_AppManagement",
-    subCategory: "Baitussalam-Web&App",
+    category: "ContentManagement",
+    subCategory: "Featured_Banners",
     action: "EditStatus",
   });
 
   const addButton = {
     text: "Add Featured Banner",
-    route: ROUTES.ADD_MUSALLI_PARTICIPANT_USER.path,
+    route: ROUTES.ADD_BAITUSSALAM_WEB_AND_APP_FEATURED_BANNERS.path,
   };
 
   // useEffect(() => {

@@ -91,24 +91,24 @@ function BaitussalamWebAndAppPublicationCategoryManagement(props) {
   };
 
   const canAddUser = permissionsUtil.checkAuth({
-    category: "Web_AppManagement",
-    subCategory: "Baitussalam-Web&App",
+    category: "ContentManagement",
+    subCategory: "Publication_Category",
     action: "Add",
   });
   const canDeleteUser = permissionsUtil.checkAuth({
-    category: "Web_AppManagement",
-    subCategory: "Baitussalam-Web&App",
+    category: "ContentManagement",
+    subCategory: "Publication_Category",
     action: "Delete",
   });
   const canChangeStatus = permissionsUtil.checkAuth({
-    category: "Web_AppManagement",
-    subCategory: "Baitussalam-Web&App",
+    category: "ContentManagement",
+    subCategory: "Publication_Category",
     action: "EditStatus",
   });
 
   const addButton = {
     text: "Add Publication Category",
-    route: ROUTES.ADD_MUSALLI_PARTICIPANT_USER.path,
+    route: ROUTES.ADD_BAITUSSALAM_WEB_AND_APP_PUBLICATION_CATEGORY.path,
   };
 
   // useEffect(() => {

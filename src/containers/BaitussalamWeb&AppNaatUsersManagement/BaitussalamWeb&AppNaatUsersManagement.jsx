@@ -117,18 +117,18 @@ function BaitussalamWebAndAppNaatUsersManagement(props) {
   };
 
   const canAddUser = permissionsUtil.checkAuth({
-    category: "Web_AppManagement",
-    subCategory: "Baitussalam-Web&App",
+    category: "UsersManagement",
+    subCategory: "Naat_Competition_Users",
     action: "Add",
   });
   const canDeleteUser = permissionsUtil.checkAuth({
-    category: "Web_AppManagement",
-    subCategory: "Baitussalam-Web&App",
+    category: "UsersManagement",
+    subCategory: "Naat_Competition_Users",
     action: "Delete",
   });
   const canChangeStatus = permissionsUtil.checkAuth({
-    category: "Web_AppManagement",
-    subCategory: "Baitussalam-Web&App",
+    category: "UsersManagement",
+    subCategory: "Naat_Competition_Users",
     action: "EditStatus",
   });
 

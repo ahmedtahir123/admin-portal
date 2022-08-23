@@ -59,24 +59,24 @@ function BaitussalamWebAndAppGalleryManagement(props) {
   };
 
   const canAddUser = permissionsUtil.checkAuth({
-    category: "Web_AppManagement",
-    subCategory: "Baitussalam-Web&App",
+    category: "ContentManagement",
+    subCategory: "Galleries",
     action: "Add",
   });
   const canDeleteUser = permissionsUtil.checkAuth({
-    category: "Web_AppManagement",
-    subCategory: "Baitussalam-Web&App",
+    category: "ContentManagement",
+    subCategory: "Galleries",
     action: "Delete",
   });
   const canChangeStatus = permissionsUtil.checkAuth({
-    category: "Web_AppManagement",
-    subCategory: "Baitussalam-Web&App",
+    category: "ContentManagement",
+    subCategory: "Galleries",
     action: "EditStatus",
   });
 
   const addButton = {
     text: "Add To Gallery",
-    route: ROUTES.ADD_MUSALLI_PARTICIPANT_USER.path,
+    route: ROUTES.ADD_BAITUSSALAM_WEB_AND_APP_GALLERIES.path,
   };
 
   // useEffect(() => {

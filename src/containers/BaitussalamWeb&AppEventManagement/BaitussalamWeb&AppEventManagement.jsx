@@ -72,23 +72,23 @@ function BaitussalamWebAndAppEventManagement(props) {
 
   const canAddUser = permissionsUtil.checkAuth({
     category: "Web_AppManagement",
-    subCategory: "Baitussalam-Web&App",
+    subCategory: "Events",
     action: "Add",
   });
   const canDeleteUser = permissionsUtil.checkAuth({
     category: "Web_AppManagement",
-    subCategory: "Baitussalam-Web&App",
+    subCategory: "Events",
     action: "Delete",
   });
   const canChangeStatus = permissionsUtil.checkAuth({
     category: "Web_AppManagement",
-    subCategory: "Baitussalam-Web&App",
+    subCategory: "Events",
     action: "EditStatus",
   });
 
   const addButton = {
     text: "Add Event",
-    route: ROUTES.ADD_MUSALLI_PARTICIPANT_USER.path,
+    route: ROUTES.ADD_BAITUSSALAM_WEB_AND_APP_EVENTS.path,
   };
 
   // useEffect(() => {
