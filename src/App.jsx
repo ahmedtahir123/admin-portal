@@ -7,6 +7,7 @@ import history from "./utils/history.utils";
 // import { isLoggedIn } from "./utils/auth.utils";
 
 import "./styles/App.scss";
+import "react-quill/dist/quill.snow.css";
 
 // const PrivateRouteProvider = React.lazy(() => import("./providers/privateRoute.provider"));
 const MainLayoutProvider = React.lazy(() => import("./providers/mainLayout.provider"));
