@@ -1,18 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { Form, Input, Button, Row, Col, Radio, Spin, Divider, Popconfirm, InputNumber } from "antd";
-import PropTypes from "prop-types";
+import { Button, Col, Divider, Form, Input, Popconfirm, Radio, Row, Select, Spin, Upload } from "antd";
 import * as moment from "dayjs";
-import { useParams } from "react-router-dom";
-import _isEmpty from "lodash/isEmpty";
+import JoditEditor from "jodit-react";
 import _get from "lodash/get";
-import ROUTES from "../../routes/constant.route";
-import Avatar from "../../images/avatar.svg";
-import { VALIDATE_FORM_MESSAGES_TEMPLATE, CONFIRM_MESSAGE, DATE_FORMAT_TIME } from "../../utils/constants";
+import _isEmpty from "lodash/isEmpty";
+import _map from "lodash/map";
+import PropTypes from "prop-types";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import PageTitle from "../../components/PageTitle/PageTitle";
-import { numberOnly } from "../../utils/utils";
-
-import "./AddEditBaitussalamWeb&AppDuasManagement.scss";
+import BrandLogo from "../../images/avatar.png";
+import listingPageCardImage from "../../images/listing-card.svg";
+import ROUTES from "../../routes/constant.route";
 import "../../styles/_helpers.scss";
+import { CONFIRM_MESSAGE, DATE_FORMAT_TIME, VALIDATE_FORM_MESSAGES_TEMPLATE } from "../../utils/constants";
+import { beforeUpload, getBase64, numberOnly } from "../../utils/utils";
+import "./AddEditBaitussalamWeb&AppDuasManagement.scss";
 
 const AddEditBaitussalamWebAndAppDuasManagementContainer = ({
   selected,
@@ -28,6 +30,8 @@ const AddEditBaitussalamWebAndAppDuasManagementContainer = ({
   const isEditView = !!id;
   const [form] = Form.useForm();
   const [displayPic, setDisplayPic] = useState("");
+  const { Option } = Select;
+  const [bannerImageUrl, setBannerImageUrl] = useState(listingPageCardImage);
 
   const _deleteAdmin = async () => {
     try {
@@ -121,6 +125,12 @@ const AddEditBaitussalamWebAndAppDuasManagementContainer = ({
       enableDisableAdmin(id, false);
     }
   };
+
+  const handleImageChange = info => {
+    if (info.fileList.length >= 0) {
+      getBase64(info.fileList[0].originFileObj, imageUrl => setBannerImageUrl(imageUrl));
+    }
+  };
   const createdAt = _get(selected, "createdAt", "") ? moment(selected.createdAt).format(DATE_FORMAT_TIME) : "";
   const updatedAt = _get(selected, "updatedAt", "") ? moment(selected.updatedAt).format(DATE_FORMAT_TIME) : "";
   return (
@@ -130,7 +140,7 @@ const AddEditBaitussalamWebAndAppDuasManagementContainer = ({
           <Spin size="large" tip="Loading ..." />
         </div>
       ) : null}
-      <PageTitle title={isEditView ? "Edit Admin" : "Add Admin"} />
+      <PageTitle title={isEditView ? "Edit Admin" : "Add Duas"} />
       <Form
         className="AddUser"
         form={form}
@@ -147,61 +157,85 @@ const AddEditBaitussalamWebAndAppDuasManagementContainer = ({
                 <Input placeholder="User Code" readOnly />
               </Form.Item>
             ) : null}
-            <Form.Item label="First Name" name="firstName" rules={[{ required: true }]}>
-              <Input placeholder="First Name" />
+            <Form.Item label="Dua Active" name={["userMetaData", "isEnabled"]} rules={[{ required: true }]}>
+              <Radio.Group>
+                <Radio.Button value>Active</Radio.Button>
+                <Radio.Button value={false}>Disabled</Radio.Button>
+              </Radio.Group>
             </Form.Item>
-            <Form.Item label="Last Name" name="lastName" rules={[{ required: true }]}>
-              <Input placeholder="Last Name" />
+            <Form.Item label="Title" name="title" rules={[{ required: true }]}>
+              <Input placeholder="Title" />
             </Form.Item>
-            <Form.Item label="Email" name="emailAddress" rules={[{ required: true, type: "email" }]}>
-              <Input placeholder="Email" readOnly={isEditView} />
+            <Form.Item label="Description" name="description" rules={[{ required: true }]}>
+              <JoditEditor onBlur={newContent => {}} />
             </Form.Item>
-            {!isEditView ? (
-              <Form.Item label="Password" name="password" rules={[{ required: true }]}>
-                <Input.Password />
-              </Form.Item>
-            ) : null}
+            <Form.Item label="Category" name="Category" rules={[{ required: true }]}>
+              <Select placeholder="Category">
+                {_map([], city => (
+                  <Option key={city.code} value={city.code}>
+                    {city.name}
+                  </Option>
+                ))}
+              </Select>
+            </Form.Item>
             <Form.Item
-              label="Cell Number"
-              name="cellPhoneNumber"
+              label="Dua Display Order"
+              name="duadisplayorder"
               rules={[
                 {
                   required: true,
-                  max: 20,
+                  max: 10,
                 },
                 numberOnly,
               ]}
             >
-              <Input placeholder="03001234567" />
+              <Input placeholder="2" />
             </Form.Item>
           </Col>
           <Col span={8} xs={24} sm={12} lg={12}>
-            <Form.Item className="text-left mg-top-40" name={["userMetaData", "isEnabled"]}>
-              <Radio.Group>
-                <Radio.Button value>Enabled</Radio.Button>
-                <Radio.Button value={false}>Disabled</Radio.Button>
-              </Radio.Group>
+            <Form.Item label="Dua Media Type" name="duamediatype" rules={[{ required: true }]}>
+              <Select placeholder="Dua Media Type">
+                {_map([], city => (
+                  <Option key={city.code} value={city.code}>
+                    {city.name}
+                  </Option>
+                ))}
+              </Select>
             </Form.Item>
-
-            <Form.Item label="">
-              <div className="bg-gray text-center">
-                {/* <div className="bg-gray"> */}
-                {/* {displayPic ? (
-                    <img src={displayPic} alt="avatar" width={275} />
-                  ) : (
-                    <img src={avatar} alt="avatar" width={275} />
-                  )} */}
-                {/* </div> */}
-                <img src={displayPic || Avatar} alt="avatar" width={275} />
+            <Form.Item label="Dua Media Language" name="duamedialanguage" rules={[{ required: true }]}>
+              <Select placeholder="Dua Media Language">
+                {_map([], city => (
+                  <Option key={city.code} value={city.code}>
+                    {city.name}
+                  </Option>
+                ))}
+              </Select>
+            </Form.Item>
+            <Form.Item
+              label="Media Display Order"
+              name="mediadisplayorder"
+              rules={[
+                {
+                  required: true,
+                  max: 10,
+                },
+                numberOnly,
+              ]}
+            >
+              <Input placeholder="2" />
+            </Form.Item>
+            <Form.Item label="Dua Image">
+              <div className="text-center">
+                <div className="bg-gray">
+                  <img src={bannerImageUrl || BrandLogo} alt="avatar" width={250} />
+                  <div className="upload-container">
+                    <Upload showUploadList={false} beforeUpload={beforeUpload} onChange={handleImageChange}>
+                      <Button>Upload</Button>
+                    </Upload>
+                  </div>
+                </div>
               </div>
             </Form.Item>
-            {isEditView ? (
-              <div className="text-right mg-top-10">
-                <Button type="primary" onClick={_changePassword}>
-                  Change Password
-                </Button>
-              </div>
-            ) : null}
           </Col>
         </Row>
 

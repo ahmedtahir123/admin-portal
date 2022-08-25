@@ -1,20 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { Form, Input, Button, Row, Col, Radio, Spin, Divider, Popconfirm, Select } from "antd";
-import PropTypes from "prop-types";
+import { Button, Col, Divider, Form, Input, Popconfirm, Radio, Row, Select, Spin } from "antd";
 import * as moment from "dayjs";
-import { useParams } from "react-router-dom";
-import _isEmpty from "lodash/isEmpty";
+import JoditEditor from "jodit-react";
 import _get from "lodash/get";
+import _isEmpty from "lodash/isEmpty";
 import _map from "lodash/map";
-import ROUTES from "../../routes/constant.route";
-import Avatar from "../../images/avatar.svg";
-import { VALIDATE_FORM_MESSAGES_TEMPLATE, CONFIRM_MESSAGE, DATE_FORMAT_TIME } from "../../utils/constants";
+import PropTypes from "prop-types";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import PageTitle from "../../components/PageTitle/PageTitle";
-import { numberOnly } from "../../utils/utils";
-
-import "./AddEditBaitussalamWeb&AppBayanatCategoryManagement.scss";
+import ROUTES from "../../routes/constant.route";
 import "../../styles/_helpers.scss";
+import { CONFIRM_MESSAGE, DATE_FORMAT_TIME, VALIDATE_FORM_MESSAGES_TEMPLATE } from "../../utils/constants";
 import GalleryGrid from "../GalleryGrid";
+import "./AddEditBaitussalamWeb&AppBayanatCategoryManagement.scss";
 
 const AddEditBaitussalamWebAndAppBayanatCategoryManagementContainer = ({
   selected,
@@ -167,7 +165,7 @@ const AddEditBaitussalamWebAndAppBayanatCategoryManagementContainer = ({
               </Select>
             </Form.Item>
             <Form.Item label=" Description" name="Description" rules={[{ required: true }]}>
-              <Input placeholder=" Description" />
+              <JoditEditor onBlur={newContent => {}} />
             </Form.Item>
             <Form.Item label=" Order No" name="Order No" rules={[{ required: true }]}>
               <Input placeholder=" Order No" />
@@ -189,12 +187,11 @@ const AddEditBaitussalamWebAndAppBayanatCategoryManagementContainer = ({
                 <div className="bg-gray">
                   <GalleryGrid images={[]} gridOnly />
                   <div className="upload-container">
-                    <Button onClick={() => { }}>Manage Banner Gallery</Button>
+                    <Button onClick={() => {}}>Manage Banner Gallery</Button>
                   </div>
                 </div>
               </div>
             </Form.Item>
-
           </Col>
         </Row>
 

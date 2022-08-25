@@ -1,20 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { Form, Input, Button, Row, Col, Radio, Spin, Divider, Popconfirm, Select } from "antd";
-import PropTypes from "prop-types";
+import { Button, Col, Divider, Form, Input, Popconfirm, Row, Select, Spin } from "antd";
 import * as moment from "dayjs";
-import { useParams } from "react-router-dom";
-import _isEmpty from "lodash/isEmpty";
+import JoditEditor from "jodit-react";
 import _get from "lodash/get";
+import _isEmpty from "lodash/isEmpty";
 import _map from "lodash/map";
-import ROUTES from "../../routes/constant.route";
-import Avatar from "../../images/avatar.svg";
-import { VALIDATE_FORM_MESSAGES_TEMPLATE, CONFIRM_MESSAGE, DATE_FORMAT_TIME } from "../../utils/constants";
+import PropTypes from "prop-types";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import PageTitle from "../../components/PageTitle/PageTitle";
-import { numberOnly } from "../../utils/utils";
-
-import "./AddEditBaitussalamWeb&AppNewsManagement.scss";
+import ROUTES from "../../routes/constant.route";
 import "../../styles/_helpers.scss";
+import { CONFIRM_MESSAGE, DATE_FORMAT_TIME, VALIDATE_FORM_MESSAGES_TEMPLATE } from "../../utils/constants";
 import GalleryGrid from "../GalleryGrid";
+import "./AddEditBaitussalamWeb&AppNewsManagement.scss";
 
 const AddEditBaitussalamWebAndAppNewsletterManagementContainer = ({
   selected,
@@ -145,11 +143,11 @@ const AddEditBaitussalamWebAndAppNewsletterManagementContainer = ({
       >
         <Row className="fields-row" gutter={20} type="flex">
           <Col span={8} xs={24} sm={12} lg={12}>
-          <Form.Item label="Title" name="title" rules={[{ required: true }]}>
+            <Form.Item label="Title" name="title" rules={[{ required: true }]}>
               <Input placeholder="Title" />
             </Form.Item>
             <Form.Item label="Description" name="description" rules={[{ required: true }]}>
-              <Input placeholder="description" />
+              <JoditEditor onBlur={newContent => {}} />
             </Form.Item>
             <Form.Item label="Order No" name="orderNo" rules={[{ required: true }]}>
               <Input placeholder="Order No" readOnly={isEditView} />
@@ -170,7 +168,7 @@ const AddEditBaitussalamWebAndAppNewsletterManagementContainer = ({
                 <div className="bg-gray">
                   <GalleryGrid images={[]} gridOnly />
                   <div className="upload-container">
-                    <Button onClick={()=>{}}>Image(360*220)</Button>
+                    <Button onClick={() => {}}>Image(360*220)</Button>
                   </div>
                 </div>
               </div>
