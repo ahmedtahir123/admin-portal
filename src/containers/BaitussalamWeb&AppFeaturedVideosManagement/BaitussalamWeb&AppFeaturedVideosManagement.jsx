@@ -12,10 +12,9 @@ import CustomIcon from "../../components/CustomIcon/CustomIcon";
 const columns = [
   {
     title: "Name",
-    dataIndex: "Name",
-    key: "Name",
-    sorter: true,
-    render: (text, record) => <Link to={`${ROUTES.EDIT_ADMIN_USER.path}/${record.userId}`}>{record.fullName}</Link>,
+    dataIndex: "nameEn",
+    key: "nameEn",
+    // sorter: true,
   },
   {
     title: "Description",
@@ -29,18 +28,18 @@ const columns = [
   },
   {
     title: "Thumbnail",
-    dataIndex: "thumbnail",
-    key: "thumbnail",
+    dataIndex: "thumbnailLink",
+    key: "thumbnailLink",
   },
   {
     title: "Display At Home Screen",
-    dataIndex: "display",
-    key: "display",
+    dataIndex: "displayAtHome",
+    key: "displayAtHome",
   },
   {
     title: "Sort Order",
-    dataIndex: "SortOrder",
-    key: "SortOrder",
+    dataIndex: "sortOrder",
+    key: "sortOrder",
   },
   {
     title: "Created At",
@@ -64,10 +63,8 @@ const columns = [
   },
   {
     title: "Status",
-    dataIndex: "userMetaData",
+    dataIndex: "status",
     key: "status",
-    sorter: true,
-    render: d => d.status,
   },
   {
     title: "Action",
@@ -82,22 +79,15 @@ const columns = [
             </Button>
           </Link>
         </Col>
-        <Col span={12} xs={24} sm={12} lg={12}>
-          <Link to={`/swim-lane-manager/${record.id}`}>
-            <Button type="link">
-              <CustomIcon name="UsergroupAddOutlined" />
-            </Button>
-          </Link>
-        </Col>
       </Row>
     ),
   },
 ];
 
 function BaitussalamWebAndAppFeaturedVideosManagement(props) {
-  const { loading, enableDisableAdmin, pagination, getAdminUsers, deleteAdminUsers, list } = props;
+  const { loading, enableDisableAdmin, pagination, getFeaturedVideos, deleteAdminUsers, list } = props;
   const getList = async query => {
-    await getAdminUsers(query);
+    await getFeaturedVideos(query);
   };
 
   const canAddUser = permissionsUtil.checkAuth({
@@ -147,7 +137,7 @@ function BaitussalamWebAndAppFeaturedVideosManagement(props) {
         dataSource={list}
         columns={columns}
         loading={loading}
-        rowKey="userId"
+        rowKey="id"
         addButton={addButton}
         pagination={pagination}
         deleteAllData={deleteAdminUsers}
@@ -157,13 +147,14 @@ function BaitussalamWebAndAppFeaturedVideosManagement(props) {
         canChangeStatus={canChangeStatus}
         canAdd={canAddUser}
         canDelete={canDeleteUser}
+        scroll={{ x: 1200 }}
       />
     </>
   );
 }
 
 BaitussalamWebAndAppFeaturedVideosManagement.propTypes = {
-  getAdminUsers: PropTypes.func,
+  getFeaturedVideos: PropTypes.func,
   list: PropTypes.array,
   deleteAdminUsers: PropTypes.func,
   loading: PropTypes.bool,

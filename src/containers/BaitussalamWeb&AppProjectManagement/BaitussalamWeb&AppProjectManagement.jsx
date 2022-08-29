@@ -12,27 +12,29 @@ import CustomIcon from "../../components/CustomIcon/CustomIcon";
 const columns = [
   {
     title: "Title",
-    dataIndex: "Name",
-    key: "Name",
+    dataIndex: "title",
+    key: "title",
     sorter: true,
-    render: (text, record) => <Link to={`${ROUTES.EDIT_ADMIN_USER.path}/${record.userId}`}>{record.fullName}</Link>,
+    // render: (text, record) => <Link to={`${ROUTES.EDIT_ADMIN_USER.path}/${record.userId}`}>{record.fullName}</Link>,
   },
   {
     title: "Description",
-    dataIndex: "fatherName",
-    key: "fatherName",
+    dataIndex: "description",
+    key: "description",
     sorter: true,
-    render: (text, record) => <Link to={`${ROUTES.EDIT_ADMIN_USER.path}/${record.userId}`}>{record.fullName}</Link>,
   },
   {
     title: "Order No",
-    dataIndex: "emailAddress",
-    key: "emailAddress",
+    dataIndex: "orderNumber",
+    key: "orderNumber",
   },
   {
     title: "Image",
-    dataIndex: "Image",
-    key: "Image",
+    dataIndex: "image",
+    key: "image",
+    render: image => (
+      <img className="card-img" src={`https://dev.baitussalam.org/storage/images/projects/${image}`} alt="pic1" />
+    ),
   },
   {
     title: "Action",
@@ -40,17 +42,10 @@ const columns = [
     align: "center",
     render: record => (
       <Row>
-        <Col span={12} xs={24} sm={12} lg={12}>
+        <Col span={4} xs={24} sm={12} lg={4}>
           <Link to={`/landing-designer/${record.id}`}>
             <Button type="link">
-              <CustomIcon name="UserOutlined" />
-            </Button>
-          </Link>
-        </Col>
-        <Col span={12} xs={24} sm={12} lg={12}>
-          <Link to={`/swim-lane-manager/${record.id}`}>
-            <Button type="link">
-              <CustomIcon name="UsergroupAddOutlined" />
+              <CustomIcon name="EditOutlined" />
             </Button>
           </Link>
         </Col>
@@ -60,9 +55,9 @@ const columns = [
 ];
 
 function BaitussalamWebAndAppProjectManagement(props) {
-  const { loading, enableDisableAdmin, pagination, getAdminUsers, deleteAdminUsers, list } = props;
+  const { loading, enableDisableAdmin, pagination, getProjects, deleteAdminUsers, list } = props;
   const getList = async query => {
-    await getAdminUsers(query);
+    await getProjects(query);
   };
 
   const canAddUser = permissionsUtil.checkAuth({
@@ -128,7 +123,7 @@ function BaitussalamWebAndAppProjectManagement(props) {
 }
 
 BaitussalamWebAndAppProjectManagement.propTypes = {
-  getAdminUsers: PropTypes.func,
+  getProjects: PropTypes.func,
   list: PropTypes.array,
   deleteAdminUsers: PropTypes.func,
   loading: PropTypes.bool,

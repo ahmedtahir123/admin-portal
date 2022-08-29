@@ -12,10 +12,11 @@ import CustomIcon from "../../components/CustomIcon/CustomIcon";
 const columns = [
   {
     title: "Name",
-    dataIndex: "Name",
-    key: "Name",
+    dataIndex: "name",
+    key: "name",
     sorter: true,
-    render: (text, record) => <Link to={`${ROUTES.EDIT_ADMIN_USER.path}/${record.userId}`}>{record.fullName}</Link>,
+    fixed: "left",
+    // render: (text, record) => <Link to={`${ROUTES.EDIT_ADMIN_USER.path}/${record.userId}`}>{record.fullName}</Link>,
   },
   {
     title: "Description",
@@ -24,8 +25,8 @@ const columns = [
   },
   {
     title: "Parent Id",
-    dataIndex: "parentId",
-    key: "parentId",
+    dataIndex: "parentCategoryId",
+    key: "parentCategoryId",
   },
   {
     title: "Order No",
@@ -34,7 +35,7 @@ const columns = [
   },
   {
     title: "Status",
-    dataIndex: "userMetaData",
+    dataIndex: "status",
     key: "status",
     sorter: true,
     render: d => d.status,
@@ -51,8 +52,8 @@ const columns = [
   },
   {
     title: "Updated At",
-    dataIndex: "updatedAt",
-    key: "updatedAt",
+    dataIndex: "lastUpdatedAt",
+    key: "lastUpdatedAt",
   },
   {
     title: "Updated By",
@@ -72,22 +73,15 @@ const columns = [
             </Button>
           </Link>
         </Col>
-        <Col span={12} xs={24} sm={12} lg={12}>
-          <Link to={`/swim-lane-manager/${record.id}`}>
-            <Button type="link">
-              <CustomIcon name="UsergroupAddOutlined" />
-            </Button>
-          </Link>
-        </Col>
       </Row>
     ),
   },
 ];
 
 function BaitussalamWebAndAppBayanatCategoryManagement(props) {
-  const { loading, enableDisableAdmin, pagination, getAdminUsers, deleteAdminUsers, list } = props;
+  const { loading, enableDisableAdmin, pagination, getBayanatCategory, deleteAdminUsers, list } = props;
   const getList = async query => {
-    await getAdminUsers(query);
+    await getBayanatCategory(query);
   };
 
   const canAddUser = permissionsUtil.checkAuth({
@@ -147,13 +141,14 @@ function BaitussalamWebAndAppBayanatCategoryManagement(props) {
         canChangeStatus={canChangeStatus}
         canAdd={canAddUser}
         canDelete={canDeleteUser}
+        scroll={{ x: 2000 }}
       />
     </>
   );
 }
 
 BaitussalamWebAndAppBayanatCategoryManagement.propTypes = {
-  getAdminUsers: PropTypes.func,
+  getBayanatCategory: PropTypes.func,
   list: PropTypes.array,
   deleteAdminUsers: PropTypes.func,
   loading: PropTypes.bool,

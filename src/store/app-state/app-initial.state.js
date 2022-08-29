@@ -180,6 +180,13 @@ const appInitialState = {
     list: [],
     selected: {},
   },
+  participant: {
+    loading: false,
+    error: null,
+    value: {},
+    list: [],
+    selected: {},
+  },
 };
 
 export default appInitialState;

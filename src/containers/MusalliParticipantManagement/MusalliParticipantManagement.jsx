@@ -83,10 +83,11 @@ const columns = [
 ];
 
 function MusalliMosqueManagement(props) {
-  const { loading, enableDisableAdmin, pagination, getAdminUsers, deleteAdminUsers, list } = props;
+  const { loading, enableDisableAdmin, pagination, getMusalliParticipant, deleteAdminUsers, list } = props;
   const getList = async query => {
-    await getAdminUsers(query);
+    await getMusalliParticipant(query);
   };
+  debugger
 
   const canAddUser = permissionsUtil.checkAuth({
     category: "MusalliManagement",
@@ -151,7 +152,7 @@ function MusalliMosqueManagement(props) {
 }
 
 MusalliMosqueManagement.propTypes = {
-  getAdminUsers: PropTypes.func,
+  getMusalliParticipant: PropTypes.func,
   list: PropTypes.array,
   deleteAdminUsers: PropTypes.func,
   loading: PropTypes.bool,

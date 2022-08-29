@@ -4,28 +4,28 @@ import musalliService from "../../services/musalli.service";
 import { SUCCESS_MESSAGE, ERROR_MESSAGE } from "../../utils/constants";
 
 export function participantRequest() {
-  return { type: ACTIONS.Participant_REQUEST };
+  return { type: ACTIONS.PARTICIPANT_REQUEST };
 }
 
 export function participantSuccess(response) {
-  return { type: ACTIONS.Participant_SUCCESS, response };
+  return { type: ACTIONS.PARTICIPANT_SUCCESS, response };
 }
 
 export function participantError(error) {
-  return { type: ACTIONS.Participant_ERROR, error };
+  return { type: ACTIONS.PARTICIPANT_ERROR, error };
 }
 
 export function ParticipantListSuccess(response) {
-  return { type: ACTIONS.Participant_LIST_SUCCESS, response };
+  return { type: ACTIONS.PARTICIPANT_LIST_SUCCESS, response };
 }
 
 export function selectedParticipantSuccess(response) {
-  return { type: ACTIONS.SELECTED_Participant_SUCCESS, response };
+  return { type: ACTIONS.SELECTED_PARTICIPANT_SUCCESS, response };
 }
 
 /* Async Actions */
 
-export function getParticipantUsers(query) {
+export function getMusalliParticipant(query) {
   return async dispatch => {
     dispatch(participantRequest());
     try {
@@ -63,7 +63,7 @@ export function deleteParticipantUsers(ids, query) {
     try {
       const [err, response] = await to(musalliService.deleteParticipantUsers(ids));
       if (err) throwError(err);
-      dispatch(getParticipantUsers(query));
+      dispatch(getMusalliParticipant(query));
       toastMessage("success", SUCCESS_MESSAGE.DELETED);
     } catch (error) {
       dispatch(participantError(error));
@@ -116,7 +116,7 @@ export function enableDisableParticipant(ids, enabled, query) {
       }
       console.log("response", response);
       if (err) throwError(err);
-      dispatch(getParticipantUsers(query));
+      dispatch(getMusalliParticipant(query));
       toastMessage("success", SUCCESS_MESSAGE.ENABLED);
     } catch (error) {
       dispatch(participantError(error));

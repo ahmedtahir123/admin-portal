@@ -2,12 +2,16 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import AppPublicationCategoryManagement from "../containers/BaitussalamWeb&AppPublicationCategoryManagement/BaitussalamWeb&AppPublicationCategoryManagement";
-import { deleteAdminUsers, enableDisableAdmin, getAdminUsers } from "../store/actions/admin.actions";
+import {
+  deleteAdminUsers,
+  enableDisableAdmin,
+  getPublicationCategory,
+} from "../store/actions/baitussalamWeb&App.actions";
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      getAdminUsers,
+      getPublicationCategory,
       deleteAdminUsers,
       enableDisableAdmin,
     },
@@ -16,7 +20,7 @@ const mapDispatchToProps = dispatch =>
 
 const mapStateToProps = state => ({
   loading: state.admin.loading,
-  list: state.admin.list,
+  list: state.admin.value,
   error: state.admin.error,
   pagination: state.admin.value,
 });

@@ -27,6 +27,7 @@ import designer from "./landingPageDesigner.reducer";
 import bookPurchaseReport from "./reports.reducer";
 import billingPlan from "./billingPlan.reducer";
 import merchantDashboard from "./merchantDashboard.reducer";
+import musalliparticipant from "./participant.reducer";
 
 export default function reducer(state = appInitialState, action) {
   if (action.type === ACTIONS.APP_RESET) {
@@ -57,5 +58,6 @@ export default function reducer(state = appInitialState, action) {
     bookPurchaseReport: bookPurchaseReport(state.bookPurchaseReport, action),
     billingPlan: billingPlan(state.billingPlan, action),
     merchantDashboard: merchantDashboard(state.merchantDashboard, action),
+    participant: musalliparticipant(state.participant, action),
   };
 }

@@ -51,7 +51,7 @@
     "react-scripts": "3.0.1"
   },
   "scripts": {
-    "start": "react-app-rewired start",
+    "start": "set HTTPS=true && react-app-rewired start",
     "build": "react-app-rewired build",
     "client": "set port=3006 && react-app-rewired start",
     "server": "nodemon ./server/src/server.js",

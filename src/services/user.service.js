@@ -16,8 +16,8 @@ const UserService = {
     return userData || false;
   },
   delUser: user => remove(`users/curators/${user._id}?userRole=${user.role}`),
-  login: (body, clientId) =>
-    post(`gateway/login`, body, { headers: { "grant-type": "password", "client-id": clientId } }),
+  // login: (body, clientId) =>
+  //   post(`gateway/login`, body, { headers: { "grant-type": "password", "client-id": clientId } }),
   logout: body => post(`gateway/logout`, body),
   changePassword: (body, page) => post(`gateway/public/${page}/admin-management/change-password`, body),
 
@@ -84,5 +84,13 @@ const UserService = {
     patch(`user-service/user/v1/public/admin/merchant-management/profile/status`, {
       headers: { "user-id": userId, status: STATUS.VERIFIED },
     }),
+  login: body =>
+    post(`oauth/token`, body, {
+      headers: {
+        "content-type": "application/x-www-form-urlencoded",
+        "Access-Control-Allow-Origin": "*",
+      },
+    },
+    ),
 };
 export default UserService;

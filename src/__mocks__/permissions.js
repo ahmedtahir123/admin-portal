@@ -4,7 +4,7 @@ export const permissions = {
   ChangePassword_View: true,
 
   // USER MANAGEMENT
-  UserManagement_View: true,
+  UserManagement_View: false,
   // UserManagement_Session_List: true,
   // UserManagement_Session_EditStatus: true,
 
@@ -32,7 +32,7 @@ export const permissions = {
   UserManagement_Merchant_EditMerchantRole: true,
   UserManagement_Merchant_EditPermission: true,
 
-  LandingManagement_View: true,
+  LandingManagement_View: false,
   LandingManagement_Profiler_List: true,
   LandingManagement_Profiler_Add: true,
   LandingManagement_Profiler_Edit: true,
@@ -40,7 +40,7 @@ export const permissions = {
   LandingManagement_Designer_Edit: true,
 
   // PARTNER MANAGEMENT
-  PartnerManagement_View: true,
+  PartnerManagement_View: false,
   PartnerManagement_Partner_List: true,
   PartnerManagement_Partner_Add: true,
   PartnerManagement_Partner_Edit: true,
@@ -72,7 +72,7 @@ export const permissions = {
   PartnerManagement_OutletBillingManagement_List: false,
 
   // Voucher MANAGEMENT
-  VoucherManagement_View: true,
+  VoucherManagement_View: false,
 
   VoucherManagement_Voucher_Add: true,
   VoucherManagement_Voucher_Delete: true,
@@ -93,7 +93,7 @@ export const permissions = {
   VoucherManagement_Category_EditStatus: true,
 
   // Promotions Management
-  PromotionManagement_View: true,
+  PromotionManagement_View: false,
   PromotionManagement_CampaignStatus_List: true,
   PromotionManagement_CampaignStatus_View: true,
   PromotionManagement_CampaignDesigner_List: true,
@@ -103,7 +103,7 @@ export const permissions = {
   PromotionManagement_CampaignDesigner_EditStatus: true,
 
   // REPORTS
-  ReportsManagement_View: true,
+  ReportsManagement_View: false,
   ReportsManagement_BookOrderReport_List: true,
   ReportsManagement_VoucherRedemptionReport_List: true,
   ReportsManagement_SalesReport_List: true,
@@ -112,7 +112,7 @@ export const permissions = {
   ReportsManagement_BookActivationReport_List: true,
 
   // BOOK SUBSCRIPTION MANAGEMENT
-  BookSubscriptionManagement_View: true,
+  BookSubscriptionManagement_View: false,
   BookSubscriptionManagement_BookOrderManagement_List: true,
   BookSubscriptionManagement_BookOrderManagement_Add: true,
   BookSubscriptionManagement_BookOrderManagement_Edit: true,

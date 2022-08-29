@@ -12,22 +12,22 @@ import CustomIcon from "../../components/CustomIcon/CustomIcon";
 const columns = [
   {
     title: "Name",
-    dataIndex: "Name",
-    key: "Name",
+    dataIndex: "name",
+    key: "name",
     sorter: true,
-    render: (text, record) => <Link to={`${ROUTES.EDIT_ADMIN_USER.path}/${record.userId}`}>{record.fullName}</Link>,
+    // render: (text, record) => <Link to={`${ROUTES.EDIT_ADMIN_USER.path}/${record.userId}`}>{record.fullName}</Link>,
   },
   {
     title: "Display Name",
     dataIndex: "displayName",
     key: "displayName",
     sorter: true,
-    render: (text, record) => <Link to={`${ROUTES.EDIT_ADMIN_USER.path}/${record.userId}`}>{record.fullName}</Link>,
+    // render: (text, record) => <Link to={`${ROUTES.EDIT_ADMIN_USER.path}/${record.userId}`}>{record.fullName}</Link>,
   },
   {
     title: "Discription",
-    dataIndex: "discription",
-    key: "discription",
+    dataIndex: "description",
+    key: "description",
   },
   {
     title: "Created At",
@@ -41,8 +41,8 @@ const columns = [
   },
   {
     title: "Updated At",
-    dataIndex: "updatedAt",
-    key: "updatedAt",
+    dataIndex: "lastUpdatedAt",
+    key: "lastUpdatedAt",
   },
   {
     title: "Updated By",
@@ -62,22 +62,15 @@ const columns = [
             </Button>
           </Link>
         </Col>
-        <Col span={12} xs={24} sm={12} lg={12}>
-          <Link to={`/swim-lane-manager/${record.id}`}>
-            <Button type="link">
-              <CustomIcon name="UsergroupAddOutlined" />
-            </Button>
-          </Link>
-        </Col>
       </Row>
     ),
   },
 ];
 
 function BaitussalamWebAndAppDuaCategoryManagement(props) {
-  const { loading, enableDisableAdmin, pagination, getAdminUsers, deleteAdminUsers, list } = props;
+  const { loading, enableDisableAdmin, pagination, getDuasCategory, deleteAdminUsers, list } = props; 
   const getList = async query => {
-    await getAdminUsers(query);
+    await getDuasCategory(query);
   };
 
   const canAddUser = permissionsUtil.checkAuth({
@@ -143,7 +136,7 @@ function BaitussalamWebAndAppDuaCategoryManagement(props) {
 }
 
 BaitussalamWebAndAppDuaCategoryManagement.propTypes = {
-  getAdminUsers: PropTypes.func,
+  getDuasCategory: PropTypes.func,
   list: PropTypes.array,
   deleteAdminUsers: PropTypes.func,
   loading: PropTypes.bool,

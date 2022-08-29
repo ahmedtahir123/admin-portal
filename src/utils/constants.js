@@ -1,9 +1,9 @@
 /* eslint-disable no-template-curly-in-string */
-export const BASE_URL = window.BASE_URL || "http://110.93.214.166:31890/api";
+export const BASE_URL = window.BASE_URL || "https://dev-api.baitussalam.org:8450";
 export const UPLOAD_URL = window.UPLOAD_URL || "http://110.93.214.166:9109";
 export const TOKEN = "CT_TOKEN";
 export const USER = "CT_USER";
-export const CLIENT_ID = "bgn-admin-client";
+export const CLIENT_ID = "bs-admin-client";
 export const DATE_FORMAT = "DD/MM/YYYY";
 export const DATE_FORMAT_TIME = "DD/MM/YYYY HH:mm";
 export const TIME_FORMAT = "HH:mm";

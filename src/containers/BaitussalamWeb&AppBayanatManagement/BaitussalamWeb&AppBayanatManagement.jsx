@@ -12,7 +12,7 @@ import CustomIcon from "../../components/CustomIcon/CustomIcon";
 const columns = [
   {
     title: "Title",
-    dataIndex: "Title",
+    dataIndex: "name",
     key: "Title",
     sorter: true,
     render: (text, record) => <Link to={`${ROUTES.EDIT_ADMIN_USER.path}/${record.userId}`}>{record.fullName}</Link>,
@@ -77,9 +77,9 @@ const columns = [
 ];
 
 function BaitussalamWebAndAppBayanatManagement(props) {
-  const { loading, enableDisableAdmin, pagination, getAdminUsers, deleteAdminUsers, list } = props;
+  const { loading, enableDisableAdmin, pagination, getBayanatCategory, deleteAdminUsers, list } = props;
   const getList = async query => {
-    await getAdminUsers(query);
+    await getBayanatCategory(query);
   };
 
   const canAddUser = permissionsUtil.checkAuth({
@@ -145,7 +145,7 @@ function BaitussalamWebAndAppBayanatManagement(props) {
 }
 
 BaitussalamWebAndAppBayanatManagement.propTypes = {
-  getAdminUsers: PropTypes.func,
+  getBayanatCategory: PropTypes.func,
   list: PropTypes.array,
   deleteAdminUsers: PropTypes.func,
   loading: PropTypes.bool,
