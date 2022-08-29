@@ -1,33 +1,17 @@
+import { Button, Col, DatePicker, Divider, Form, Input, Popconfirm, Radio, Row, Select, Spin, Upload } from "antd";
+import * as moment from "dayjs";
+import _get from "lodash/get";
+import _isEmpty from "lodash/isEmpty";
+import _map from "lodash/map";
+import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import {
-  Form,
-  Input,
-  Button,
-  Row,
-  Col,
-  Radio,
-  DatePicker,
-  Upload,
-  message,
-  Divider,
-  Spin,
-  Switch,
-  Popconfirm,
-  Select,
-} from "antd";
-import PropTypes from "prop-types";
-import * as moment from "dayjs";
-import _isEmpty from "lodash/isEmpty";
-import _get from "lodash/get";
-import _map from "lodash/map";
-import "./AddEditParticipant.scss";
-import { getBase64, beforeUpload, numberOnly } from "../../utils/utils";
-import { VALIDATE_FORM_MESSAGES_TEMPLATE, CONFIRM_MESSAGE, DATE_FORMAT_TIME, DATE_FORMAT } from "../../utils/constants";
+import PageTitle from "../../components/PageTitle/PageTitle";
 import BrandLogo from "../../images/avatar.png";
 import listingPageCardImage from "../../images/listing-card.svg";
-import PageTitle from "../../components/PageTitle/PageTitle";
-import AddRemoveDealProvider from "../../providers/addRemoveDeal.provider";
+import { CONFIRM_MESSAGE, DATE_FORMAT, VALIDATE_FORM_MESSAGES_TEMPLATE } from "../../utils/constants";
+import { beforeUpload, getBase64, numberOnly } from "../../utils/utils";
+import "./AddEditParticipant.scss";
 const { RangePicker } = DatePicker;
 
 const AddEditParticipant = ({

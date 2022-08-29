@@ -1,18 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { Form, Input, Button, Row, Col, Radio, Spin, Divider, Popconfirm, InputNumber } from "antd";
-import PropTypes from "prop-types";
+import { Button, Col, Divider, Form, Input, Popconfirm, Radio, Row, Spin } from "antd";
 import * as moment from "dayjs";
-import { useParams } from "react-router-dom";
-import _isEmpty from "lodash/isEmpty";
+import JoditEditor from "jodit-react";
 import _get from "lodash/get";
-import ROUTES from "../../routes/constant.route";
-import Avatar from "../../images/avatar.svg";
-import { VALIDATE_FORM_MESSAGES_TEMPLATE, CONFIRM_MESSAGE, DATE_FORMAT_TIME } from "../../utils/constants";
+import _isEmpty from "lodash/isEmpty";
+import PropTypes from "prop-types";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import PageTitle from "../../components/PageTitle/PageTitle";
-import { numberOnly } from "../../utils/utils";
-
-import "./AddEditBaitussalamWeb&AppDuaCategoryManagement.scss";
+import ROUTES from "../../routes/constant.route";
 import "../../styles/_helpers.scss";
+import { CONFIRM_MESSAGE, DATE_FORMAT_TIME, VALIDATE_FORM_MESSAGES_TEMPLATE } from "../../utils/constants";
+import "./AddEditBaitussalamWeb&AppDuaCategoryManagement.scss";
 
 const AddEditBaitussalamWebAndAppDuaCategoryManagementContainer = ({
   selected,
@@ -149,7 +147,7 @@ const AddEditBaitussalamWebAndAppDuaCategoryManagementContainer = ({
               <Input placeholder="Display Name" />
             </Form.Item>
             <Form.Item label="Description" name="Description" rules={[{ required: true }]}>
-              <Input placeholder="Description" readOnly={isEditView} />
+              <JoditEditor onBlur={newContent => {}} />
             </Form.Item>
           </Col>
           <Col span={8} xs={24} sm={12} lg={12}>
