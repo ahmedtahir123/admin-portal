@@ -121,7 +121,6 @@ export function getFeaturedVideos(query) {
   };
 }
 
-
 export function addAdminUser(userInfo, params) {
   return async dispatch => {
     dispatch(adminRequest());
@@ -144,7 +143,7 @@ export function deleteAdminUsers(ids, query) {
     try {
       const [err, response] = await to(baitussalamAppService.deleteAdminUsers(ids));
       if (err) throwError(err);
-    //   dispatch(getAdminUsers(query));
+      //   dispatch(getAdminUsers(query));
       toastMessage("success", SUCCESS_MESSAGE.DELETED);
     } catch (error) {
       dispatch(adminError(error));
@@ -197,7 +196,7 @@ export function enableDisableAdmin(ids, enabled, query) {
       }
       console.log("response", response);
       if (err) throwError(err);
-    //   dispatch(getAdminUsers(query));
+      //   dispatch(getAdminUsers(query));
       toastMessage("success", SUCCESS_MESSAGE.ENABLED);
     } catch (error) {
       dispatch(adminError(error));
@@ -218,6 +217,43 @@ export function deleteAdminUser(id) {
     } catch (error) {
       dispatch(adminError(error));
       toastMessage("error", ERROR_MESSAGE.DELETED);
+      throwError(error);
+    }
+  };
+}
+
+export function getAllNews(query) {
+  return async dispatch => {
+    dispatch(adminRequest());
+    try {
+      // eslint-disable-next-line prefer-const
+      let [err, response] = await to(baitussalamAppService.getAllNews(query));
+      if (err) throwError(err);
+      dispatch(adminSuccess(response.content));
+      response = Object.values(response).flat();
+      dispatch(adminListSuccess(response));
+    } catch (error) {
+      dispatch(adminError(error));
+      toastMessage("error", ERROR_MESSAGE.LIST);
+      throwError(error);
+    }
+  };
+}
+
+export function getDonationCategory() {
+  return async dispatch => {
+    dispatch(adminRequest());
+    try {
+      const [err, response] = await to(baitussalamAppService.getDonationCategories());
+      console.log(response, "responseresponse");
+      console.log(err, "errerr");
+      if (err) throwError(err);
+      dispatch(adminSuccess(response.content));
+      // response = Object.values(response).flat();
+      dispatch(adminListSuccess(response));
+    } catch (error) {
+      dispatch(adminError(error));
+      toastMessage("error", ERROR_MESSAGE.LIST);
       throwError(error);
     }
   };

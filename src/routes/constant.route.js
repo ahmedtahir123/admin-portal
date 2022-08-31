@@ -479,6 +479,30 @@ const ROUTES = {
     name: "EditMusalli-Payment",
   },
 
+  MUSALLI_ATTENDANCE_CHANGE_REQUEST: {
+    path: "/musalli-attendance-change-request",
+    title: "Attendance Change Request",
+    name: "attendanceChangeRequest",
+  },
+
+  MUSALLI_ATTENDANCE_DETAIL_REPORT: {
+    path: "/musalli-attendance-detail-report",
+    title: "Attendance Detail Report",
+    name: "attendanceDetailReport",
+  },
+
+  MUSALLI_ATTENDANCE_COUNT_REPORT: {
+    path: "/musalli-attendance-count-report",
+    title: "Attendance Count Report",
+    name: "attendanceCountReport",
+  },
+
+  SMS_UTILITY: {
+    path: "/musalli-sms-utility",
+    title: "SMS Utility",
+    name: "smsUtility",
+  },
+
   // Baitussalam Web & App Routes
 
   BAITUSSALAM_WEB_AND_APP_PROJECT_MANAGEMENT: {

@@ -87,7 +87,6 @@ function MusalliMosqueManagement(props) {
   const getList = async query => {
     await getMusalliParticipant(query);
   };
-  debugger
 
   const canAddUser = permissionsUtil.checkAuth({
     category: "MusalliManagement",

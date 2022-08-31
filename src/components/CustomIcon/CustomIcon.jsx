@@ -25,6 +25,7 @@ import {
   CloseCircleTwoTone,
   DeleteOutlined,
   EditOutlined,
+  SendOutlined,
 } from "@ant-design/icons";
 
 const CustomIcon = ({ name }) => {
@@ -101,6 +102,9 @@ const CustomIcon = ({ name }) => {
       }
       case "EditOutlined": {
         return <EditOutlined />;
+      }
+      case "SendOutlined": {
+        return <SendOutlined />;
       }
       default: {
         return <HeartOutlined />;

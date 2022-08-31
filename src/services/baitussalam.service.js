@@ -16,6 +16,7 @@ const baitussalamServices = {
   getDuasCategory: () => get(`api/public/v1/dua/categories?lastUpdatedAt=2000-08-26T15%3A16%3A54.372Z`),
   getDuas: () => get(`api/public/v1/dua`),
   getFeaturedVideos: () => get(`api/public/v1/featured-videos`),
-
+  getAllNews: () => get(`api/public/v1/news/latest`),
+  getDonationCategories: () => get(`api/public/v1/donation-categories`),
 };
 export default baitussalamServices;

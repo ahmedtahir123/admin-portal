@@ -24,20 +24,22 @@ import DealManagementProvider from "../providers/dealManagement.provider";
 import LandingPageDesignerProvider from "../providers/landingPageDesigner.provider";
 import LandingPageManagementProvider from "../providers/landingPageManagement.provider";
 import MerchantManagementProvider from "../providers/merchantManagement.provider";
+// Musalli Routes
 import MusalliMosqueManagementProvider from "../providers/musalliMosqueManagement.provider";
 import MusalliParticipantManagementProvider from "../providers/musalliParticipantManagement.provider";
 import MusalliPaymentManagementProvider from "../providers/musalliPaymentManagement.provider";
 import MusalliSessionManagementProvider from "../providers/musalliSessionManagement.provider";
 import MusalliVolunteerManagementProvider from "../providers/musalliVolunteerManagement.provider";
-import OutletBillingManagementProvider from "../providers/outletBIllingManagementProvider";
-import PartnerManagementProvider from "../providers/partnerManagement.provider";
 import SessionManagementProvider from "../providers/SessionManagment.provider";
-import VoucherRedemptionManagementProvider from "../providers/VoucherRedemptionManagement.provider";
 import AddEditParticipantProvider from "../providers/addEditParticipant.provider";
 import AddEditVolunteerProvider from "../providers/addEditVolunteer.provider";
 import AddEditMosqueProvider from "../providers/addEditMosque.provider";
 import AddEditSessionProvider from "../providers/addEditSession.provider";
 import AddEditPaymentProvider from "../providers/addEditPayment.provider";
+// ----------
+import OutletBillingManagementProvider from "../providers/outletBIllingManagementProvider";
+import PartnerManagementProvider from "../providers/partnerManagement.provider";
+import VoucherRedemptionManagementProvider from "../providers/VoucherRedemptionManagement.provider";
 
 import BaitussalamWebAndAppProjectManagementProvider from "../providers/baitussalamWeb&AppProjectManagement.provider";
 import AddEditBaitussalamWebAndAppProjectManagementProvider from "../providers/addEditBaitussalamProjectManagement.provider";
@@ -90,6 +92,10 @@ import BaitussalamWebAndSettingManagementProvider from "../providers/baitussalam
 import AddEditBaitussalamWebAndSettingManagementProvider from "../providers/addEditBaitussalamSettingManagement.provider";
 
 import ROUTES from "./constant.route";
+import MusalliAttendanceChangeRequestProvider from "../providers/musalliAttendanceChangeRequest.provider";
+import MusalliAttendanceDetailReportProvider from "../providers/musalliAttendanceDetailReport.provider";
+import MusalliAttendanceCountReportProvider from "../providers/musalliAttendanceCountReport.provider";
+import SMSUtilityProvider from "../providers/smsUtility.provider";
 
 const ChangePasswordProvider = React.lazy(() => import("../providers/changePassword.provider"));
 
@@ -1448,6 +1454,58 @@ const routes = [
     subCategory: "Musalli",
     action: "Edit",
   },
+  {
+    path: ROUTES.MUSALLI_ATTENDANCE_CHANGE_REQUEST.path,
+    exact: true,
+    name: ROUTES.MUSALLI_ATTENDANCE_CHANGE_REQUEST.name,
+    displayName: ROUTES.MUSALLI_ATTENDANCE_CHANGE_REQUEST.title,
+    component: MusalliAttendanceChangeRequestProvider,
+    isPrivate: true,
+    icon: "HeartOutlined",
+    module: 12,
+    category: "MusalliManagement",
+    subCategory: "Musalli",
+    action: "List",
+  },
+  {
+    path: ROUTES.MUSALLI_ATTENDANCE_DETAIL_REPORT.path,
+    exact: true,
+    name: ROUTES.MUSALLI_ATTENDANCE_DETAIL_REPORT.name,
+    displayName: ROUTES.MUSALLI_ATTENDANCE_DETAIL_REPORT.title,
+    component: MusalliAttendanceDetailReportProvider,
+    isPrivate: true,
+    icon: "HeartOutlined",
+    module: 12,
+    category: "MusalliManagement",
+    subCategory: "Musalli",
+    action: "List",
+  },
+  {
+    path: ROUTES.MUSALLI_ATTENDANCE_COUNT_REPORT.path,
+    exact: true,
+    name: ROUTES.MUSALLI_ATTENDANCE_COUNT_REPORT.name,
+    displayName: ROUTES.MUSALLI_ATTENDANCE_COUNT_REPORT.title,
+    component: MusalliAttendanceCountReportProvider,
+    isPrivate: true,
+    icon: "HeartOutlined",
+    module: 12,
+    category: "MusalliManagement",
+    subCategory: "Musalli",
+    action: "List",
+  },
+  {
+    path: ROUTES.SMS_UTILITY.path,
+    exact: true,
+    name: ROUTES.SMS_UTILITY.name,
+    displayName: ROUTES.SMS_UTILITY.title,
+    component: SMSUtilityProvider,
+    isPrivate: true,
+    icon: "HeartOutlined",
+    module: 12,
+    category: "MusalliManagement",
+    subCategory: "Musalli",
+    action: "List",
+  },
 
   // Baitussalam Web & App Management Routes
 
@@ -2454,8 +2512,7 @@ const routes = [
     category: "Web_AppManagement",
     subCategory: "Settings",
     action: "Edit",
-  }
-
+  },
 ];
 
 export default routes;

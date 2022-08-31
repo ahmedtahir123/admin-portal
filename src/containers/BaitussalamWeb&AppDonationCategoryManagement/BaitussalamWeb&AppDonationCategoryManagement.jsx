@@ -11,51 +11,36 @@ import CustomIcon from "../../components/CustomIcon/CustomIcon";
 
 const columns = [
   {
+    title: "id",
+    dataIndex: "title",
+    key: "title",
+    sorter: true,
+    // render: (text, record) => <Link to={`${ROUTES.EDIT_ADMIN_USER.path}/${record.userId}`}>{record.fullName}</Link>,
+  },
+  {
     title: "Name",
-    dataIndex: "Name",
-    key: "Name",
-    sorter: true,
-    render: (text, record) => <Link to={`${ROUTES.EDIT_ADMIN_USER.path}/${record.userId}`}>{record.fullName}</Link>,
+    dataIndex: "description",
+    key: "description",
   },
   {
-    title: "Father Name",
-    dataIndex: "fatherName",
-    key: "fatherName",
-    sorter: true,
-    render: (text, record) => <Link to={`${ROUTES.EDIT_ADMIN_USER.path}/${record.userId}`}>{record.fullName}</Link>,
+    title: "Is Fixed Ammount",
+    dataIndex: "orderNumber",
+    key: "orderNumber",
   },
   {
-    title: "Email Address",
-    dataIndex: "emailAddress",
-    key: "emailAddress",
-    sorter: (a, b) => a.emailAddress.length - b.emailAddress.length,
-    sortDirections: ["descend", "ascend"],
+    title: "Created At",
+    dataIndex: "orderNumber",
+    key: "orderNumber",
   },
   {
-    title: "Contact",
-    dataIndex: "cellPhoneNumber",
-    key: "cellPhoneNumber",
-  },
-  {
-    title: "Date Of Birth",
-    dataIndex: "dob",
-    key: "dob",
-    sorter: (a, b) => a.emailAddress.length - b.emailAddress.length,
-    sortDirections: ["descend", "ascend"],
-  },
-  {
-    title: "Document Submission Status",
-    dataIndex: "documentSubmissionStatus",
-    key: "documentSubmissionStatus",
-    sorter: (a, b) => a.emailAddress.length - b.emailAddress.length,
-    sortDirections: ["descend", "ascend"],
+    title: "Updated At",
+    dataIndex: "orderNumber",
+    key: "orderNumber",
   },
   {
     title: "Status",
-    dataIndex: "userMetaData",
-    key: "status",
-    sorter: true,
-    render: d => d.status,
+    dataIndex: "orderNumber",
+    key: "orderNumber",
   },
   {
     title: "Action",
@@ -83,9 +68,9 @@ const columns = [
 ];
 
 function BaitussalamWebAndAppDonationCategoryManagement(props) {
-  const { loading, enableDisableAdmin, pagination, getAdminUsers, deleteAdminUsers, list } = props;
+  const { loading, enableDisableAdmin, pagination, getDonationCategory, deleteAdminUsers, list } = props;
   const getList = async query => {
-    await getAdminUsers(query);
+    await getDonationCategory(query);
   };
 
   const canAddUser = permissionsUtil.checkAuth({
@@ -128,6 +113,7 @@ function BaitussalamWebAndAppDonationCategoryManagement(props) {
     text: "Disable",
   };
 
+  console.log(list);
   return (
     <>
       <PageTitle title="All Donations" />
@@ -135,7 +121,7 @@ function BaitussalamWebAndAppDonationCategoryManagement(props) {
         dataSource={list}
         columns={columns}
         loading={loading}
-        rowKey="userId"
+        rowKey="id"
         addButton={addButton}
         pagination={pagination}
         deleteAllData={deleteAdminUsers}
@@ -151,7 +137,7 @@ function BaitussalamWebAndAppDonationCategoryManagement(props) {
 }
 
 BaitussalamWebAndAppDonationCategoryManagement.propTypes = {
-  getAdminUsers: PropTypes.func,
+  getDonationCategory: PropTypes.func,
   list: PropTypes.array,
   deleteAdminUsers: PropTypes.func,
   loading: PropTypes.bool,

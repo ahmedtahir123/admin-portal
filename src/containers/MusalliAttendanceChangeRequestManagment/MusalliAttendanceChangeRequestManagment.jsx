@@ -2,7 +2,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { Button, Col, Row, Image } from "antd";
+import { Button, Col, Row } from "antd";
 import ROUTES from "../../routes/constant.route";
 import ListView from "../../components/ListView/ListView";
 import permissionsUtil from "../../utils/permissions.util";
@@ -11,35 +11,42 @@ import CustomIcon from "../../components/CustomIcon/CustomIcon";
 
 const columns = [
   {
-    title: "Title",
-    dataIndex: "title",
-    key: "title",
-    // sorter: true,
-    // render: (text, record) => <Link to={`${ROUTES.EDIT_ADMIN_USER.path}/${record.userId}`}>{record.fullName}</Link>,
+    title: "ID",
+    dataIndex: "id",
+    key: "id",
+    sorter: true,
   },
   {
-    title: "Description",
-    dataIndex: "description",
-    key: "description",
+    title: "Participant Name",
+    dataIndex: "mosqueName",
+    key: "mosqueName",
+    sorter: true,
   },
   {
-    title: "Department Name",
-    dataIndex: "departmentName",
-    key: "departmentName",
+    title: "Participant Father Name",
+    dataIndex: "locationName",
+    key: "locationName",
+    // sorter: (a, b) => a.locationName.length - b.locationName.length,
   },
   {
-    title: "Published ON",
-    dataIndex: "PublishedDate",
-    key: "PublishedDate",
+    title: "Date Request",
+    dataIndex: "locationName",
+    key: "locationName",
   },
   {
-    title: "Image",
-    dataIndex: "image",
-    key: "image",
-    render: image => {
-      console.log(image);
-      // <img className="card-img" src={`https://dev.baitussalam.org/storage/images/projects/${image}`} alt="pic1" />
-    },
+    title: "Participant Comment",
+    dataIndex: "locationName",
+    key: "locationName",
+  },
+  {
+    title: "Resolver Comment",
+    dataIndex: "locationName",
+    key: "locationName",
+  },
+  {
+    title: "Request Status",
+    dataIndex: "locationName",
+    key: "locationName",
   },
   {
     title: "Action",
@@ -59,31 +66,31 @@ const columns = [
   },
 ];
 
-function BaitussalamWebAndAppNewsManagement(props) {
-  const { loading, enableDisableAdmin, pagination, getAllNews, deleteAdminUsers, list } = props;
+function MusalliAttendanceChangeRequestManagment(props) {
+  const { loading, enableDisableAdmin, pagination, getAdminUsers, deleteAdminUsers, list } = props;
   const getList = async query => {
-    await getAllNews(query);
+    await getAdminUsers(query);
   };
 
   const canAddUser = permissionsUtil.checkAuth({
-    category: "Web_AppManagement",
-    subCategory: "News",
+    category: "MusalliManagement",
+    subCategory: "Musalli",
     action: "Add",
   });
   const canDeleteUser = permissionsUtil.checkAuth({
-    category: "Web_AppManagement",
-    subCategory: "News",
+    category: "MusalliManagement",
+    subCategory: "Musalli",
     action: "Delete",
   });
   const canChangeStatus = permissionsUtil.checkAuth({
-    category: "Web_AppManagement",
-    subCategory: "News",
+    category: "MusalliManagement",
+    subCategory: "Musalli",
     action: "EditStatus",
   });
 
   const addButton = {
-    text: "Add News",
-    route: ROUTES.ADD_BAITUSSALAM_WEB_AND_APP_NEWS.path,
+    text: "Add Mosque",
+    route: ROUTES.ADD_MUSALLI_MOSQUE_USER.path,
   };
 
   // useEffect(() => {
@@ -95,19 +102,19 @@ function BaitussalamWebAndAppNewsManagement(props) {
   //   } else getList();
   // }, []);
 
-  const onEnable = {
-    handler: enableDisableAdmin,
-    text: "Enable",
-  };
+  // const onEnable = {
+  //   handler: enableDisableAdmin,
+  //   text: "Enable",
+  // };
 
-  const onDisable = {
-    handler: enableDisableAdmin,
-    text: "Disable",
-  };
+  // const onDisable = {
+  //   handler: enableDisableAdmin,
+  //   text: "Disable",
+  // };
 
   return (
     <>
-      <PageTitle title="All News" />
+      <PageTitle title="Attendance Change Request" />
       <ListView
         dataSource={list}
         columns={columns}
@@ -117,19 +124,18 @@ function BaitussalamWebAndAppNewsManagement(props) {
         pagination={pagination}
         deleteAllData={deleteAdminUsers}
         getList={getList}
-        enableButton={onEnable}
-        disableButton={onDisable}
+        // enableButton={onEnable}
+        // disableButton={onDisable}
         canChangeStatus={canChangeStatus}
-        canAdd={canAddUser}
-        canDelete={canDeleteUser}
-        scroll={{ x: 100, y: 580 }}
+        // canAdd={canAddUser}
+        // canDelete={canDeleteUser}
       />
     </>
   );
 }
 
-BaitussalamWebAndAppNewsManagement.propTypes = {
-  getAllNews: PropTypes.func,
+MusalliAttendanceChangeRequestManagment.propTypes = {
+  getAdminUsers: PropTypes.func,
   list: PropTypes.array,
   deleteAdminUsers: PropTypes.func,
   loading: PropTypes.bool,
@@ -137,4 +143,4 @@ BaitussalamWebAndAppNewsManagement.propTypes = {
   enableDisableAdmin: PropTypes.func,
 };
 
-export default BaitussalamWebAndAppNewsManagement;
+export default MusalliAttendanceChangeRequestManagment;

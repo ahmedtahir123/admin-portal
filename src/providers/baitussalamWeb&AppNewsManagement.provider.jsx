@@ -2,12 +2,12 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import AppNewsManagement from "../containers/BaitussalamWeb&AppNewsManagement/BaitussalamWeb&AppNewsManagement";
-import { deleteAdminUsers, enableDisableAdmin, getAdminUsers } from "../store/actions/admin.actions";
+import { deleteAdminUsers, enableDisableAdmin, getAllNews } from "../store/actions/baitussalamWeb&App.actions";
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      getAdminUsers,
+      getAllNews,
       deleteAdminUsers,
       enableDisableAdmin,
     },

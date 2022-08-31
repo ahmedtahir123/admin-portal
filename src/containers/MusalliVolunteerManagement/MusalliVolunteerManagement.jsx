@@ -15,7 +15,6 @@ const columns = [
     dataIndex: "id",
     key: "id",
     sorter: true,
-    render: (text, record) => <Link to={`${ROUTES.EDIT_ADMIN_USER.path}/${record.userId}`}>{record.fullName}</Link>,
   },
   {
     title: "Full Name",

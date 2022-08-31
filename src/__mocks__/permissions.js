@@ -103,7 +103,7 @@ export const permissions = {
   PromotionManagement_CampaignDesigner_EditStatus: true,
 
   // REPORTS
-  ReportsManagement_View: false,
+  ReportsManagement_View: true,
   ReportsManagement_BookOrderReport_List: true,
   ReportsManagement_VoucherRedemptionReport_List: true,
   ReportsManagement_SalesReport_List: true,
