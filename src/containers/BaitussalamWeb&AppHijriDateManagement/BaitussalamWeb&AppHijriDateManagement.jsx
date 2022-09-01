@@ -11,51 +11,59 @@ import CustomIcon from "../../components/CustomIcon/CustomIcon";
 
 const columns = [
   {
-    title: "Name",
-    dataIndex: "Name",
-    key: "Name",
+    title: "ID",
+    dataIndex: "id",
+    key: "id",
     sorter: true,
-    render: (text, record) => <Link to={`${ROUTES.EDIT_ADMIN_USER.path}/${record.userId}`}>{record.fullName}</Link>,
   },
   {
-    title: "Father Name",
-    dataIndex: "fatherName",
-    key: "fatherName",
-    sorter: true,
-    render: (text, record) => <Link to={`${ROUTES.EDIT_ADMIN_USER.path}/${record.userId}`}>{record.fullName}</Link>,
+    title: "Country",
+    dataIndex: "country",
+    key: "country",
+    render: (text, record) => <>{text?.name}</>,
   },
   {
-    title: "Email Address",
-    dataIndex: "emailAddress",
-    key: "emailAddress",
-    sorter: (a, b) => a.emailAddress.length - b.emailAddress.length,
+    title: "Hijri Month",
+    dataIndex: "month",
+    key: "month",
+    render: (text, record) => (
+      <>
+        <div>{text?.monthEn}</div>
+      </>
+    ),
+  },
+  {
+    title: "Hijri Month Start Date",
+    dataIndex: "startDate",
+    key: "startDate",
+    render: (text, record) => <>{text?.join(`-`)}</>,
+  },
+  {
+    title: "Created At",
+    dataIndex: "createdAt",
+    key: "createdAt",
     sortDirections: ["descend", "ascend"],
+    render: (text, record) => (
+      <>
+        {text?.slice(0, 3)?.join(`-`)} T {text?.slice(3, 6)?.join(`:`)}
+      </>
+    ),
   },
   {
-    title: "Contact",
-    dataIndex: "cellPhoneNumber",
-    key: "cellPhoneNumber",
+    title: "Created By",
+    dataIndex: "createdBy",
+    key: "createdBy",
+    // sortDirections: ["descend", "ascend"],
   },
   {
-    title: "Date Of Birth",
-    dataIndex: "dob",
-    key: "dob",
-    sorter: (a, b) => a.emailAddress.length - b.emailAddress.length,
-    sortDirections: ["descend", "ascend"],
-  },
-  {
-    title: "Document Submission Status",
-    dataIndex: "documentSubmissionStatus",
-    key: "documentSubmissionStatus",
-    sorter: (a, b) => a.emailAddress.length - b.emailAddress.length,
-    sortDirections: ["descend", "ascend"],
-  },
-  {
-    title: "Status",
-    dataIndex: "userMetaData",
-    key: "status",
-    sorter: true,
-    render: d => d.status,
+    title: "Updated At",
+    dataIndex: "updatedAt",
+    key: "updatedAt",
+    render: (text, record) => (
+      <>
+        {text?.slice(0, 3)?.join(`-`)} T {text?.slice(3, 6)?.join(`:`)}
+      </>
+    ),
   },
   {
     title: "Action",
@@ -66,14 +74,7 @@ const columns = [
         <Col span={12} xs={24} sm={12} lg={12}>
           <Link to={`/landing-designer/${record.id}`}>
             <Button type="link">
-              <CustomIcon name="UserOutlined" />
-            </Button>
-          </Link>
-        </Col>
-        <Col span={12} xs={24} sm={12} lg={12}>
-          <Link to={`/swim-lane-manager/${record.id}`}>
-            <Button type="link">
-              <CustomIcon name="UsergroupAddOutlined" />
+              <CustomIcon name="EditOutlined" />
             </Button>
           </Link>
         </Col>
@@ -83,9 +84,10 @@ const columns = [
 ];
 
 function BaitussalamWebAndAppHijriDateManagement(props) {
-  const { loading, enableDisableAdmin, pagination, getAdminUsers, deleteAdminUsers, list } = props;
+  const { loading, enableDisableAdmin, pagination, getHijriDates, deleteAdminUsers, list } = props;
+  // debugger;
   const getList = async query => {
-    await getAdminUsers(query);
+    await getHijriDates(query);
   };
 
   const canAddUser = permissionsUtil.checkAuth({
@@ -128,14 +130,16 @@ function BaitussalamWebAndAppHijriDateManagement(props) {
     text: "Disable",
   };
 
+  console.log(list, "listlist");
+
   return (
     <>
-      <PageTitle title="All Projects" />
+      <PageTitle title="Hijri Dates" />
       <ListView
         dataSource={list}
         columns={columns}
         loading={loading}
-        rowKey="userId"
+        rowKey="id"
         addButton={addButton}
         pagination={pagination}
         deleteAllData={deleteAdminUsers}
@@ -151,7 +155,7 @@ function BaitussalamWebAndAppHijriDateManagement(props) {
 }
 
 BaitussalamWebAndAppHijriDateManagement.propTypes = {
-  getAdminUsers: PropTypes.func,
+  getHijriDates: PropTypes.func,
   list: PropTypes.array,
   deleteAdminUsers: PropTypes.func,
   loading: PropTypes.bool,

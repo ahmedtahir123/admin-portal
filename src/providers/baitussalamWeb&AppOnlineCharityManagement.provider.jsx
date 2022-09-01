@@ -2,12 +2,12 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import AppOnlineCharityManagement from "../containers/BaitussalamWeb&AppOnlineCharityManagement/BaitussalamWeb&AppOnlineCharityManagement";
-import { deleteAdminUsers, enableDisableAdmin, getAdminUsers } from "../store/actions/admin.actions";
+import { deleteAdminUsers, enableDisableAdmin, getOnlineCharity } from "../store/actions/baitussalamWeb&App.actions";
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      getAdminUsers,
+      getOnlineCharity,
       deleteAdminUsers,
       enableDisableAdmin,
     },
@@ -16,7 +16,7 @@ const mapDispatchToProps = dispatch =>
 
 const mapStateToProps = state => ({
   loading: state.admin.loading,
-  list: state.admin.list,
+  list: state.admin.value,
   error: state.admin.error,
   pagination: state.admin.value,
 });

@@ -14,7 +14,6 @@ const columns = [
     title: "Name",
     dataIndex: "nameEn",
     key: "nameEn",
-    // sorter: true,
   },
   {
     title: "Description",
@@ -30,11 +29,13 @@ const columns = [
     title: "Thumbnail",
     dataIndex: "thumbnailLink",
     key: "thumbnailLink",
+    render: record => <img src={`https://dev.baitussalam.org/storage/${record}`} alt="thumbnail" width={200} />,
   },
   {
     title: "Display At Home Screen",
     dataIndex: "displayAtHome",
     key: "displayAtHome",
+    render: record => <div>{`${record}`}</div>,
   },
   {
     title: "Sort Order",

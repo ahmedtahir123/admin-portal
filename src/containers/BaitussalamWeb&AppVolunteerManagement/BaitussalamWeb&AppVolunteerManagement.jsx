@@ -11,18 +11,21 @@ import CustomIcon from "../../components/CustomIcon/CustomIcon";
 
 const columns = [
   {
+    title: "ID",
+    dataIndex: "id",
+    key: "id",
+    sorter: true,
+  },
+  {
     title: "Name",
     dataIndex: "Name",
     key: "Name",
     sorter: true,
-    render: (text, record) => <Link to={`${ROUTES.EDIT_ADMIN_USER.path}/${record.userId}`}>{record.fullName}</Link>,
   },
   {
     title: "Email Address",
     dataIndex: "emailAddress",
     key: "emailAddress",
-    sorter: (a, b) => a.emailAddress.length - b.emailAddress.length,
-    sortDirections: ["descend", "ascend"],
   },
   {
     title: "Phone ",
@@ -43,14 +46,7 @@ const columns = [
         <Col span={12} xs={24} sm={12} lg={12}>
           <Link to={`/landing-designer/${record.id}`}>
             <Button type="link">
-              <CustomIcon name="UserOutlined" />
-            </Button>
-          </Link>
-        </Col>
-        <Col span={12} xs={24} sm={12} lg={12}>
-          <Link to={`/swim-lane-manager/${record.id}`}>
-            <Button type="link">
-              <CustomIcon name="UsergroupAddOutlined" />
+              <CustomIcon name="EditOutlined" />
             </Button>
           </Link>
         </Col>
@@ -60,9 +56,9 @@ const columns = [
 ];
 
 function BaitussalamWebAndAppVolunteerManagement(props) {
-  const { loading, enableDisableAdmin, pagination, getAdminUsers, deleteAdminUsers, list } = props;
+  const { loading, enableDisableAdmin, pagination, getBaitussalamVolunteers, deleteAdminUsers, list } = props;
   const getList = async query => {
-    await getAdminUsers(query);
+    await getBaitussalamVolunteers(query);
   };
 
   const canAddUser = permissionsUtil.checkAuth({
@@ -128,7 +124,7 @@ function BaitussalamWebAndAppVolunteerManagement(props) {
 }
 
 BaitussalamWebAndAppVolunteerManagement.propTypes = {
-  getAdminUsers: PropTypes.func,
+  getBaitussalamVolunteers: PropTypes.func,
   list: PropTypes.array,
   deleteAdminUsers: PropTypes.func,
   loading: PropTypes.bool,

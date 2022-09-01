@@ -11,6 +11,11 @@ import CustomIcon from "../../components/CustomIcon/CustomIcon";
 
 const columns = [
   {
+    title: "ID",
+    dataIndex: "customerIdPk",
+    key: "customerIdPk",
+  },
+  {
     title: "Customer Code",
     dataIndex: "customerCode",
     key: "customerCode",
@@ -20,24 +25,21 @@ const columns = [
     dataIndex: "fullName",
     key: "fullName",
     sorter: true,
-    render: (text, record) => <Link to={`${ROUTES.EDIT_ADMIN_USER.path}/${record.userId}`}>{record.fullName}</Link>,
   },
   {
     title: "Email Address",
-    dataIndex: "emailAddress",
-    key: "emailAddress",
-    sorter: (a, b) => a.emailAddress.length - b.emailAddress.length,
-    sortDirections: ["descend", "ascend"],
+    dataIndex: "email",
+    key: "email",
   },
   {
     title: "Phone",
-    dataIndex: "phone",
-    key: "phone",
+    dataIndex: "contact",
+    key: "contact",
   },
   {
     title: "Created At",
-    dataIndex: "createdAt",
-    key: "createdAt",
+    dataIndex: "dateCreated",
+    key: "dateCreated",
   },
   {
     title: "Created By",
@@ -49,7 +51,6 @@ const columns = [
     dataIndex: "status",
     key: "status",
     sorter: true,
-    render: d => d.status,
   },
   {
     title: "Action",
@@ -60,14 +61,7 @@ const columns = [
         <Col span={12} xs={24} sm={12} lg={12}>
           <Link to={`/landing-designer/${record.id}`}>
             <Button type="link">
-              <CustomIcon name="UserOutlined" />
-            </Button>
-          </Link>
-        </Col>
-        <Col span={12} xs={24} sm={12} lg={12}>
-          <Link to={`/swim-lane-manager/${record.id}`}>
-            <Button type="link">
-              <CustomIcon name="UsergroupAddOutlined" />
+              <CustomIcon name="EditOutlined" />
             </Button>
           </Link>
         </Col>
@@ -77,9 +71,9 @@ const columns = [
 ];
 
 function BaitussalamWebAndAppCustomerManagement(props) {
-  const { loading, enableDisableAdmin, pagination, getAdminUsers, deleteAdminUsers, list } = props;
+  const { loading, enableDisableAdmin, pagination, getCustomer, deleteAdminUsers, list } = props;
   const getList = async query => {
-    await getAdminUsers(query);
+    await getCustomer(query);
   };
 
   const canAddUser = permissionsUtil.checkAuth({
@@ -129,7 +123,7 @@ function BaitussalamWebAndAppCustomerManagement(props) {
         dataSource={list}
         columns={columns}
         loading={loading}
-        rowKey="userId"
+        rowKey="customerIdPk"
         addButton={addButton}
         pagination={pagination}
         deleteAllData={deleteAdminUsers}
@@ -145,7 +139,7 @@ function BaitussalamWebAndAppCustomerManagement(props) {
 }
 
 BaitussalamWebAndAppCustomerManagement.propTypes = {
-  getAdminUsers: PropTypes.func,
+  getCustomer: PropTypes.func,
   list: PropTypes.array,
   deleteAdminUsers: PropTypes.func,
   loading: PropTypes.bool,

@@ -11,16 +11,21 @@ import CustomIcon from "../../components/CustomIcon/CustomIcon";
 
 const columns = [
   {
+    title: "ID",
+    dataIndex: "id",
+    key: "id",
+    sorter: true,
+  },
+  {
     title: "Title",
     dataIndex: "title",
     key: "title",
-    // sorter: true,
-    // render: (text, record) => <Link to={`${ROUTES.EDIT_ADMIN_USER.path}/${record.userId}`}>{record.fullName}</Link>,
   },
   {
     title: "Description",
     dataIndex: "description",
     key: "description",
+    width: 300,
   },
   {
     title: "Department Name",
@@ -36,10 +41,9 @@ const columns = [
     title: "Image",
     dataIndex: "image",
     key: "image",
-    render: image => {
-      console.log(image);
-      // <img className="card-img" src={`https://dev.baitussalam.org/storage/images/projects/${image}`} alt="pic1" />
-    },
+    render: image => (
+      <img width={200} className="card-img" src={`https://dev.baitussalam.org/storage/${image}`} alt="newimage" />
+    ),
   },
   {
     title: "Action",
@@ -122,7 +126,7 @@ function BaitussalamWebAndAppNewsManagement(props) {
         canChangeStatus={canChangeStatus}
         canAdd={canAddUser}
         canDelete={canDeleteUser}
-        scroll={{ x: 100, y: 580 }}
+        scroll={{ x: 200, y: 580 }}
       />
     </>
   );

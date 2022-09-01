@@ -18,5 +18,9 @@ const baitussalamServices = {
   getFeaturedVideos: () => get(`api/public/v1/featured-videos`),
   getAllNews: () => get(`api/public/v1/news/latest`),
   getDonationCategories: () => get(`api/public/v1/donation-categories`),
+  getHijriDates: () => get(`api/private/role-admin/v1/hijri/date`),
+  getOnlineCharity: () => get(`api/private/role-admin/v1/donations`),
+  getBaitussalamVolunteers: () => get(`api/private/role-admin/v1/volunteer`),
+  getCustomer: () => get(`api/private/role-admin/v1/customer`),
 };
 export default baitussalamServices;

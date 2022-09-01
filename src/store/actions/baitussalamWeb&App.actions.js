@@ -240,13 +240,80 @@ export function getAllNews(query) {
   };
 }
 
-export function getDonationCategory() {
+export function getDonationCategories() {
   return async dispatch => {
     dispatch(adminRequest());
     try {
       const [err, response] = await to(baitussalamAppService.getDonationCategories());
+      if (err) throwError(err);
+      dispatch(adminSuccess(response.content));
+      // response = Object.values(response).flat();
+      dispatch(adminListSuccess(response));
+    } catch (error) {
+      dispatch(adminError(error));
+      toastMessage("error", ERROR_MESSAGE.LIST);
+      throwError(error);
+    }
+  };
+}
+
+export function getHijriDates() {
+  return async dispatch => {
+    dispatch(adminRequest());
+    try {
+      const [err, response] = await to(baitussalamAppService.getHijriDates());
       console.log(response, "responseresponse");
       console.log(err, "errerr");
+      if (err) throwError(err);
+      dispatch(adminSuccess(response.content));
+      // response = Object.values(response).flat();
+      dispatch(adminListSuccess(response));
+    } catch (error) {
+      dispatch(adminError(error));
+      toastMessage("error", ERROR_MESSAGE.LIST);
+      throwError(error);
+    }
+  };
+}
+export function getOnlineCharity() {
+  return async dispatch => {
+    dispatch(adminRequest());
+    try {
+      const [err, response] = await to(baitussalamAppService.getOnlineCharity());
+      if (err) throwError(err);
+      dispatch(adminSuccess(response.content));
+      // response = Object.values(response).flat();
+      dispatch(adminListSuccess(response));
+    } catch (error) {
+      dispatch(adminError(error));
+      toastMessage("error", ERROR_MESSAGE.LIST);
+      throwError(error);
+    }
+  };
+}
+
+export function getBaitussalamVolunteers() {
+  return async dispatch => {
+    dispatch(adminRequest());
+    try {
+      const [err, response] = await to(baitussalamAppService.getBaitussalamVolunteers());
+      if (err) throwError(err);
+      dispatch(adminSuccess(response.content));
+      // response = Object.values(response).flat();
+      dispatch(adminListSuccess(response));
+    } catch (error) {
+      dispatch(adminError(error));
+      toastMessage("error", ERROR_MESSAGE.LIST);
+      throwError(error);
+    }
+  };
+}
+
+export function getCustomer() {
+  return async dispatch => {
+    dispatch(adminRequest());
+    try {
+      const [err, response] = await to(baitussalamAppService.getCustomer());
       if (err) throwError(err);
       dispatch(adminSuccess(response.content));
       // response = Object.values(response).flat();

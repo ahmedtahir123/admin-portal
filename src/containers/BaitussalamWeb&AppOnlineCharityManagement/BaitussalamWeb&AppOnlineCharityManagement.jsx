@@ -11,85 +11,103 @@ import CustomIcon from "../../components/CustomIcon/CustomIcon";
 
 const columns = [
   {
+    title: "Id",
+    dataIndex: "id",
+    key: "id",
+    width: 50,
+  },
+  {
     title: "Code",
     dataIndex: "code",
     key: "code",
+    width: 150,
   },
   {
     title: "Transaction No",
-    dataIndex: "transactionNo",
-    key: "transactionNo",
+    dataIndex: "transactionNumber",
+    key: "transactionNumber",
+    width: 150,
   },
   {
     title: "Transaction Date",
     dataIndex: "transactionDate",
     key: "transactionDate",
+    width: 150,
   },
   {
     title: "Customer Name",
-    dataIndex: "customerName",
-    key: "customerName",
+    dataIndex: "customerFullName",
+    key: "customerFullName",
+    width: 150,
   },
   {
     title: "Payment Methhod",
-    dataIndex: "paymentMethod",
-    key: "paymentMethod",
+    dataIndex: "paymentMethodName",
+    key: "paymentMethodName",
+    width: 150,
   },
   {
     title: "Total Amount",
     dataIndex: "totalAmount",
     key: "totalAmount",
+    width: 150,
   },
   {
     title: "Currency",
-    dataIndex: "Currency",
-    key: "Currency",
+    dataIndex: "currName",
+    key: "currName",
+    width: 150,
   },
   {
     title: "Platform",
-    dataIndex: "Platform",
-    key: "Platform",
-    sorter: (a, b) => a.emailAddress.length - b.emailAddress.length,
+    dataIndex: "platform",
+    key: "platform",
     sortDirections: ["descend", "ascend"],
+    width: 150,
   },
   {
     title: "QMS Booking Id",
     dataIndex: "QMS_Id",
     key: "QMS_Id",
+    width: 150,
   },
   {
     title: "Transaction Status",
-    dataIndex: "transactionStatus",
-    key: "transactionStatus",
+    dataIndex: "tranStatus",
+    key: "tranStatus",
     sorter: true,
-    render: d => d.status,
+    width: 150,
   },
   {
     title: "Status",
     dataIndex: "status",
     key: "status",
+    width: 150,
     sorter: true,
-    render: d => d.status,
   },
   {
     title: "Created At",
     dataIndex: "createdAt",
     key: "createdAt",
+    width: 150,
   },
   {
     title: "Created By",
     dataIndex: "createdBy",
     key: "createdBy",
+    width: 150,
   },
   {
     title: "Updated At",
     dataIndex: "updatedAt",
     key: "updatedAt",
+    width: 150,
   },
   {
     title: "Updated By",
     dataIndex: "updatedBy",
     key: "updatedBy",
+    width: 150,
   },
   {
     title: "Action",
@@ -100,14 +118,7 @@ const columns = [
         <Col span={12} xs={24} sm={12} lg={12}>
           <Link to={`/landing-designer/${record.id}`}>
             <Button type="link">
-              <CustomIcon name="UserOutlined" />
-            </Button>
-          </Link>
-        </Col>
-        <Col span={12} xs={24} sm={12} lg={12}>
-          <Link to={`/swim-lane-manager/${record.id}`}>
-            <Button type="link">
-              <CustomIcon name="UsergroupAddOutlined" />
+              <CustomIcon name="EditOutlined" />
             </Button>
           </Link>
         </Col>
@@ -117,9 +128,9 @@ const columns = [
 ];
 
 function BaitussalamWebAndAppOnlineCharityManagement(props) {
-  const { loading, enableDisableAdmin, pagination, getAdminUsers, deleteAdminUsers, list } = props;
+  const { loading, enableDisableAdmin, pagination, getOnlineCharity, deleteAdminUsers, list } = props;
   const getList = async query => {
-    await getAdminUsers(query);
+    await getOnlineCharity(query);
   };
 
   const canAddUser = permissionsUtil.checkAuth({
@@ -162,6 +173,7 @@ function BaitussalamWebAndAppOnlineCharityManagement(props) {
     text: "Disable",
   };
 
+  console.log(list, "listlistlistlist");
   return (
     <>
       <PageTitle title="All Online Charity" />
@@ -169,7 +181,7 @@ function BaitussalamWebAndAppOnlineCharityManagement(props) {
         dataSource={list}
         columns={columns}
         loading={loading}
-        rowKey="userId"
+        rowKey="id"
         addButton={addButton}
         pagination={pagination}
         deleteAllData={deleteAdminUsers}
@@ -179,13 +191,14 @@ function BaitussalamWebAndAppOnlineCharityManagement(props) {
         canChangeStatus={canChangeStatus}
         canAdd={canAddUser}
         canDelete={canDeleteUser}
+        scroll={{ x: 1350, y: 600 }}
       />
     </>
   );
 }
 
 BaitussalamWebAndAppOnlineCharityManagement.propTypes = {
-  getAdminUsers: PropTypes.func,
+  getOnlineCharity: PropTypes.func,
   list: PropTypes.array,
   deleteAdminUsers: PropTypes.func,
   loading: PropTypes.bool,

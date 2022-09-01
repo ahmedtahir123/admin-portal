@@ -68,9 +68,9 @@ const columns = [
 ];
 
 function BaitussalamWebAndAppDonationCategoryManagement(props) {
-  const { loading, enableDisableAdmin, pagination, getDonationCategory, deleteAdminUsers, list } = props;
+  const { loading, enableDisableAdmin, pagination, getDonationCategories, deleteAdminUsers, list } = props;
   const getList = async query => {
-    await getDonationCategory(query);
+    await getDonationCategories(query);
   };
 
   const canAddUser = permissionsUtil.checkAuth({
@@ -116,7 +116,7 @@ function BaitussalamWebAndAppDonationCategoryManagement(props) {
   console.log(list);
   return (
     <>
-      <PageTitle title="All Donations" />
+      <PageTitle title="Donation Categories" />
       <ListView
         dataSource={list}
         columns={columns}
@@ -137,7 +137,7 @@ function BaitussalamWebAndAppDonationCategoryManagement(props) {
 }
 
 BaitussalamWebAndAppDonationCategoryManagement.propTypes = {
-  getDonationCategory: PropTypes.func,
+  getDonationCategories: PropTypes.func,
   list: PropTypes.array,
   deleteAdminUsers: PropTypes.func,
   loading: PropTypes.bool,
