@@ -17,37 +17,48 @@ const columns = [
     sorter: true,
   },
   {
-    title: "Full Name",
-    dataIndex: "fullName",
-    key: "fullName",
-    sorter: true,
-    render: (text, record) => <Link to={`${ROUTES.EDIT_ADMIN_USER.path}/${record.userId}`}>{record.fullName}</Link>,
+    title: "Name",
+    dataIndex: "name",
+    key: "name",
   },
   {
-    title: "Email Address",
-    dataIndex: "emailAddress",
-    key: "emailAddress",
-    sorter: (a, b) => a.emailAddress.length - b.emailAddress.length,
-    sortDirections: ["descend", "ascend"],
+    title: "Mosque",
+    dataIndex: "mosque",
+    key: "mosque",
+  },
+  {
+    title: "Cnic",
+    dataIndex: "nic",
+    key: "nic",
+  },
+  {
+    title: "Email",
+    dataIndex: "email",
+    key: "email",
   },
   {
     title: "Contact",
-    dataIndex: "cellPhoneNumber",
-    key: "cellPhoneNumber",
+    dataIndex: "contact",
+    key: "contact",
   },
   {
-    title: "Date Of Birth",
-    dataIndex: "dob",
-    key: "dob",
-    sorter: (a, b) => a.emailAddress.length - b.emailAddress.length,
-    sortDirections: ["descend", "ascend"],
+    title: "DOB",
+    dataIndex: "dateOfBirth",
+    key: "dateOfBirth",
+    width: 100,
+    render: record => <>{record?.join("-")}</>,
   },
   {
-    title: "Location Name",
-    dataIndex: "locationName",
-    key: "locationName",
-    sorter: (a, b) => a.locationName.length - b.locationName.length,
-    sortDirections: ["descend", "ascend"],
+    title: "Address",
+    dataIndex: "address",
+    key: "address",
+    render: record => <>{record?.addressLine}</>,
+  },
+  {
+    title: "City",
+    dataIndex: "name",
+    key: "name",
+    render: record => <>{record?.city}</>,
   },
   {
     title: "Action",
@@ -58,14 +69,7 @@ const columns = [
         <Col span={12} xs={24} sm={12} lg={12}>
           <Link to={`/landing-designer/${record.id}`}>
             <Button type="link">
-              <CustomIcon name="UserOutlined" />
-            </Button>
-          </Link>
-        </Col>
-        <Col span={12} xs={24} sm={12} lg={12}>
-          <Link to={`/swim-lane-manager/${record.id}`}>
-            <Button type="link">
-              <CustomIcon name="UsergroupAddOutlined" />
+              <CustomIcon name="EditOutlined" />
             </Button>
           </Link>
         </Col>
@@ -75,9 +79,9 @@ const columns = [
 ];
 
 function MusalliVolunteerManagement(props) {
-  const { loading, enableDisableAdmin, pagination, getAdminUsers, deleteAdminUsers, list } = props;
+  const { loading, enableDisableAdmin, pagination, getMusalliVolunteer, deleteAdminUsers, list } = props;
   const getList = async query => {
-    await getAdminUsers(query);
+    await getMusalliVolunteer(query);
   };
 
   const canAddUser = permissionsUtil.checkAuth({
@@ -119,7 +123,7 @@ function MusalliVolunteerManagement(props) {
     handler: enableDisableAdmin,
     text: "Disable",
   };
-
+  console.log(list, "listAAA");
   return (
     <>
       <PageTitle title="All Volunteers" />
@@ -127,23 +131,23 @@ function MusalliVolunteerManagement(props) {
         dataSource={list}
         columns={columns}
         loading={loading}
-        rowKey="userId"
+        rowKey="id"
         addButton={addButton}
         pagination={pagination}
-        deleteAllData={deleteAdminUsers}
+        // deleteAllData={deleteAdminUsers}
         getList={getList}
-        enableButton={onEnable}
-        disableButton={onDisable}
-        canChangeStatus={canChangeStatus}
-        canAdd={canAddUser}
-        canDelete={canDeleteUser}
+        // enableButton={onEnable}
+        // disableButton={onDisable}
+        // canChangeStatus={canChangeStatus}
+        // canAdd={canAddUser}
+        // canDelete={canDeleteUser}
       />
     </>
   );
 }
 
 MusalliVolunteerManagement.propTypes = {
-  getAdminUsers: PropTypes.func,
+  getMusalliVolunteer: PropTypes.func,
   list: PropTypes.array,
   deleteAdminUsers: PropTypes.func,
   loading: PropTypes.bool,

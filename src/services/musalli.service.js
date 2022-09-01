@@ -11,5 +11,6 @@ import { userTypes } from "../__mocks__/userTypes";
 
 const musalliService = {
   getAllParticipantUsers: query => get(`api/role-admin/v1/participant`),
+  getMusalliVolunteer: query => get(`api/role-admin/v1/volunteer`),
 };
 export default musalliService;
