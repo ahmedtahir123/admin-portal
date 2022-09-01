@@ -30,12 +30,7 @@ const AddEditParticipant = ({
   const [promotionDrawerVisible, setPromotionDrawerVisible] = useState(false);
   const { id } = useParams();
   const isEditView = !!id;
-  const currentStatus = ["Planned", "Scheduled", "In-Execution", "Completed", "Terminated"];
-  const filters = {
-    categories: ["Cat1", "Cat2", "Cat3"],
-    brands: ["Brand1", "Brand2", "Brand3"],
-    locations: ["Loc1", "Loc2", "Loc3"],
-  };
+
 
   useEffect(() => {
     if (id) {
@@ -78,7 +73,7 @@ const AddEditParticipant = ({
   };
 
   const onFormFinish = fieldsValue => {
-    const rangeTimeValue = fieldsValue.date;
+    const rangeTimeValue = fieldsValue.dateOfBirth;
     const values = {
       ...fieldsValue,
       startDate: rangeTimeValue[0].valueOf(),
@@ -134,9 +129,6 @@ const AddEditParticipant = ({
       >
         <Row className="fields-row" gutter={20} type="flex">
           <Col span={8} xs={24} sm={12} lg={12}>
-            <Form.Item label="Participant Id" name="participantId">
-              <Input readOnly placeholder="Participant Id" />
-            </Form.Item>
             <Form.Item label="Participant Name" name="participantName" rules={[{ required: true }]}>
               <Input placeholder="Participant Name" />
             </Form.Item>
@@ -162,7 +154,7 @@ const AddEditParticipant = ({
             >
               <Input placeholder="03001234567" />
             </Form.Item>
-            <Form.Item label="City" name="city" rules={[{ required: true }]}>
+            <Form.Item label="City" name="city" rules={[{ required: false }]}>
               <Select placeholder="City">
                 {_map([], city => (
                   <Option key={city.code} value={city.code}>
@@ -171,7 +163,7 @@ const AddEditParticipant = ({
                 ))}
               </Select>
             </Form.Item>
-            <Form.Item label="Mosque Name" name="mosqueName" rules={[{ required: true }]}>
+            <Form.Item label="Mosque Name" name="mosqueName" rules={[{ required: false }]}>
               <Select placeholder="Mosque Name">
                 {_map([], mosque => (
                   <Option key={mosque.code} value={mosque.code}>
@@ -180,17 +172,19 @@ const AddEditParticipant = ({
                 ))}
               </Select>
             </Form.Item>
-            <Form.Item label="Address" name="address" rules={[{ required: true }]}>
+            <Form.Item label="Address" name="address" rules={[{ required: false }]}>
               <Input placeholder="Address" />
             </Form.Item>
           </Col>
           <Col span={8} xs={24} sm={12} lg={12} className="mg-top-40">
-            <Form.Item className="text-left" name="enabled">
-              <Radio.Group>
-                <Radio.Button value>ACTIVE</Radio.Button>
-                <Radio.Button value={false}>IN-ACTIVE</Radio.Button>
-              </Radio.Group>
-            </Form.Item>
+            {isEditView && (
+              <Form.Item className="text-left" name="enabled">
+                <Radio.Group>
+                  <Radio.Button value>ACTIVE</Radio.Button>
+                  <Radio.Button value={false}>IN-ACTIVE</Radio.Button>
+                </Radio.Group>
+              </Form.Item>
+            )}
             <Form.Item label="Profile Picture">
               <div className="text-center">
                 <div className="bg-gray">

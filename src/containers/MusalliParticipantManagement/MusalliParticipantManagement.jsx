@@ -12,50 +12,50 @@ import CustomIcon from "../../components/CustomIcon/CustomIcon";
 const columns = [
   {
     title: "Name",
-    dataIndex: "Name",
-    key: "Name",
+    dataIndex: "name",
+    key: "name",
     sorter: true,
-    render: (text, record) => <Link to={`${ROUTES.EDIT_ADMIN_USER.path}/${record.userId}`}>{record.fullName}</Link>,
+    // render: (text, record) => <Link to={`${ROUTES.EDIT_ADMIN_USER.path}/${record.userId}`}>{record.fullName}</Link>,
   },
   {
     title: "Father Name",
     dataIndex: "fatherName",
     key: "fatherName",
     sorter: true,
-    render: (text, record) => <Link to={`${ROUTES.EDIT_ADMIN_USER.path}/${record.userId}`}>{record.fullName}</Link>,
+    // render: (text, record) => <Link to={`${ROUTES.EDIT_ADMIN_USER.path}/${record.userId}`}>{record.fullName}</Link>,
   },
   {
     title: "Email Address",
-    dataIndex: "emailAddress",
-    key: "emailAddress",
-    sorter: (a, b) => a.emailAddress.length - b.emailAddress.length,
-    sortDirections: ["descend", "ascend"],
+    dataIndex: "email",
+    key: "email",
+    // sorter: (a, b) => a.emailAddress.length - b.emailAddress.length,
+    // sortDirections: ["descend", "ascend"],
   },
   {
     title: "Contact",
-    dataIndex: "cellPhoneNumber",
-    key: "cellPhoneNumber",
+    dataIndex: "contact",
+    key: "contact",
   },
   {
     title: "Date Of Birth",
-    dataIndex: "dob",
-    key: "dob",
-    sorter: (a, b) => a.emailAddress.length - b.emailAddress.length,
-    sortDirections: ["descend", "ascend"],
+    dataIndex: "dateOfBirth",
+    key: "dateOfBirth",
+    // sorter: (a, b) => a.emailAddress.length - b.emailAddress.length,
+    // sortDirections: ["descend", "ascend"],
   },
   {
     title: "Document Submission Status",
     dataIndex: "documentSubmissionStatus",
     key: "documentSubmissionStatus",
-    sorter: (a, b) => a.emailAddress.length - b.emailAddress.length,
-    sortDirections: ["descend", "ascend"],
+    // sorter: (a, b) => a.emailAddress.length - b.emailAddress.length,
+    // sortDirections: ["descend", "ascend"],
   },
   {
     title: "Status",
-    dataIndex: "userMetaData",
+    dataIndex: "status",
     key: "status",
-    sorter: true,
-    render: d => d.status,
+    // sorter: true,
+    // render: d => d.status,
   },
   {
     title: "Action",
@@ -67,13 +67,6 @@ const columns = [
           <Link to={`/landing-designer/${record.id}`}>
             <Button type="link">
               <CustomIcon name="UserOutlined" />
-            </Button>
-          </Link>
-        </Col>
-        <Col span={12} xs={24} sm={12} lg={12}>
-          <Link to={`/swim-lane-manager/${record.id}`}>
-            <Button type="link">
-              <CustomIcon name="UsergroupAddOutlined" />
             </Button>
           </Link>
         </Col>
@@ -135,7 +128,7 @@ function MusalliMosqueManagement(props) {
         dataSource={list}
         columns={columns}
         loading={loading}
-        rowKey="userId"
+        rowKey="id"
         addButton={addButton}
         pagination={pagination}
         deleteAllData={deleteAdminUsers}
