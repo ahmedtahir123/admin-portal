@@ -2,23 +2,21 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import MusalliMosqueManagement from "../containers/MusalliMosqueManagement/MusalliMosqueManagement";
-import { deleteAdminUsers, enableDisableAdmin, getAdminUsers } from "../store/actions/admin.actions";
+import { getAllMosque } from "../store/actions/musalli_mosque.action";
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      getAdminUsers,
-      deleteAdminUsers,
-      enableDisableAdmin,
+      getAllMosque,
     },
     dispatch,
   );
 
 const mapStateToProps = state => ({
-  loading: state.admin.loading,
-  list: state.admin.list,
-  error: state.admin.error,
-  pagination: state.admin.value,
+  loading: state.mosque.loading,
+  list: state.mosque.list,
+  error: state.mosque.error,
+  pagination: state.mosque.value,
 });
 
 const MusalliMosqueManagementProvider = withRouter(
