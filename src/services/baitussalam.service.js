@@ -22,5 +22,6 @@ const baitussalamServices = {
   getOnlineCharity: () => get(`api/private/role-admin/v1/donations`),
   getBaitussalamVolunteers: () => get(`api/private/role-admin/v1/volunteer`),
   getCustomer: () => get(`api/private/role-admin/v1/customer`),
+  getBaitussalamAdminUser: () => get(`api/private/role-super-admin/v1/admin`),
 };
 export default baitussalamServices;

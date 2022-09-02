@@ -65,9 +65,9 @@ const columns = [
 ];
 
 function BaitussalamWebAndAppAdminUserManagement(props) {
-  const { loading, enableDisableAdmin, pagination, getAdminUsers, deleteAdminUsers, list } = props;
+  const { loading, enableDisableAdmin, pagination, getBaitussalamAdminUser, deleteAdminUsers, list } = props;
   const getList = async query => {
-    await getAdminUsers(query);
+    await getBaitussalamAdminUser(query);
   };
 
   const canAddUser = permissionsUtil.checkAuth({
@@ -133,7 +133,7 @@ function BaitussalamWebAndAppAdminUserManagement(props) {
 }
 
 BaitussalamWebAndAppAdminUserManagement.propTypes = {
-  getAdminUsers: PropTypes.func,
+  getBaitussalamAdminUser: PropTypes.func,
   list: PropTypes.array,
   deleteAdminUsers: PropTypes.func,
   loading: PropTypes.bool,
