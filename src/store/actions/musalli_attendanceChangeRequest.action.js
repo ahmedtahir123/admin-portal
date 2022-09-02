@@ -25,14 +25,14 @@ export function selectedParticipantSuccess(response) {
 
 /* Async Actions */
 
-export function getMusalliSession(query) {
+export function getMusalliAttendanceChangeRequest(query) {
   return async dispatch => {
     dispatch(participantRequest());
     try {
-      const [err, response] = await to(musalliService.getMusalliSession(query));
+      const [err, response] = await to(musalliService.getMusalliAttendanceChangeRequest(query));
       if (err) throwError(err);
       dispatch(participantSuccess(response));
-      dispatch(ParticipantListSuccess(response));
+      dispatch(ParticipantListSuccess(response.content));
     } catch (error) {
       dispatch(participantError(error));
       toastMessage("error", ERROR_MESSAGE.LIST);
@@ -63,7 +63,7 @@ export function deleteParticipantUsers(ids, query) {
     try {
       const [err, response] = await to(musalliService.deleteParticipantUsers(ids));
       if (err) throwError(err);
-      dispatch(getMusalliSession(query));
+      dispatch(getMusalliAttendanceChangeRequest(query));
       toastMessage("success", SUCCESS_MESSAGE.DELETED);
     } catch (error) {
       dispatch(participantError(error));
@@ -116,7 +116,7 @@ export function enableDisableParticipant(ids, enabled, query) {
       }
       console.log("response", response);
       if (err) throwError(err);
-      dispatch(getMusalliSession(query));
+      dispatch(getMusalliAttendanceChangeRequest(query));
       toastMessage("success", SUCCESS_MESSAGE.ENABLED);
     } catch (error) {
       dispatch(participantError(error));

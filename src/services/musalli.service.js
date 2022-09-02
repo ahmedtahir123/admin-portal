@@ -13,5 +13,8 @@ const musalliService = {
   getAllParticipantUsers: query => get(`api/role-admin/v1/participant`),
   getMusalliVolunteer: query => get(`api/role-admin/v1/volunteer`),
   getAllMosque: query => get(`api/role-admin/v1/mosque`),
+  getMusalliSession: query => get(`api/public/v1/session/active`),
+  getMusalliAttendanceChangeRequest: query =>
+    get(`api/role-admin/v1/participant/participant-attendance-change/participant-attendance-change`),
 };
 export default musalliService;

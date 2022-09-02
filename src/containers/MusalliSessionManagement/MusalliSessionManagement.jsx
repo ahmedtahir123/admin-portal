@@ -15,95 +15,170 @@ const columns = [
     dataIndex: "id",
     key: "id",
     sorter: true,
-    render: (text, record) => <Link to={`${ROUTES.EDIT_ADMIN_USER.path}/${record.userId}`}>{record.fullName}</Link>,
+    width: 50,
   },
   {
     title: "Description",
     dataIndex: "description",
     key: "description",
     sorter: true,
+    width: 200,
   },
   {
     title: "Status",
-    dataIndex: "userMetaData",
+    dataIndex: "status",
     key: "status",
-    sorter: true,
-    render: d => d.status,
+    width: 200,
   },
   {
     title: "Start Date",
     dataIndex: "startDate",
     key: "startDate",
+    width: 200,
+    render: d =>
+      d
+        ?.slice(0, 3)
+        ?.reverse()
+        ?.join("-"),
   },
   {
     title: "End Date",
     dataIndex: "endDate",
     key: "endDate",
+    width: 200,
+    render: d =>
+      d
+        ?.slice(0, 3)
+        ?.reverse()
+        ?.join("-"),
   },
   {
     title: "Mosque Regestration Start Date",
-    dataIndex: "mosqueRegestrationStartDate",
-    key: "mosqueRegestrationStartDate",
+    dataIndex: "masjidRegistrationStartDate",
+    key: "masjidRegistrationStartDate",
+    width: 200,
+    render: d =>
+      d
+        ?.slice(0, 3)
+        ?.reverse()
+        ?.join("-"),
   },
   {
     title: "Mosque Regestration End Date",
-    dataIndex: "mosqueRegestrationEndDate",
-    key: "mosqueRegestrationEndDate",
+    dataIndex: "masjidRegistrationEndDate",
+    key: "masjidRegistrationEndDate",
+    width: 200,
+    render: d =>
+      d
+        ?.slice(0, 3)
+        ?.reverse()
+        ?.join("-"),
   },
   {
     title: "Participant Regestration Start Date",
-    dataIndex: "participantRegestrationStartDate",
-    key: "participantRegestrationStartDate",
+    dataIndex: "participantRegistrationStartDate",
+    key: "participantRegistrationStartDate",
+    width: 200,
+    render: d =>
+      d
+        ?.slice(0, 3)
+        ?.reverse()
+        ?.join("-"),
   },
   {
     title: "Participant Regestration End Date",
-    dataIndex: "participantRegestrationEndDate",
-    key: "participantRegestrationEndDate",
+    dataIndex: "participantRegistrationEndDate",
+    key: "participantRegistrationEndDate",
+    width: 200,
+    render: d =>
+      d
+        ?.slice(0, 3)
+        ?.reverse()
+        ?.join("-"),
   },
   {
     title: "Maximum Participant DOB",
-    dataIndex: "maximumParticipantDOB",
-    key: "maximumParticipantDOB",
+    dataIndex: "maximumParticipantDateOfBirth",
+    key: "maximumParticipantDateOfBirth",
+    width: 200,
+    render: d =>
+      d
+        ?.slice(0, 3)
+        ?.reverse()
+        ?.join("-"),
   },
   {
     title: "Minimum Participant DOB",
-    dataIndex: "minimumParticipantDOB",
-    key: "minimumParticipantDOB",
+    dataIndex: "minimumParticipantDateOfBirth",
+    key: "minimumParticipantDateOfBirth",
+    width: 200,
+    render: d =>
+      d
+        ?.slice(0, 3)
+        ?.reverse()
+        ?.join("-"),
   },
   {
     title: "Competition Start Date",
     dataIndex: "competitionStartDate",
     key: "competitionStartDate",
+    width: 200,
+    render: d =>
+      d
+        ?.slice(0, 3)
+        ?.reverse()
+        ?.join("-"),
   },
   {
     title: "Competition End Date",
     dataIndex: "competitionEndDate",
     key: "competitionEndDate",
+    width: 200,
+    render: d =>
+      d
+        ?.slice(0, 3)
+        ?.reverse()
+        ?.join("-"),
   },
   {
     title: "Cost Per Cycle",
     dataIndex: "costPerCycle",
     key: "costPerCycle",
+    width: 200,
   },
   {
     title: "Percentage To Pay",
     dataIndex: "percentageToPay",
     key: "percentageToPay",
+    width: 200,
   },
   {
     title: "Payment Due Date",
     dataIndex: "paymentDueDate",
     key: "paymentDueDate",
+    width: 200,
+    render: d =>
+      d
+        ?.slice(0, 3)
+        ?.reverse()
+        ?.join("-"),
   },
   {
     title: "Second Payment Due Date",
     dataIndex: "secondPaymentDueDate",
     key: "secondPaymentDueDate",
+    width: 200,
+    render: d =>
+      d
+        ?.slice(0, 3)
+        ?.reverse()
+        ?.join("-"),
   },
   {
     title: "Payment Percentage Split On First Due Date ",
-    dataIndex: "percentageSplit",
-    key: "percentageSplit",
+    dataIndex: "paymentPercentageSplitOnFirstDueDate",
+    key: "paymentPercentageSplitOnFirstDueDate",
+    width: 200,
   },
   {
     title: "Action",
@@ -114,14 +189,7 @@ const columns = [
         <Col span={12} xs={24} sm={12} lg={12}>
           <Link to={`/landing-designer/${record.id}`}>
             <Button type="link">
-              <CustomIcon name="UserOutlined" />
-            </Button>
-          </Link>
-        </Col>
-        <Col span={12} xs={24} sm={12} lg={12}>
-          <Link to={`/swim-lane-manager/${record.id}`}>
-            <Button type="link">
-              <CustomIcon name="UsergroupAddOutlined" />
+              <CustomIcon name="EditOutlined" />
             </Button>
           </Link>
         </Col>
@@ -131,9 +199,9 @@ const columns = [
 ];
 
 function MusalliSessionManagement(props) {
-  const { loading, enableDisableAdmin, pagination, getAdminUsers, deleteAdminUsers, list } = props;
+  const { loading, enableDisableAdmin, pagination, getMusalliSession, deleteAdminUsers, list } = props;
   const getList = async query => {
-    await getAdminUsers(query);
+    await getMusalliSession(query);
   };
 
   const canAddUser = permissionsUtil.checkAuth({
@@ -175,7 +243,7 @@ function MusalliSessionManagement(props) {
     handler: enableDisableAdmin,
     text: "Disable",
   };
-
+  console.log(list, "listlistlistlistlist");
   return (
     <>
       <PageTitle title="All Sessions" />
@@ -183,23 +251,24 @@ function MusalliSessionManagement(props) {
         dataSource={list}
         columns={columns}
         loading={loading}
-        rowKey="userId"
+        rowKey="id"
         addButton={addButton}
         pagination={pagination}
         deleteAllData={deleteAdminUsers}
         getList={getList}
         enableButton={onEnable}
-        disableButton={onDisable}
-        canChangeStatus={canChangeStatus}
-        canAdd={canAddUser}
-        canDelete={canDeleteUser}
+        // disableButton={onDisable}
+        // canChangeStatus={canChangeStatus}
+        // canAdd={canAddUser}
+        // canDelete={canDeleteUser}
+        scroll={{ x: 200, y: 400 }}
       />
     </>
   );
 }
 
 MusalliSessionManagement.propTypes = {
-  getAdminUsers: PropTypes.func,
+  getMusalliSession: PropTypes.func,
   list: PropTypes.array,
   deleteAdminUsers: PropTypes.func,
   loading: PropTypes.bool,

@@ -18,35 +18,41 @@ const columns = [
   },
   {
     title: "Participant Name",
-    dataIndex: "mosqueName",
-    key: "mosqueName",
+    dataIndex: "participantName",
+    key: "participantName",
     sorter: true,
+    width: 150,
   },
   {
     title: "Participant Father Name",
-    dataIndex: "locationName",
-    key: "locationName",
-    // sorter: (a, b) => a.locationName.length - b.locationName.length,
+    dataIndex: "participantFatherName",
+    key: "participantFatherName",
+    width: 150,
   },
   {
     title: "Date Request",
-    dataIndex: "locationName",
-    key: "locationName",
+    dataIndex: "dateRequest",
+    key: "dateRequest",
+    width: 150,
+    render: record => record?.join("-"),
   },
   {
     title: "Participant Comment",
-    dataIndex: "locationName",
-    key: "locationName",
+    dataIndex: "participantComment",
+    key: "participantComment",
+    width: 250,
   },
   {
     title: "Resolver Comment",
-    dataIndex: "locationName",
-    key: "locationName",
+    dataIndex: "resolverComment",
+    key: "resolverComment",
+    width: 150,
   },
   {
     title: "Request Status",
-    dataIndex: "locationName",
-    key: "locationName",
+    dataIndex: "requestStatus",
+    key: "requestStatus",
+    width: 150,
   },
   {
     title: "Action",
@@ -67,9 +73,9 @@ const columns = [
 ];
 
 function MusalliAttendanceChangeRequestManagment(props) {
-  const { loading, enableDisableAdmin, pagination, getAdminUsers, deleteAdminUsers, list } = props;
+  const { loading, enableDisableAdmin, pagination, getMusalliAttendanceChangeRequest, deleteAdminUsers, list } = props;
   const getList = async query => {
-    await getAdminUsers(query);
+    await getMusalliAttendanceChangeRequest(query);
   };
 
   const canAddUser = permissionsUtil.checkAuth({
@@ -135,7 +141,7 @@ function MusalliAttendanceChangeRequestManagment(props) {
 }
 
 MusalliAttendanceChangeRequestManagment.propTypes = {
-  getAdminUsers: PropTypes.func,
+  getMusalliAttendanceChangeRequest: PropTypes.func,
   list: PropTypes.array,
   deleteAdminUsers: PropTypes.func,
   loading: PropTypes.bool,

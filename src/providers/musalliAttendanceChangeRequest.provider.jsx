@@ -2,23 +2,27 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import MusalliAttendanceChangeRequestManagment from "../containers/MusalliAttendanceChangeRequestManagment/MusalliAttendanceChangeRequestManagment";
-import { deleteAdminUsers, enableDisableAdmin, getAdminUsers } from "../store/actions/admin.actions";
+import {
+  // deleteAdminUsers,
+  // enableDisableAdmin,
+  getMusalliAttendanceChangeRequest,
+} from "../store/actions/musalli_attendanceChangeRequest.action";
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      getAdminUsers,
-      deleteAdminUsers,
-      enableDisableAdmin,
+      getMusalliAttendanceChangeRequest,
+      // deleteAdminUsers,
+      // enableDisableAdmin,
     },
     dispatch,
   );
 
 const mapStateToProps = state => ({
-  loading: state.admin.loading,
-  list: state.admin.list,
-  error: state.admin.error,
-  pagination: state.admin.value,
+  loading: state.participant.loading,
+  list: state.participant.list,
+  error: state.participant.error,
+  pagination: state.participant.value,
 });
 
 const MusalliAttendanceChangeRequestProvider = withRouter(
