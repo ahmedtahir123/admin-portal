@@ -15,51 +15,58 @@ const columns = [
     dataIndex: "id",
     key: "id",
     sorter: true,
-    render: (text, record) => <Link to={`${ROUTES.EDIT_ADMIN_USER.path}/${record.userId}`}>{record.fullName}</Link>,
+    // render: (text, record) => <Link to={`${ROUTES.EDIT_ADMIN_USER.path}/${record.userId}`}>{record.fullName}</Link>,
   },
   {
     title: "Mosque Name",
-    dataIndex: "mosqueName",
-    key: "mosqueName",
+    dataIndex: "name",
+    key: "name",
     sorter: true,
-    render: (text, record) => <Link to={`${ROUTES.EDIT_ADMIN_USER.path}/${record.userId}`}>{record.fullName}</Link>,
+    // render: (text, record) => <Link to={`${ROUTES.EDIT_ADMIN_USER.path}/${record.userId}`}>{record.fullName}</Link>,
   },
   {
-    title: "Location Name",
-    dataIndex: "locationName",
-    key: "locationName",
-    sorter: (a, b) => a.locationName.length - b.locationName.length,
-    sortDirections: ["descend", "ascend"],
+    title: "Status",
+    dataIndex: "status",
+    key: "status",
+    sorter: true,
+    // render: (text, record) => <Link to={`${ROUTES.EDIT_ADMIN_USER.path}/${record.userId}`}>{record.fullName}</Link>,
   },
-  {
-    title: "Action",
-    key: "action",
-    align: "center",
-    render: record => (
-      <Row>
-        <Col span={12} xs={24} sm={12} lg={12}>
-          <Link to={`/landing-designer/${record.id}`}>
-            <Button type="link">
-              <CustomIcon name="UserOutlined" />
-            </Button>
-          </Link>
-        </Col>
-        <Col span={12} xs={24} sm={12} lg={12}>
-          <Link to={`/swim-lane-manager/${record.id}`}>
-            <Button type="link">
-              <CustomIcon name="UsergroupAddOutlined" />
-            </Button>
-          </Link>
-        </Col>
-      </Row>
-    ),
-  },
+  // {
+  //   title: "Location Name",
+  //   dataIndex: "locationName",
+  //   key: "locationName",
+  //   sorter: (a, b) => a.locationName.length - b.locationName.length,
+  //   sortDirections: ["descend", "ascend"],
+  // },
+  // {
+  //   title: "Action",
+  //   key: "action",
+  //   align: "center",
+  //   render: record => (
+  //     <Row>
+  //       <Col span={12} xs={24} sm={12} lg={12}>
+  //         <Link to={`/landing-designer/${record.id}`}>
+  //           <Button type="link">
+  //             <CustomIcon name="UserOutlined" />
+  //           </Button>
+  //         </Link>
+  //       </Col>
+  //       <Col span={12} xs={24} sm={12} lg={12}>
+  //         <Link to={`/swim-lane-manager/${record.id}`}>
+  //           <Button type="link">
+  //             <CustomIcon name="UsergroupAddOutlined" />
+  //           </Button>
+  //         </Link>
+  //       </Col>
+  //     </Row>
+  //   ),
+  // },
 ];
 
 function MusalliMosqueManagement(props) {
-  const { loading, enableDisableAdmin, pagination, getAdminUsers, deleteAdminUsers, list } = props;
+  const { loading, enableDisableAdmin, pagination, getAllMosque, deleteAdminUsers, list } = props;
   const getList = async query => {
-    await getAdminUsers(query);
+    await getAllMosque(query);
   };
 
   const canAddUser = permissionsUtil.checkAuth({
@@ -109,7 +116,7 @@ function MusalliMosqueManagement(props) {
         dataSource={list}
         columns={columns}
         loading={loading}
-        rowKey="userId"
+        rowKey="id"
         addButton={addButton}
         pagination={pagination}
         deleteAllData={deleteAdminUsers}
@@ -125,7 +132,7 @@ function MusalliMosqueManagement(props) {
 }
 
 MusalliMosqueManagement.propTypes = {
-  getAdminUsers: PropTypes.func,
+  getAllMosque: PropTypes.func,
   list: PropTypes.array,
   deleteAdminUsers: PropTypes.func,
   loading: PropTypes.bool,
