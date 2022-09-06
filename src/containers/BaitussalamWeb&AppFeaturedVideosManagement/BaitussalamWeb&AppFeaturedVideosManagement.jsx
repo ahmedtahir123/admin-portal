@@ -14,69 +14,94 @@ const columns = [
     title: "Name",
     dataIndex: "nameEn",
     key: "nameEn",
+    width: 150,
   },
   {
     title: "Description",
     dataIndex: "description",
     key: "description",
+    width: 150,
   },
   {
     title: "Video Link",
     dataIndex: "videoLink",
     key: "videoLink",
+    width: 150,
   },
   {
     title: "Thumbnail",
     dataIndex: "thumbnailLink",
     key: "thumbnailLink",
+    width: 150,
+
     render: record => <img src={`https://dev.baitussalam.org/storage/${record}`} alt="thumbnail" width={200} />,
   },
   {
     title: "Display At Home Screen",
     dataIndex: "displayAtHome",
     key: "displayAtHome",
+    width: 150,
+
     render: record => <div>{`${record}`}</div>,
   },
   {
     title: "Sort Order",
     dataIndex: "sortOrder",
     key: "sortOrder",
+    width: 150,
   },
   {
     title: "Created At",
     dataIndex: "createdAt",
     key: "createdAt",
+    width: 150,
+    render: (text, record) => (
+      <>
+        {text?.slice(0, 3)?.join(`-`)} T {text?.slice(3, 6)?.join(`:`)}
+      </>
+    ),
   },
   {
     title: "Created By",
     dataIndex: "createdBy",
     key: "createdBy",
+    width: 150,
   },
   {
     title: "Updated At",
     dataIndex: "updatedAt",
     key: "updatedAt",
+    width: 150,
+    render: (text, record) => (
+      <>
+        {text?.slice(0, 3)?.join(`-`)} T {text?.slice(3, 6)?.join(`:`)}
+      </>
+    ),
   },
   {
     title: "Updated By",
     dataIndex: "updatedBy",
     key: "updatedBy",
+    width: 150,
   },
   {
     title: "Status",
     dataIndex: "status",
     key: "status",
+    width: 150,
   },
   {
     title: "Action",
     key: "action",
+    width: 150,
+
     align: "center",
     render: record => (
       <Row>
         <Col span={12} xs={24} sm={12} lg={12}>
           <Link to={`/landing-designer/${record.id}`}>
             <Button type="link">
-              <CustomIcon name="UserOutlined" />
+              <CustomIcon name="EditOutlined" />
             </Button>
           </Link>
         </Col>
