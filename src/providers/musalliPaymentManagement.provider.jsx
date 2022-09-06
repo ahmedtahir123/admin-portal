@@ -2,23 +2,26 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import MusalliPaymentManagement from "../containers/MusalliPaymentManagement/MusalliPaymentManagement";
-import { deleteAdminUsers, enableDisableAdmin, getAdminUsers } from "../store/actions/admin.actions";
+import {
+  // deleteAdminUsers, enableDisableAdmin,
+  getMusalliPayment,
+} from "../store/actions/musalli_payment.action";
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      getAdminUsers,
-      deleteAdminUsers,
-      enableDisableAdmin,
+      getMusalliPayment,
+      // deleteAdminUsers,
+      // enableDisableAdmin,
     },
     dispatch,
   );
 
 const mapStateToProps = state => ({
-  loading: state.admin.loading,
-  list: state.admin.list,
-  error: state.admin.error,
-  pagination: state.admin.value,
+  loading: state.participant.loading,
+  list: state.participant.list,
+  error: state.participant.error,
+  pagination: state.participant.value,
 });
 
 const MusalliPaymentManagementProvider = withRouter(

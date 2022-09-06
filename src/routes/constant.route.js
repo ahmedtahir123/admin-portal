@@ -497,6 +497,12 @@ const ROUTES = {
     name: "attendanceCountReport",
   },
 
+  MUSALLI_ATTENDANCE_BULK: {
+    path: "/musalli-attendance-bulk",
+    title: "Attendance Bulk",
+    name: "attendanceBulk",
+  },
+
   SMS_UTILITY: {
     path: "/musalli-sms-utility",
     title: "SMS Utility",

@@ -18,43 +18,49 @@ const columns = [
     sorter: true,
   },
   {
-    title: "Masjid Name",
+    title: "Name",
     dataIndex: "name",
     key: "name",
-    sorter: true,
   },
   {
-    title: "Absent",
-    dataIndex: "absent_participants",
-    key: "absent_participants",
-    sorter: true,
+    title: "Father Name",
+    dataIndex: "father_name",
+    key: "father_name",
   },
   {
-    title: "Present",
-    dataIndex: "present_participants",
-    key: "present_participants",
-    sorter: true,
+    title: "Email",
+    dataIndex: "email",
+    key: "email",
   },
   {
-    title: "Total",
-    dataIndex: "total_participants",
-    key: "total_participants",
-    sorter: true,
-  },
-  {
-    title: "Full Attendance Participant",
-    dataIndex: "full_attendance_participants",
-    key: "full_attendance_participants",
-    sorter: true,
+    title: "Attendance",
+    dataIndex: "attendance",
+    key: "attendance",
   },
 ];
 
-function MusalliAttendanceCountReportManagment(props) {
-  const { loading, enableDisableAdmin, pagination, getMusalliAttendanceCountReport, deleteAdminUsers, list } = props;
+function MusalliAttendanceBulkManagment(props) {
+  const {
+    loading,
+    enableDisableAdmin,
+    pagination,
+    deleteAdminUsers,
+    list,
+    getAllActiveMosqueBySession,
+    mosqueOptionlist,
+    mosqueOptionLoading,
+  } = props;
   const [form] = Form.useForm();
   const [date, setDate] = useState("");
 
   const getList = async query => {};
+
+  useEffect(() => {
+    const getMosque = async () => {
+      await getAllActiveMosqueBySession();
+    };
+    getMosque();
+  }, []);
 
   const canAddUser = permissionsUtil.checkAuth({
     category: "MusalliManagement",
@@ -96,14 +102,25 @@ function MusalliAttendanceCountReportManagment(props) {
   //   text: "Disable",
   // };
 
-  const onFormFinish = async fieldValue => {
-    await getMusalliAttendanceCountReport(date.toString());
+  const onFormFinish = async val => {
+    // await getAttendanceDetailReport(val?.mosque);
   };
+
+  // useEffect(() => {
+  //     const convertList = Object.values(list);
+  //     const listArr = [];
+  //     // eslint-disable-next-line array-callback-return
+  //     convertList.map(val => {
+  //         // eslint-disable-next-line array-callback-return
+  //         // eslint-disable-next-line no-unused-expressions
+  //         val.length > 0 && val.map(val2 => listArr.push(val2));
+  //     });
+  //     setValue(listArr);
+  // }, [list]);
 
   const onClear = () => {
     form.resetFields();
   };
-
   return (
     <>
       <Form
@@ -119,22 +136,40 @@ function MusalliAttendanceCountReportManagment(props) {
         name="nest-messages"
         onFinish={onFormFinish}
       >
-        <Row className="fields-row" gutter={20} type="flex" justify="space-between">
+        <Row className="fields-row" gutter={[20, 12]} type="flex">
+          <Col span={12} xs={24} sm={12} lg={12}>
+            <Form.Item name="mosque" rules={[{ required: true, message: "Mosque is required!" }]}>
+              <Select
+                showSearch
+                placeholder="Select Mosque"
+                optionFilterProp="children"
+                loading={mosqueOptionLoading}
+                filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+              >
+                {mosqueOptionlist?.length > 0 &&
+                  mosqueOptionlist?.map(item => (
+                    <Select.Option key={item.code} value={item.id}>
+                      {item.name}
+                    </Select.Option>
+                  ))}
+              </Select>
+            </Form.Item>
+          </Col>
           <Col span={12} xs={24} sm={12} lg={12}>
             <Form.Item name="date" rules={[{ required: true, message: "Please Select Date!" }]}>
               <DatePicker style={{ width: "600px" }} onChange={(_, string) => setDate(string)} />
             </Form.Item>
           </Col>
           {/* <Divider /> */}
-          <Col span={8} xs={24} sm={12} lg={4}>
+          <Col span={4} xs={24} sm={12} lg={4}>
             <Button type="primary" htmlType="submit" onClick={() => {}}>
               Get Attendance
             </Button>
           </Col>
-          <Col span={8} xs={24} sm={12} lg={4}>
+          <Col span={4} xs={24} sm={12} lg={4}>
             <Button onClick={onClear}>Clear</Button>
           </Col>
-          <Col span={8} xs={24} sm={12} lg={4}>
+          <Col span={4} xs={24} sm={12} lg={4}>
             <Button type="primary" onClick={() => {}}>
               Export Attendance
             </Button>
@@ -143,7 +178,7 @@ function MusalliAttendanceCountReportManagment(props) {
       </Form>
       <Divider />
 
-      <PageTitle title="Attendance Count Report" />
+      <PageTitle title="Attendance Bulk" />
       <ListView
         dataSource={list}
         columns={columns}
@@ -156,6 +191,7 @@ function MusalliAttendanceCountReportManagment(props) {
         // enableButton={onEnable}
         // disableButton={onDisable}
         canChangeStatus={canChangeStatus}
+        rowSelection={false}
         // canAdd={canAddUser}
         // canDelete={canDeleteUser}
       />
@@ -163,13 +199,15 @@ function MusalliAttendanceCountReportManagment(props) {
   );
 }
 
-MusalliAttendanceCountReportManagment.propTypes = {
-  getMusalliAttendanceCountReport: PropTypes.func,
+MusalliAttendanceBulkManagment.propTypes = {
+  getAllActiveMosqueBySession: PropTypes.func,
   list: PropTypes.array,
+  mosqueOptionlist: PropTypes.array,
   deleteAdminUsers: PropTypes.func,
   loading: PropTypes.bool,
+  mosqueOptionLoading: PropTypes.bool,
   pagination: PropTypes.object,
   enableDisableAdmin: PropTypes.func,
 };
 
-export default MusalliAttendanceCountReportManagment;
+export default MusalliAttendanceBulkManagment;
