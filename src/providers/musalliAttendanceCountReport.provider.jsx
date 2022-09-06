@@ -3,23 +3,27 @@ import { withRouter } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import MusalliAttendanceChangeRequestManagment from "../containers/MusalliAttendanceChangeRequestManagment/MusalliAttendanceChangeRequestManagment";
 import MusalliAttendanceCountReportManagment from "../containers/MusalliAttendanceCountReport/MusalliAttendanceCountReportManagment";
-import { deleteAdminUsers, enableDisableAdmin, getAdminUsers } from "../store/actions/admin.actions";
+import {
+  // deleteAdminUsers,
+  // enableDisableAdmin,
+  getMusalliAttendanceCountReport,
+} from "../store/actions/musalli_AttendanceCountReport.action";
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      getAdminUsers,
-      deleteAdminUsers,
-      enableDisableAdmin,
+      getMusalliAttendanceCountReport,
+      // deleteAdminUsers,
+      // enableDisableAdmin,
     },
     dispatch,
   );
 
 const mapStateToProps = state => ({
-  loading: state.admin.loading,
-  list: state.admin.list,
-  error: state.admin.error,
-  pagination: state.admin.value,
+  loading: state.participant.loading,
+  list: state.participant.value,
+  error: state.participant.error,
+  pagination: state.participant.value,
 });
 
 const MusalliAttendanceCountReportProvider = withRouter(

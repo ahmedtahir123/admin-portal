@@ -15,66 +15,87 @@ const columns = [
     dataIndex: "id",
     key: "id",
     sorter: true,
-    render: (text, record) => <Link to={`${ROUTES.EDIT_ADMIN_USER.path}/${record.userId}`}>{record.fullName}</Link>,
+    width: 50,
   },
   {
     title: "Volunteer Name",
-    dataIndex: "volunteerName",
-    key: "volunteerName",
+    dataIndex: "volunteer",
+    key: "volunteer",
     sorter: true,
-    render: (text, record) => <Link to={`${ROUTES.EDIT_ADMIN_USER.path}/${record.userId}`}>{record.fullName}</Link>,
+    render: (text, record) => text?.name,
+    width: 150,
+  },
+  {
+    title: "Volunteer CNIC",
+    dataIndex: "volunteer",
+    key: "volunteer",
+    width: 150,
+    sorter: true,
+    render: (text, record) => text?.nic,
   },
   {
     title: "Volunteer Email Address",
-    dataIndex: "volunteerEmailAddress",
-    key: "volunteerEmailAddress",
-    sorter: (a, b) => a.emailAddress.length - b.emailAddress.length,
-    sortDirections: ["descend", "ascend"],
+    dataIndex: "volunteer",
+    key: "volunteer",
+    width: 150,
+    render: (text, record) => text?.email,
+  },
+  {
+    title: "Mosque",
+    dataIndex: "volunteer",
+    key: "volunteer",
+    width: 150,
+    render: (text, record) => text?.mosque?.name,
+  },
+  {
+    title: "City",
+    dataIndex: "volunteer",
+    key: "volunteer",
+    width: 150,
+    render: (text, record) => text?.address?.city,
   },
   {
     title: "Amount",
     dataIndex: "amount",
     key: "amount",
+    width: 150,
   },
   {
     title: "Description",
     dataIndex: "description",
     key: "description",
+    width: 150,
   },
   {
     title: "Comment",
     dataIndex: "comment",
     key: "comment",
+    width: 150,
   },
   {
     title: "Request Status",
-    dataIndex: "userMetaData",
-    key: "status",
-    sorter: true,
-    render: d => d.status,
+    dataIndex: "requestStatus",
+    key: "requestStatus",
+    width: 150,
   },
   {
     title: "Created Date",
-    dataIndex: "createdDate",
-    key: "createdDate",
+    dataIndex: "dateCreated",
+    key: "dateCreated",
+    width: 150,
   },
   {
     title: "Action",
     key: "action",
     align: "center",
+    width: 150,
+
     render: record => (
       <Row>
         <Col span={12} xs={24} sm={12} lg={12}>
           <Link to={`/landing-designer/${record.id}`}>
             <Button type="link">
-              <CustomIcon name="UserOutlined" />
-            </Button>
-          </Link>
-        </Col>
-        <Col span={12} xs={24} sm={12} lg={12}>
-          <Link to={`/swim-lane-manager/${record.id}`}>
-            <Button type="link">
-              <CustomIcon name="UsergroupAddOutlined" />
+              <CustomIcon name="EditOutlined" />
             </Button>
           </Link>
         </Col>
@@ -84,9 +105,9 @@ const columns = [
 ];
 
 function MusalliPaymentManagement(props) {
-  const { loading, enableDisableAdmin, pagination, getAdminUsers, deleteAdminUsers, list } = props;
+  const { loading, enableDisableAdmin, pagination, getMusalliPayment, deleteAdminUsers, list } = props;
   const getList = async query => {
-    await getAdminUsers(query);
+    await getMusalliPayment(query);
   };
 
   const canAddUser = permissionsUtil.checkAuth({
@@ -139,20 +160,21 @@ function MusalliPaymentManagement(props) {
         rowKey="userId"
         addButton={addButton}
         pagination={pagination}
-        deleteAllData={deleteAdminUsers}
+        // deleteAllData={deleteAdminUsers}
         getList={getList}
-        enableButton={onEnable}
-        disableButton={onDisable}
+        // enableButton={onEnable}
+        // disableButton={onDisable}
         canChangeStatus={canChangeStatus}
         canAdd={canAddUser}
-        canDelete={canDeleteUser}
+        // canDelete={canDeleteUser}
+        scroll={{ x: 400 }}
       />
     </>
   );
 }
 
 MusalliPaymentManagement.propTypes = {
-  getAdminUsers: PropTypes.func,
+  getMusalliPayment: PropTypes.func,
   list: PropTypes.array,
   deleteAdminUsers: PropTypes.func,
   loading: PropTypes.bool,

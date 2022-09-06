@@ -194,6 +194,21 @@ const appInitialState = {
     list: [],
     selected: {},
   },
+  musalliAttendanceDetailReport: {
+    loading: false,
+    error: null,
+    value: {},
+    list: [],
+    selected: {},
+  },
+
+  activeMosqueBySession: {
+    mosqueOptionLoading: false,
+    mosqueOptionerror: null,
+    mosqueOptionvalue: {},
+    mosqueOptionlist: [],
+    mosqueOptionselected: {},
+  },
 };
 
 export default appInitialState;

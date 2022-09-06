@@ -25,11 +25,11 @@ export function selectedParticipantSuccess(response) {
 
 /* Async Actions */
 
-export function getMusalliPayment(query) {
+export function getMusalliAttendanceCountReport(query) {
   return async dispatch => {
     dispatch(participantRequest());
     try {
-      const [err, response] = await to(musalliService.getMusalliPayment(query));
+      const [err, response] = await to(musalliService.getMusalliAttendanceCountReport(query));
       if (err) throwError(err);
       dispatch(participantSuccess(response));
       dispatch(ParticipantListSuccess(response.content));
@@ -63,7 +63,7 @@ export function deleteParticipantUsers(ids, query) {
     try {
       const [err, response] = await to(musalliService.deleteParticipantUsers(ids));
       if (err) throwError(err);
-      dispatch(getMusalliPayment(query));
+      dispatch(getMusalliAttendanceCountReport(query));
       toastMessage("success", SUCCESS_MESSAGE.DELETED);
     } catch (error) {
       dispatch(participantError(error));
@@ -116,7 +116,7 @@ export function enableDisableParticipant(ids, enabled, query) {
       }
       console.log("response", response);
       if (err) throwError(err);
-      dispatch(getMusalliPayment(query));
+      dispatch(getMusalliAttendanceCountReport(query));
       toastMessage("success", SUCCESS_MESSAGE.ENABLED);
     } catch (error) {
       dispatch(participantError(error));

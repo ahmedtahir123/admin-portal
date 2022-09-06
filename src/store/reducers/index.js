@@ -29,6 +29,8 @@ import billingPlan from "./billingPlan.reducer";
 import merchantDashboard from "./merchantDashboard.reducer";
 import musalliparticipant from "./participant.reducer";
 import mosque from "./mosque.reducer";
+import musalliAttendanceDetailReport from "./musalli_attendance_detail_report.reducer";
+import activeMosqueBySession from "./activeMosqueBySession.reducer";
 
 export default function reducer(state = appInitialState, action) {
   if (action.type === ACTIONS.APP_RESET) {
@@ -61,5 +63,7 @@ export default function reducer(state = appInitialState, action) {
     merchantDashboard: merchantDashboard(state.merchantDashboard, action),
     participant: musalliparticipant(state.participant, action),
     mosque: mosque(state.mosque, action),
+    musalliAttendanceDetailReport: musalliAttendanceDetailReport(state.musalliAttendanceDetailReport, action),
+    activeMosqueBySession: activeMosqueBySession(state.activeMosqueBySession, action),
   };
 }

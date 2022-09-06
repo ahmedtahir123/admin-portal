@@ -3,6 +3,7 @@ import { throwError, to, toastMessage } from "../../utils/utils";
 import musalliService from "../../services/musalli.service";
 import { SUCCESS_MESSAGE, ERROR_MESSAGE } from "../../utils/constants";
 
+// Attendance Detail Report
 export function participantRequest() {
   return { type: ACTIONS.PARTICIPANT_REQUEST };
 }
@@ -23,15 +24,53 @@ export function selectedParticipantSuccess(response) {
   return { type: ACTIONS.SELECTED_PARTICIPANT_SUCCESS, response };
 }
 
+// Active mosque by session
+
+export function activeMosqueBySesionRequest() {
+  return { type: ACTIONS.ACTIVE_MOSQUE_BY_SESSION_REQUEST };
+}
+
+export function activeMosqueBySesionSuccess(response) {
+  return { type: ACTIONS.ACTIVE_MOSQUE_BY_SESSION_SECCESS, response };
+}
+
+export function activeMosqueBySesionError(error) {
+  return { type: ACTIONS.ACTIVE_MOSQUE_BY_SESSION_ERROR, error };
+}
+
+export function activeMosqueBySesionListSuccess(response) {
+  return { type: ACTIONS.ACTIVE_MOSQUE_BY_SESSION_LIST_SUCCESS, response };
+}
+
+export function selectedActiveMosqueBySesionSuccess(response) {
+  return { type: ACTIONS.SELECTED_ACTIVE_MOSQUE_BY_SESSION_SUCCESS, response };
+}
+
 /* Async Actions */
 
-export function getMusalliPayment(query) {
+export function getAllActiveMosqueBySession(query) {
+  return async dispatch => {
+    dispatch(activeMosqueBySesionRequest());
+    try {
+      const [err, response] = await to(musalliService.getAllActiveMosqueBySession(query));
+      if (err) throwError(err);
+      dispatch(activeMosqueBySesionSuccess(response));
+      dispatch(activeMosqueBySesionListSuccess(response.content));
+    } catch (error) {
+      dispatch(activeMosqueBySesionError(error));
+      toastMessage("error", ERROR_MESSAGE.LIST);
+      throwError(error);
+    }
+  };
+}
+
+export function getAttendanceDetailReport(query) {
   return async dispatch => {
     dispatch(participantRequest());
     try {
-      const [err, response] = await to(musalliService.getMusalliPayment(query));
+      const [err, response] = await to(musalliService.getAttendanceDetailReport(query));
       if (err) throwError(err);
-      dispatch(participantSuccess(response));
+      dispatch(participantSuccess(response?.attendanceDetailMap));
       dispatch(ParticipantListSuccess(response.content));
     } catch (error) {
       dispatch(participantError(error));
@@ -63,7 +102,7 @@ export function deleteParticipantUsers(ids, query) {
     try {
       const [err, response] = await to(musalliService.deleteParticipantUsers(ids));
       if (err) throwError(err);
-      dispatch(getMusalliPayment(query));
+      dispatch(getAllActiveMosqueBySession(query));
       toastMessage("success", SUCCESS_MESSAGE.DELETED);
     } catch (error) {
       dispatch(participantError(error));
@@ -114,9 +153,8 @@ export function enableDisableParticipant(ids, enabled, query) {
       } else {
         [err, response] = await to(musalliService.disableParticipant(ids));
       }
-      console.log("response", response);
       if (err) throwError(err);
-      dispatch(getMusalliPayment(query));
+      dispatch(getAllActiveMosqueBySession(query));
       toastMessage("success", SUCCESS_MESSAGE.ENABLED);
     } catch (error) {
       dispatch(participantError(error));

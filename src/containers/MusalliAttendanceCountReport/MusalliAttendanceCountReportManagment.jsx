@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Button, Col, DatePicker, Divider, Form, Row, Select, Space } from "antd";
@@ -19,43 +19,42 @@ const columns = [
   },
   {
     title: "Masjid Name",
-    dataIndex: "mosqueName",
-    key: "mosqueName",
+    dataIndex: "name",
+    key: "name",
     sorter: true,
   },
   {
     title: "Absent",
-    dataIndex: "mosqueName",
-    key: "mosqueName",
+    dataIndex: "absent_participants",
+    key: "absent_participants",
     sorter: true,
   },
   {
     title: "Present",
-    dataIndex: "locationName",
-    key: "locationName",
+    dataIndex: "present_participants",
+    key: "present_participants",
     sorter: true,
   },
   {
     title: "Total",
-    dataIndex: "locationName",
-    key: "locationName",
+    dataIndex: "total_participants",
+    key: "total_participants",
     sorter: true,
   },
   {
     title: "Full Attendance Participant",
-    dataIndex: "locationName",
-    key: "locationName",
+    dataIndex: "full_attendance_participants",
+    key: "full_attendance_participants",
     sorter: true,
   },
 ];
 
 function MusalliAttendanceCountReportManagment(props) {
-  const { loading, enableDisableAdmin, pagination, getAdminUsers, deleteAdminUsers, list } = props;
+  const { loading, enableDisableAdmin, pagination, getMusalliAttendanceCountReport, deleteAdminUsers, list } = props;
   const [form] = Form.useForm();
+  const [date, setDate] = useState("");
 
-  const getList = async query => {
-    await getAdminUsers(query);
-  };
+  const getList = async query => {};
 
   const canAddUser = permissionsUtil.checkAuth({
     category: "MusalliManagement",
@@ -97,7 +96,13 @@ function MusalliAttendanceCountReportManagment(props) {
   //   text: "Disable",
   // };
 
-  const onFormFinish = () => {};
+  const onFormFinish = async fieldValue => {
+    await getMusalliAttendanceCountReport(date.toString());
+  };
+
+  const onClear = () => {
+    form.resetFields();
+  };
 
   return (
     <>
@@ -113,24 +118,21 @@ function MusalliAttendanceCountReportManagment(props) {
         layout="vertical"
         name="nest-messages"
         onFinish={onFormFinish}
-        validateMessages={VALIDATE_FORM_MESSAGES_TEMPLATE}
       >
         <Row className="fields-row" gutter={20} type="flex" justify="space-between">
           <Col span={12} xs={24} sm={12} lg={12}>
-            <Form.Item name="brandCode" rules={[{ required: true }]}>
-              <Space>
-                <DatePicker style={{ width: "600px" }} />
-              </Space>
+            <Form.Item name="date" rules={[{ required: true, message: "Please Select Date!" }]}>
+              <DatePicker style={{ width: "600px" }} onChange={(_, string) => setDate(string)} />
             </Form.Item>
           </Col>
           {/* <Divider /> */}
           <Col span={8} xs={24} sm={12} lg={4}>
-            <Button type="primary" onClick={() => {}}>
+            <Button type="primary" htmlType="submit" onClick={() => {}}>
               Get Attendance
             </Button>
           </Col>
           <Col span={8} xs={24} sm={12} lg={4}>
-            <Button onClick={() => {}}>Clear</Button>
+            <Button onClick={onClear}>Clear</Button>
           </Col>
           <Col span={8} xs={24} sm={12} lg={4}>
             <Button type="primary" onClick={() => {}}>
@@ -162,7 +164,7 @@ function MusalliAttendanceCountReportManagment(props) {
 }
 
 MusalliAttendanceCountReportManagment.propTypes = {
-  getAdminUsers: PropTypes.func,
+  getMusalliAttendanceCountReport: PropTypes.func,
   list: PropTypes.array,
   deleteAdminUsers: PropTypes.func,
   loading: PropTypes.bool,
