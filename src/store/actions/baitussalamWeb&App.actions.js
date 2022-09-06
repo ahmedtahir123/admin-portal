@@ -325,3 +325,20 @@ export function getCustomer() {
     }
   };
 }
+
+export function getBaitussalamAdminUser() {
+  return async dispatch => {
+    dispatch(adminRequest());
+    try {
+      const [err, response] = await to(baitussalamAppService.getBaitussalamAdminUser());
+      if (err) throwError(err);
+      dispatch(adminSuccess(response.content));
+      // response = Object.values(response).flat();
+      dispatch(adminListSuccess(response));
+    } catch (error) {
+      dispatch(adminError(error));
+      toastMessage("error", ERROR_MESSAGE.LIST);
+      throwError(error);
+    }
+  };
+}

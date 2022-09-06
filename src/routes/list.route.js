@@ -96,6 +96,7 @@ import MusalliAttendanceChangeRequestProvider from "../providers/musalliAttendan
 import MusalliAttendanceDetailReportProvider from "../providers/musalliAttendanceDetailReport.provider";
 import MusalliAttendanceCountReportProvider from "../providers/musalliAttendanceCountReport.provider";
 import SMSUtilityProvider from "../providers/smsUtility.provider";
+import MusalliAttendanceBulkProvider from "../providers/musalliAttendanceBulk.provider";
 
 const ChangePasswordProvider = React.lazy(() => import("../providers/changePassword.provider"));
 
@@ -1486,6 +1487,19 @@ const routes = [
     name: ROUTES.MUSALLI_ATTENDANCE_COUNT_REPORT.name,
     displayName: ROUTES.MUSALLI_ATTENDANCE_COUNT_REPORT.title,
     component: MusalliAttendanceCountReportProvider,
+    isPrivate: true,
+    icon: "HeartOutlined",
+    module: 12,
+    category: "MusalliManagement",
+    subCategory: "Musalli",
+    action: "List",
+  },
+  {
+    path: ROUTES.MUSALLI_ATTENDANCE_BULK.path,
+    exact: true,
+    name: ROUTES.MUSALLI_ATTENDANCE_BULK.name,
+    displayName: ROUTES.MUSALLI_ATTENDANCE_BULK.title,
+    component: MusalliAttendanceBulkProvider,
     isPrivate: true,
     icon: "HeartOutlined",
     module: 12,
