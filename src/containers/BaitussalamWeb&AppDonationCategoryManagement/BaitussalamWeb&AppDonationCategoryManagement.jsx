@@ -12,35 +12,34 @@ import CustomIcon from "../../components/CustomIcon/CustomIcon";
 const columns = [
   {
     title: "id",
-    dataIndex: "title",
-    key: "title",
+    dataIndex: "id",
+    key: "id",
     sorter: true,
-    // render: (text, record) => <Link to={`${ROUTES.EDIT_ADMIN_USER.path}/${record.userId}`}>{record.fullName}</Link>,
   },
   {
     title: "Name",
-    dataIndex: "description",
-    key: "description",
+    dataIndex: "name",
+    key: "name",
   },
   {
     title: "Is Fixed Ammount",
-    dataIndex: "orderNumber",
-    key: "orderNumber",
+    dataIndex: "isFixedAmount",
+    key: "isFixedAmount",
   },
   {
     title: "Created At",
-    dataIndex: "orderNumber",
-    key: "orderNumber",
+    dataIndex: "createdAt",
+    key: "createdAt",
   },
   {
     title: "Updated At",
-    dataIndex: "orderNumber",
-    key: "orderNumber",
+    dataIndex: "updatedAt",
+    key: "updatedAt",
   },
   {
     title: "Status",
-    dataIndex: "orderNumber",
-    key: "orderNumber",
+    dataIndex: "status",
+    key: "status",
   },
   {
     title: "Action",

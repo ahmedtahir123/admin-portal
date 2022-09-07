@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Button, Col, Row } from "antd";
@@ -11,25 +11,27 @@ import CustomIcon from "../../components/CustomIcon/CustomIcon";
 
 const columns = [
   {
+    title: "ID",
+    dataIndex: "id",
+    key: "id",
+    sorter: true,
+  },
+  {
     title: "Name",
     dataIndex: "name",
     key: "name",
     sorter: true,
-    // render: (text, record) => <Link to={`${ROUTES.EDIT_ADMIN_USER.path}/${record.userId}`}>{record.fullName}</Link>,
   },
   {
     title: "Father Name",
     dataIndex: "fatherName",
     key: "fatherName",
     sorter: true,
-    // render: (text, record) => <Link to={`${ROUTES.EDIT_ADMIN_USER.path}/${record.userId}`}>{record.fullName}</Link>,
   },
   {
     title: "Email Address",
     dataIndex: "email",
     key: "email",
-    // sorter: (a, b) => a.emailAddress.length - b.emailAddress.length,
-    // sortDirections: ["descend", "ascend"],
   },
   {
     title: "Contact",
@@ -40,22 +42,16 @@ const columns = [
     title: "Date Of Birth",
     dataIndex: "dateOfBirth",
     key: "dateOfBirth",
-    // sorter: (a, b) => a.emailAddress.length - b.emailAddress.length,
-    // sortDirections: ["descend", "ascend"],
   },
   {
     title: "Document Submission Status",
     dataIndex: "documentSubmissionStatus",
     key: "documentSubmissionStatus",
-    // sorter: (a, b) => a.emailAddress.length - b.emailAddress.length,
-    // sortDirections: ["descend", "ascend"],
   },
   {
     title: "Status",
     dataIndex: "status",
     key: "status",
-    // sorter: true,
-    // render: d => d.status,
   },
   {
     title: "Action",
@@ -66,7 +62,7 @@ const columns = [
         <Col span={12} xs={24} sm={12} lg={12}>
           <Link to={`/landing-designer/${record.id}`}>
             <Button type="link">
-              <CustomIcon name="UserOutlined" />
+              <CustomIcon name="EditOutlined" />
             </Button>
           </Link>
         </Col>

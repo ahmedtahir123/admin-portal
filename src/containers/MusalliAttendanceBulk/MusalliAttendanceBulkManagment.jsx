@@ -45,6 +45,7 @@ function MusalliAttendanceBulkManagment(props) {
     enableDisableAdmin,
     pagination,
     deleteAdminUsers,
+    getAttendanceDetailReport,
     list,
     getAllActiveMosqueBySession,
     mosqueOptionlist,
@@ -103,7 +104,7 @@ function MusalliAttendanceBulkManagment(props) {
   // };
 
   const onFormFinish = async val => {
-    // await getAttendanceDetailReport(val?.mosque);
+    await getAttendanceDetailReport(val?.mosque);
   };
 
   // useEffect(() => {
@@ -156,7 +157,7 @@ function MusalliAttendanceBulkManagment(props) {
             </Form.Item>
           </Col>
           <Col span={12} xs={24} sm={12} lg={12}>
-            <Form.Item name="date" rules={[{ required: true, message: "Please Select Date!" }]}>
+            <Form.Item name="date" rules={[{ required: false, message: "Please Select Date!" }]}>
               <DatePicker style={{ width: "600px" }} onChange={(_, string) => setDate(string)} />
             </Form.Item>
           </Col>
@@ -201,6 +202,7 @@ function MusalliAttendanceBulkManagment(props) {
 
 MusalliAttendanceBulkManagment.propTypes = {
   getAllActiveMosqueBySession: PropTypes.func,
+  getAttendanceDetailReport: PropTypes.func,
   list: PropTypes.array,
   mosqueOptionlist: PropTypes.array,
   deleteAdminUsers: PropTypes.func,

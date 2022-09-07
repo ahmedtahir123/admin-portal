@@ -11,35 +11,49 @@ import CustomIcon from "../../components/CustomIcon/CustomIcon";
 
 const columns = [
   {
+    title: "ID",
+    dataIndex: "id",
+    key: "id",
+    sorter: true,
+    width: 50,
+  },
+  {
     title: "Title",
     dataIndex: "title",
     key: "title",
-    sorter: true,
-    // render: (text, record) => <Link to={`${ROUTES.EDIT_ADMIN_USER.path}/${record.userId}`}>{record.fullName}</Link>,
+    width: 150,
   },
   {
     title: "Description",
     dataIndex: "description",
     key: "description",
-    sorter: true,
+    width: 300,
   },
   {
     title: "Order No",
     dataIndex: "orderNumber",
     key: "orderNumber",
+    width: 150,
   },
   {
     title: "Image",
     dataIndex: "image",
     key: "image",
+    width: 150,
     render: image => (
-      <img className="card-img" src={`https://dev.baitussalam.org/storage/images/projects/${image}`} alt="pic1" />
+      <img
+        className="card-img"
+        width={200}
+        src={`https://dev.baitussalam.org/storage/images/projects/${image}`}
+        alt="pic1"
+      />
     ),
   },
   {
     title: "Action",
     key: "action",
     align: "center",
+    width: 150,
     render: record => (
       <Row>
         <Col span={4} xs={24} sm={12} lg={4}>
@@ -107,7 +121,7 @@ function BaitussalamWebAndAppProjectManagement(props) {
         dataSource={list}
         columns={columns}
         loading={loading}
-        rowKey="userId"
+        rowKey="id"
         addButton={addButton}
         pagination={pagination}
         deleteAllData={deleteAdminUsers}
@@ -117,6 +131,7 @@ function BaitussalamWebAndAppProjectManagement(props) {
         canChangeStatus={canChangeStatus}
         canAdd={canAddUser}
         canDelete={canDeleteUser}
+        scroll={{ x: 200 }}
       />
     </>
   );

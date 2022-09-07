@@ -11,6 +11,12 @@ import CustomIcon from "../../components/CustomIcon/CustomIcon";
 
 const columns = [
   {
+    title: "ID",
+    dataIndex: "id",
+    key: "id",
+    sorter: true,
+  },
+  {
     title: "Name",
     dataIndex: "name",
     key: "name",
@@ -24,15 +30,18 @@ const columns = [
   },
   {
     title: "Dua Category Name",
-    dataIndex: "emailAddress",
-    key: "emailAddress",
-    sorter: (a, b) => a.emailAddress.length - b.emailAddress.length,
-    sortDirections: ["descend", "ascend"],
+    dataIndex: "category_name",
+    key: "category_name",
   },
   {
     title: "Created At",
     dataIndex: "createdAt",
     key: "createdAt",
+    render: (text, record) => (
+      <>
+        {text?.slice(0, 3)?.join(`-`)} T {text?.slice(3, 6)?.join(`:`)}
+      </>
+    ),
   },
   {
     title: "Created By",
@@ -43,6 +52,11 @@ const columns = [
     title: "Updated At",
     dataIndex: "lastUpdatedAt",
     key: "lastUpdatedAt",
+    render: (text, record) => (
+      <>
+        {text?.slice(0, 3)?.join(`-`)} T {text?.slice(3, 6)?.join(`:`)}
+      </>
+    ),
   },
   {
     title: "Updated By",
@@ -63,7 +77,7 @@ const columns = [
         <Col span={12} xs={24} sm={12} lg={12}>
           <Link to={`/landing-designer/${record.id}`}>
             <Button type="link">
-              <CustomIcon name="UserOutlined" />
+              <CustomIcon name="EditOutlined" />
             </Button>
           </Link>
         </Col>
