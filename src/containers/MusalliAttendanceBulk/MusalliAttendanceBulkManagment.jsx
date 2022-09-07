@@ -157,7 +157,7 @@ function MusalliAttendanceBulkManagment(props) {
             </Form.Item>
           </Col>
           <Col span={12} xs={24} sm={12} lg={12}>
-            <Form.Item name="date" rules={[{ required: false, message: "Please Select Date!" }]}>
+            <Form.Item name="date" rules={[{ required: true, message: "Please Select Date!" }]}>
               <DatePicker style={{ width: "600px" }} onChange={(_, string) => setDate(string)} />
             </Form.Item>
           </Col>
