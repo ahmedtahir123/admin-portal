@@ -2,7 +2,8 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { Button, Col, DatePicker, Divider, Form, Row, Select, Space } from "antd";
+import { DownOutlined } from "@ant-design/icons";
+import { Button, Col, DatePicker, Divider, Form, Row, Select } from "antd";
 import ROUTES from "../../routes/constant.route";
 import ListView from "../../components/ListView/ListView";
 import permissionsUtil from "../../utils/permissions.util";
@@ -10,6 +11,7 @@ import PageTitle from "../../components/PageTitle/PageTitle";
 import CustomIcon from "../../components/CustomIcon/CustomIcon";
 import { VALIDATE_FORM_MESSAGES_TEMPLATE } from "../../utils/constants";
 
+const { Option } = Select;
 const columns = [
   {
     title: "ID",
@@ -24,8 +26,8 @@ const columns = [
   },
   {
     title: "Father Name",
-    dataIndex: "father_name",
-    key: "father_name",
+    dataIndex: "fatherName",
+    key: "fatherName",
   },
   {
     title: "Email",
@@ -34,8 +36,21 @@ const columns = [
   },
   {
     title: "Attendance",
-    dataIndex: "attendance",
     key: "attendance",
+    render: record => (
+      <Row>
+        <Col span={12} xs={24} sm={12} lg={12}>
+          <Select
+            defaultValue="present"
+            // disabled="true"
+          >
+            {/* style={{ width: 120 }} onChange={handleChange} */}
+            <Option value="present">Present</Option>
+            <Option value="absent">Absent</Option>
+          </Select>
+        </Col>
+      </Row>
+    ),
   },
 ];
 
@@ -45,6 +60,7 @@ function MusalliAttendanceBulkManagment(props) {
     enableDisableAdmin,
     pagination,
     deleteAdminUsers,
+    getMusalliAttendanceBulk,
     list,
     getAllActiveMosqueBySession,
     mosqueOptionlist,
@@ -52,6 +68,7 @@ function MusalliAttendanceBulkManagment(props) {
   } = props;
   const [form] = Form.useForm();
   const [date, setDate] = useState("");
+  const [value, setValue] = useState([]);
 
   const getList = async query => {};
 
@@ -103,20 +120,20 @@ function MusalliAttendanceBulkManagment(props) {
   // };
 
   const onFormFinish = async val => {
-    // await getAttendanceDetailReport(val?.mosque);
+    await getMusalliAttendanceBulk(val?.mosque);
   };
 
-  // useEffect(() => {
-  //     const convertList = Object.values(list);
-  //     const listArr = [];
-  //     // eslint-disable-next-line array-callback-return
-  //     convertList.map(val => {
-  //         // eslint-disable-next-line array-callback-return
-  //         // eslint-disable-next-line no-unused-expressions
-  //         val.length > 0 && val.map(val2 => listArr.push(val2));
-  //     });
-  //     setValue(listArr);
-  // }, [list]);
+  useEffect(() => {
+    const convertList = Object.values(list);
+    const listArr = [];
+    // eslint-disable-next-line array-callback-return
+    convertList.map(val => {
+      // eslint-disable-next-line array-callback-return
+      // eslint-disable-next-line no-unused-expressions
+      val.length > 0 && val.map(val2 => listArr.push(val2));
+    });
+    setValue(listArr);
+  }, [list]);
 
   const onClear = () => {
     form.resetFields();
@@ -156,7 +173,7 @@ function MusalliAttendanceBulkManagment(props) {
             </Form.Item>
           </Col>
           <Col span={12} xs={24} sm={12} lg={12}>
-            <Form.Item name="date" rules={[{ required: true, message: "Please Select Date!" }]}>
+            <Form.Item name="date" rules={[{ required: false, message: "Please Select Date!" }]}>
               <DatePicker style={{ width: "600px" }} onChange={(_, string) => setDate(string)} />
             </Form.Item>
           </Col>
@@ -180,7 +197,7 @@ function MusalliAttendanceBulkManagment(props) {
 
       <PageTitle title="Attendance Bulk" />
       <ListView
-        dataSource={list}
+        dataSource={value}
         columns={columns}
         loading={loading}
         rowKey="id"
@@ -195,12 +212,23 @@ function MusalliAttendanceBulkManagment(props) {
         // canAdd={canAddUser}
         // canDelete={canDeleteUser}
       />
+      <Row className="fields-row" type="flex" justify="center">
+        <Col span={4} xs={24} sm={12} lg={4}>
+          <Button
+            type="primary"
+            //   disabled="true"
+          >
+            Save
+          </Button>
+        </Col>
+      </Row>
     </>
   );
 }
 
 MusalliAttendanceBulkManagment.propTypes = {
   getAllActiveMosqueBySession: PropTypes.func,
+  getMusalliAttendanceBulk: PropTypes.func,
   list: PropTypes.array,
   mosqueOptionlist: PropTypes.array,
   deleteAdminUsers: PropTypes.func,
