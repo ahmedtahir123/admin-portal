@@ -28,6 +28,7 @@ import bookPurchaseReport from "./reports.reducer";
 import billingPlan from "./billingPlan.reducer";
 import merchantDashboard from "./merchantDashboard.reducer";
 import musalliparticipant from "./participant.reducer";
+import musallivolunteer from "./volunteer.reducer";
 import mosque from "./mosque.reducer";
 import musalliAttendanceDetailReport from "./musalli_attendance_detail_report.reducer";
 import activeMosqueBySession from "./activeMosqueBySession.reducer";
@@ -61,6 +62,7 @@ export default function reducer(state = appInitialState, action) {
     bookPurchaseReport: bookPurchaseReport(state.bookPurchaseReport, action),
     billingPlan: billingPlan(state.billingPlan, action),
     merchantDashboard: merchantDashboard(state.merchantDashboard, action),
+    volunteer: musallivolunteer(state.volunteer, action),
     participant: musalliparticipant(state.participant, action),
     mosque: mosque(state.mosque, action),
     musalliAttendanceDetailReport: musalliAttendanceDetailReport(state.musalliAttendanceDetailReport, action),

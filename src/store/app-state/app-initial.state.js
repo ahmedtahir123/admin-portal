@@ -187,6 +187,13 @@ const appInitialState = {
     list: [],
     selected: {},
   },
+  volunteer: {
+    loading: false,
+    error: null,
+    value: {},
+    list: [],
+    selected: {},
+  },
   mosque: {
     loading: false,
     error: null,

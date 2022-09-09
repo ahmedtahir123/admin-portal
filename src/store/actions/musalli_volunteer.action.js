@@ -26,7 +26,7 @@ export function selectedParticipantSuccess(response) {
 /* Async Actions */
 
 export function getMusalliVolunteer(query) {
-  console.log("FUNRUN");
+  // console.log("FUNRUN");
 
   return async dispatch => {
     dispatch(participantRequest());
