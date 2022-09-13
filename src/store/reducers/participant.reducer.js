@@ -1,6 +1,6 @@
 import { produce } from "immer";
 import ACTIONS from "../actions/types.actions";
-const admin = produce((draft, action) => {
+const musalliparticipant = produce((draft, action) => {
   switch (action.type) {
     case ACTIONS.PARTICIPANT_REQUEST:
       draft.loading = true;
@@ -29,4 +29,4 @@ const admin = produce((draft, action) => {
   }
 });
 
-export default admin;
+export default musalliparticipant;

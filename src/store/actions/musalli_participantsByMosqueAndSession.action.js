@@ -3,40 +3,38 @@ import { throwError, to, toastMessage } from "../../utils/utils";
 import musalliService from "../../services/musalli.service";
 import { SUCCESS_MESSAGE, ERROR_MESSAGE } from "../../utils/constants";
 
-export function volunteerRequest() {
-  return { type: ACTIONS.VOLUNTEER_REQUEST };
+export function participantsByMosqueAndSessionRequest() {
+  return { type: ACTIONS.PARTICIPANT_BY_MOSQUE_AND_SESSION_REQUEST };
 }
 
-export function volunteerSuccess(response) {
-  return { type: ACTIONS.VOLUNTEER_SUCCESS, response };
+export function participantsByMosqueAndSessionSuccess(response) {
+  return { type: ACTIONS.PARTICIPANT_BY_MOSQUE_AND_SESSION_SUCCESS, response };
 }
 
-export function volunteerError(error) {
-  return { type: ACTIONS.VOLUNTEER_ERROR, error };
+export function participantsByMosqueAndSessionError(error) {
+  return { type: ACTIONS.PARTICIPANT_BY_MOSQUE_AND_SESSION_ERROR, error };
 }
 
-export function volunteerListSuccess(response) {
-  return { type: ACTIONS.VOLUNTEER_LIST_SUCCESS, response };
+export function ParticipantsByMosqueAndSessionListSuccess(response) {
+  return { type: ACTIONS.PARTICIPANT_BY_MOSQUE_AND_SESSION_LIST_SUCCESS, response };
 }
 
-export function selectedVolunteerSuccess(response) {
-  return { type: ACTIONS.SELECTED_VOLUNTEER_SUCCESS, response };
+export function selectedParticipantsByMosqueAndSessionSuccess(response) {
+  return { type: ACTIONS.SELECTED_PARTICIPANT_BY_MOSQUE_AND_SESSION_SUCCESS, response };
 }
 
 /* Async Actions */
 
-export function getMusalliVolunteer(query) {
-  // console.log("FUNRUN");
-
+export function getMusalliParticipantsByMosqueAndSession(query) {
   return async dispatch => {
-    dispatch(volunteerRequest());
+    dispatch(participantsByMosqueAndSessionRequest());
     try {
-      const [err, response] = await to(musalliService.getMusalliVolunteer(query));
+      const [err, response] = await to(musalliService.getAllParticipantsByMosqueAndSession(query));
       if (err) throwError(err);
-      dispatch(volunteerSuccess(response));
-      dispatch(volunteerListSuccess(response.content));
+      dispatch(participantsByMosqueAndSessionSuccess(response));
+      dispatch(ParticipantsByMosqueAndSessionListSuccess(response.content));
     } catch (error) {
-      dispatch(volunteerError(error));
+      dispatch(participantsByMosqueAndSessionError(error));
       toastMessage("error", ERROR_MESSAGE.LIST);
       throwError(error);
     }
@@ -65,7 +63,7 @@ export function getMusalliVolunteer(query) {
 //     try {
 //       const [err, response] = await to(musalliService.deleteParticipantUsers(ids));
 //       if (err) throwError(err);
-//       dispatch(getMusalliVolunteer(query));
+//       dispatch(getMusalliParticipant(query));
 //       toastMessage("success", SUCCESS_MESSAGE.DELETED);
 //     } catch (error) {
 //       dispatch(participantError(error));
@@ -118,7 +116,7 @@ export function getMusalliVolunteer(query) {
 //       }
 //       console.log("response", response);
 //       if (err) throwError(err);
-//       dispatch(getMusalliVolunteer(query));
+//       dispatch(getMusalliParticipant(query));
 //       toastMessage("success", SUCCESS_MESSAGE.ENABLED);
 //     } catch (error) {
 //       dispatch(participantError(error));

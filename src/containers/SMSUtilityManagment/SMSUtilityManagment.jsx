@@ -66,30 +66,62 @@ function SMSUtilityManagment(props) {
     getMusalliVolunteer,
     volunteerOptionLoading,
     volunteerOptionList,
+    getMusalliParticipantsByMosqueAndSession,
+    // participantsByMosqueAndSessionOptionLoading,
+    participantsByMosqueAndSessionOptionList,
+    getMusalliVolunteerByMosqueAndSession,
+    volunteerByMosqueAndSessionOptionList,
   } = props;
+  const [mosqueValue, setMosqueValue] = useState(null);
+  // const [participantsToShow, setParticipantsToShow] = useState([]);
+  // const [dropdownCode, setDropdownCode] = useState(2);
   const [form] = Form.useForm();
   const [fieldsToShow, setFieldsToShow] = useState(1);
   //  useEffect(()=>{
-  //   console.log(fieldsToShow)
+  //   if(fieldsToShow===2){
+  //     const getParticipant = async () => {
+  //       await getMusalliParticipant();
+  //     };
+  //     getParticipant();
+  //     console.log(participantOptionList,"acaaaaa");
+  //   }
+  //   else if(fieldsToShow===3){
+  //     const getParticipantsByMosque = async () => {
+  //       await getMusalliParticipantsByMosqueAndSession(mosqueValue);
+  //     };
+  //     getParticipantsByMosque();
+  //     console.log(participantsByMosqueOptionList,"12111")
+  //   }
   //  },[fieldsToShow])
+  //  useEffect(()=>{
+  //     console.log(participantsToShow,"pllllllassa")
+  //  },[participantsToShow])
   const getList = async query => {
     await getAdminUsers(query);
   };
 
   useEffect(() => {
-    const getMosque = async () => {
+    const getData = async () => {
       await getAllActiveMosqueBySession();
-    };
-    getMosque();
-    const getParticipant = async () => {
       await getMusalliParticipant();
-    };
-    getParticipant();
-    const getVolunteer = async () => {
       await getMusalliVolunteer();
     };
-    getVolunteer();
+    getData();
   }, []);
+
+  useEffect(() => {
+    const getParticipantsByMosque = async () => {
+      if (fieldsToShow === 2) {
+        await getMusalliParticipantsByMosqueAndSession(mosqueValue);
+      } else if (fieldsToShow === 5) {
+        // console.log(volunteerByMosqueAndSessionOptionList,"pepepe")
+        await getMusalliVolunteerByMosqueAndSession(mosqueValue);
+      }
+    };
+    if (mosqueValue !== null) {
+      getParticipantsByMosque();
+    }
+  }, [mosqueValue]);
 
   const canAddUser = permissionsUtil.checkAuth({
     category: "MusalliManagement",
@@ -180,7 +212,7 @@ function SMSUtilityManagment(props) {
                   optionFilterProp="children"
                   loading={mosqueOptionLoading}
                   filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
-                  // onChange={(value)=>setFieldsToShow(value)}
+                  onChange={value => setMosqueValue(value)}
                 >
                   {mosqueOptionlist?.length > 0 &&
                     mosqueOptionlist?.map(item => (
@@ -203,14 +235,19 @@ function SMSUtilityManagment(props) {
                   filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
                   // onChange={(value)=>setFieldsToShow(value)}
                 >
-                  {participantOptionList.content?.length > 0 &&
-                    participantOptionList.content?.map(item => (
-                      <Select.Option key={item.id} value={item.id}>
-                        {item.name}
-                      </Select.Option>
-                    ))
-                  // console.log(participantOptionList,'aaaa')
-                  }
+                  {fieldsToShow === 3
+                    ? participantOptionList?.length > 0 &&
+                      participantOptionList?.map(item => (
+                        <Select.Option key={item.id} value={item.id}>
+                          {item.name}
+                        </Select.Option>
+                      ))
+                    : participantsByMosqueAndSessionOptionList?.length > 0 &&
+                      participantsByMosqueAndSessionOptionList?.map(item => (
+                        <Select.Option key={item.id} value={item.id}>
+                          {item.name}
+                        </Select.Option>
+                      ))}
                 </Select>
               </Form.Item>
             </Col>
@@ -222,18 +259,23 @@ function SMSUtilityManagment(props) {
                   showSearch
                   placeholder="Select Volunteer"
                   optionFilterProp="children"
-                  loading={loading}
+                  loading={volunteerOptionLoading}
                   filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
                   // onChange={(value)=>setFieldsToShow(value)}
                 >
-                  {volunteerOptionList.content?.length > 0 &&
-                    volunteerOptionList.content?.map(item => (
-                      <Select.Option key={item.id} value={item.id}>
-                        {item.name}
-                      </Select.Option>
-                    ))
-                  // console.log(volunteerOptionList)
-                  }
+                  {fieldsToShow === 6
+                    ? volunteerOptionList?.length > 0 &&
+                      volunteerOptionList?.map(item => (
+                        <Select.Option key={item.id} value={item.id}>
+                          {item.name}
+                        </Select.Option>
+                      ))
+                    : volunteerByMosqueAndSessionOptionList?.length > 0 &&
+                      volunteerByMosqueAndSessionOptionList?.map(item => (
+                        <Select.Option key={item.id} value={item.id}>
+                          {item.name}
+                        </Select.Option>
+                      ))}
                 </Select>
               </Form.Item>
             </Col>
@@ -259,14 +301,18 @@ SMSUtilityManagment.propTypes = {
   getAllActiveMosqueBySession: PropTypes.func,
   getMusalliParticipant: PropTypes.func,
   getMusalliVolunteer: PropTypes.func,
+  getMusalliParticipantsByMosqueAndSession: PropTypes.func,
+  getMusalliVolunteerByMosqueAndSession: PropTypes.func,
   getAdminUsers: PropTypes.func,
   list: PropTypes.array,
   mosqueOptionlist: PropTypes.array,
   mosqueOptionLoading: PropTypes.bool,
   participantOptionList: PropTypes.array,
+  participantsByMosqueAndSessionOptionList: PropTypes.array,
   participantOptionLoading: PropTypes.bool,
   volunteerOptionList: PropTypes.array,
   volunteerOptionLoading: PropTypes.bool,
+  volunteerByMosqueAndSessionOptionList: PropTypes.array,
   deleteAdminUsers: PropTypes.func,
   loading: PropTypes.bool,
   pagination: PropTypes.object,

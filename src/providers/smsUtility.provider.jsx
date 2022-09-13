@@ -7,6 +7,8 @@ import { deleteAdminUsers, enableDisableAdmin, getAdminUsers } from "../store/ac
 import { getAllActiveMosqueBySession } from "../store/actions/musalli_attendanceDetailReport.action";
 import { getMusalliParticipant } from "../store/actions/musalli_participant.action";
 import { getMusalliVolunteer } from "../store/actions/musalli_volunteer.action";
+import { getMusalliParticipantsByMosqueAndSession } from "../store/actions/musalli_participantsByMosqueAndSession.action";
+import { getMusalliVolunteerByMosqueAndSession } from "../store/actions/musalli_volunteerByMosqueAndSession.action";
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
@@ -17,6 +19,8 @@ const mapDispatchToProps = dispatch =>
       getAllActiveMosqueBySession,
       getMusalliParticipant,
       getMusalliVolunteer,
+      getMusalliParticipantsByMosqueAndSession,
+      getMusalliVolunteerByMosqueAndSession,
     },
     dispatch,
   );
@@ -29,9 +33,12 @@ const mapStateToProps = state => ({
   mosqueOptionLoading: state.activeMosqueBySession.mosqueOptionLoading,
   mosqueOptionlist: state.activeMosqueBySession.mosqueOptionvalue,
   participantOptionLoading: state.participant.loading,
-  participantOptionList: state.participant.value,
-  volunteerOptionLoading: state.participant.loading,
-  volunteerOptionList: state.participant.value,
+  participantOptionList: state.participant.list,
+  volunteerOptionLoading: state.volunteer.loading,
+  volunteerOptionList: state.volunteer.list,
+  participantsByMosqueAndSessionOptionLoading: state.participantsByMosqueAndSession.loading,
+  participantsByMosqueAndSessionOptionList: state.participantsByMosqueAndSession.list,
+  volunteerByMosqueAndSessionOptionList: state.volunteerByMosqueAndSession.list,
 });
 
 const SMSUtilityProvider = withRouter(connect(mapStateToProps, mapDispatchToProps)(SMSUtilityManagment));
