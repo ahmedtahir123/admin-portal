@@ -1,7 +1,7 @@
 /* eslint-disable no-template-curly-in-string */
 // export const BASE_URL = window.BASE_URL || "https://api.baitussalam.org:8443";
 export const BASE_URL = window.BASE_URL || "https://dev-api.baitussalam.org:8450";
-// export const BASE_URL = window.BASE_URL || "http://localhost:8080";
+// export const BASE_URL = window.BASE_URL || "https://localhost:8080";
 export const UPLOAD_URL = window.UPLOAD_URL || "http://110.93.214.166:9109";
 export const TOKEN = "CT_TOKEN";
 export const USER = "CT_USER";

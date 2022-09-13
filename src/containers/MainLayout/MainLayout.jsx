@@ -21,6 +21,7 @@ const MainLayout = ({
   user,
   getStates,
   getCities,
+  musalliGetAllActiveSession,
 }) => {
   const [isFixedLayout, setIsFixedLayout] = useState(true);
   const [isMenuLoading, setIsMenuLoading] = useState(false);
@@ -29,6 +30,7 @@ const MainLayout = ({
     updateUserInStore(_user);
     // getStates();
     // getCities();
+    musalliGetAllActiveSession();
   }, []);
 
   const onBreakPoint = isBreak => {
@@ -106,6 +108,7 @@ MainLayout.propTypes = {
   isModalOpen: PropTypes.bool,
   getStates: PropTypes.func,
   getCities: PropTypes.func,
+  musalliGetAllActiveSession: PropTypes.func,
 };
 
 export default MainLayout;

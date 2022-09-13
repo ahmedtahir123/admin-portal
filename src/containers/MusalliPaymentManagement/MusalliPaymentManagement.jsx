@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Button, Col, Row } from "antd";
@@ -105,10 +105,31 @@ const columns = [
 ];
 
 function MusalliPaymentManagement(props) {
-  const { loading, enableDisableAdmin, pagination, getMusalliPayment, deleteAdminUsers, list } = props;
+  const {
+    loading,
+    enableDisableAdmin,
+    pagination,
+    getMusalliPayment,
+    deleteAdminUsers,
+    list,
+    activeSessionLoading,
+    activeSessionList,
+  } = props;
+
+  function sessionId() {
+    if (activeSessionList?.length > 0) {
+      return activeSessionList[0]?.id;
+    }
+    return null;
+  }
+  const sessionIdValue = sessionId();
+
   const getList = async query => {
+    console.log(query, "sessionIdValuesessionIdValue");
     await getMusalliPayment(query);
   };
+
+  console.log(sessionIdValue, "sessionIdValue");
 
   const canAddUser = permissionsUtil.checkAuth({
     category: "MusalliManagement",
@@ -150,25 +171,30 @@ function MusalliPaymentManagement(props) {
     text: "Disable",
   };
 
+  console.log(activeSessionList, "activeSessionListpay");
+
   return (
     <>
       <PageTitle title="All Payments" />
-      <ListView
-        dataSource={list}
-        columns={columns}
-        loading={loading}
-        rowKey="userId"
-        addButton={addButton}
-        pagination={pagination}
-        // deleteAllData={deleteAdminUsers}
-        getList={getList}
-        // enableButton={onEnable}
-        // disableButton={onDisable}
-        canChangeStatus={canChangeStatus}
-        canAdd={canAddUser}
-        // canDelete={canDeleteUser}
-        scroll={{ x: 400 }}
-      />
+      {sessionIdValue && (
+        <ListView
+          dataSource={list}
+          columns={columns}
+          loading={loading}
+          rowKey="userId"
+          addButton={addButton}
+          pagination={pagination}
+          // deleteAllData={deleteAdminUsers}
+          getList={getList}
+          // enableButton={onEnable}
+          // disableButton={onDisable}
+          canChangeStatus={canChangeStatus}
+          canAdd={canAddUser}
+          // canDelete={canDeleteUser}
+          scroll={{ x: 400 }}
+          sessionIdValue={sessionIdValue}
+        />
+      )}
     </>
   );
 }
@@ -180,6 +206,8 @@ MusalliPaymentManagement.propTypes = {
   loading: PropTypes.bool,
   pagination: PropTypes.object,
   enableDisableAdmin: PropTypes.func,
+  activeSessionLoading: PropTypes.bool,
+  activeSessionList: PropTypes.array,
 };
 
 export default MusalliPaymentManagement;

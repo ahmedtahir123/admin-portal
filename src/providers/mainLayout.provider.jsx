@@ -5,6 +5,7 @@ import MainLayoutContainer from "../containers/MainLayout";
 import { showModal } from "../store/actions/ui.actions";
 import { getUserNotifications, logout, userSuccess, viewUserNotifications } from "../store/actions/user.actions";
 import { getLocations, getState } from "../store/actions/areaSegment.actions";
+import { musalliGetAllActiveSession } from "../store/actions/master.action";
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
@@ -16,6 +17,7 @@ const mapDispatchToProps = dispatch =>
       updateUserInStore: userSuccess,
       getCities: getLocations,
       getStates: getState,
+      musalliGetAllActiveSession,
     },
     dispatch,
   );
@@ -27,6 +29,9 @@ const mapStateToProps = state => ({
   notificationsData: state.user.notificationsData,
   error: state.user.error,
   isModalOpen: state.ui.isModalOpen,
+
+  activeSessionLoading: state.musalliGetAllActiveSession.loading,
+  activeSessionList: state.musalliGetAllActiveSession.list,
 });
 
 const MainLayoutProvider = withRouter(connect(mapStateToProps, mapDispatchToProps)(MainLayoutContainer));

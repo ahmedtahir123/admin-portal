@@ -30,6 +30,9 @@ const mapStateToProps = state => ({
   mosqueOptionLoading: state.activeMosqueBySession.mosqueOptionLoading,
   // mosqueOptionvalue: state.activeMosqueBySession.value,
   mosqueOptionlist: state.activeMosqueBySession.mosqueOptionvalue,
+
+  // activeSessionLoading: state.musalliGetAllActiveSession.loading,
+  // activeSessionList: state.musalliGetAllActiveSession.list,
 });
 
 const MusalliAttendanceBulkProvider = withRouter(

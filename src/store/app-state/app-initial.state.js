@@ -209,6 +209,14 @@ const appInitialState = {
     mosqueOptionlist: [],
     mosqueOptionselected: {},
   },
+
+  musalliGetAllActiveSession: {
+    loading: false,
+    error: null,
+    value: {},
+    list: [],
+    selected: {},
+  },
 };
 
 export default appInitialState;

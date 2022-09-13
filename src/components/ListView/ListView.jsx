@@ -36,6 +36,7 @@ const ListView = props => {
     retireButton,
     suspendButton,
     cloneButton,
+    sessionIdValue,
   } = props;
 
   const [rowsSelected, setRowsSelected] = useState([]);
@@ -83,7 +84,7 @@ const ListView = props => {
     ...pagination,
   });
   useEffect(() => {
-    const _query = queryGenerator(sorterFilterPage);
+    const _query = { ...queryGenerator(sorterFilterPage), ...(sessionIdValue ? { sessionId: sessionIdValue } : {}) };
     getList(_query);
   }, []);
 
@@ -630,6 +631,7 @@ ListView.propTypes = {
   dataSource: PropTypes.array,
   loading: PropTypes.bool,
   deleteAllData: PropTypes.func,
+  sessionIdValue: PropTypes.number,
   enableButton: PropTypes.shape({
     text: PropTypes.string.isRequired,
     handler: PropTypes.func.isRequired,

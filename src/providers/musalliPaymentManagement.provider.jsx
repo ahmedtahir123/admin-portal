@@ -22,6 +22,9 @@ const mapStateToProps = state => ({
   list: state.participant.list,
   error: state.participant.error,
   pagination: state.participant.value,
+
+  activeSessionLoading: state.musalliGetAllActiveSession.loading,
+  activeSessionList: state.musalliGetAllActiveSession.list,
 });
 
 const MusalliPaymentManagementProvider = withRouter(

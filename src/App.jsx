@@ -1,12 +1,11 @@
-import React, { Suspense } from "react";
-import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 import { Layout, Spin } from "antd";
-
+import React, { Suspense, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import NoMatch from "./components/NoMatch";
-import history from "./utils/history.utils";
 // import { isLoggedIn } from "./utils/auth.utils";
-
 import "./styles/App.scss";
+import history from "./utils/history.utils";
 
 // const PrivateRouteProvider = React.lazy(() => import("./providers/privateRoute.provider"));
 const MainLayoutProvider = React.lazy(() => import("./providers/mainLayout.provider"));
