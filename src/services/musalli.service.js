@@ -19,7 +19,7 @@ const musalliService = {
   getMusalliPayment: query => get(`api/role-admin/v1/payment-request/session/${query?.sessionId}`),
   getMusalliAttendanceCountReport: query =>
     get(`api/role-admin/v1/session/attendance-count/report/1?attendance-date=${query}`),
-  getAllActiveMosqueBySession: query => get(`api/public/v1/mosque/session/1`),
+  getAllActiveMosqueBySession: query => get(`api/public/v1/mosque/session/${query}`),
   getAttendanceDetailReport: query => get(`api/role-admin/v1/session/attendance-detail/report/1?mosque-id=${query}`),
   getMusalliAttendanceBulk: query => get(`api/role-admin/v1/participant/mosque/${query}`),
   musalliGetAllActiveSession: query => get(`api/public/v1/session/active`),
@@ -28,4 +28,3 @@ export default musalliService;
 //
 
 // getMusalliPayment
-// getAllActiveMosqueBySession

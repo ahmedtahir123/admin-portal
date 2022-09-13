@@ -44,18 +44,33 @@ function MusalliAttendanceDetailReportManagment(props) {
     getAllActiveMosqueBySession,
     mosqueOptionlist,
     mosqueOptionLoading,
+    activeSessionList,
   } = props;
   const [form] = Form.useForm();
   const [value, setValue] = useState([]);
 
   const getList = async query => {};
 
+  function sessionId() {
+    if (activeSessionList?.length > 0) {
+      return activeSessionList[0]?.id;
+    }
+    return null;
+  }
+
+  const sessionIdValue = sessionId();
+  console.log(sessionIdValue, "sessionIdValuesessionIdValuesessionIdValue");
+
+  // const sessionIdValue = sessionId();
+
   useEffect(() => {
-    const getMosque = async () => {
-      await getAllActiveMosqueBySession();
+    const getMosque = async id => {
+      await getAllActiveMosqueBySession(id);
     };
-    getMosque();
-  }, []);
+    if (sessionId() !== null) {
+      getMosque(sessionId());
+    }
+  }, [activeSessionList]);
 
   const canAddUser = permissionsUtil.checkAuth({
     category: "MusalliManagement",
@@ -202,6 +217,7 @@ MusalliAttendanceDetailReportManagment.propTypes = {
   mosqueOptionLoading: PropTypes.bool,
   pagination: PropTypes.object,
   enableDisableAdmin: PropTypes.func,
+  activeSessionList: PropTypes.array,
 };
 
 export default MusalliAttendanceDetailReportManagment;
