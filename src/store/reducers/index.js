@@ -34,6 +34,7 @@ import musallivolunteer from "./volunteer.reducer";
 import mosque from "./mosque.reducer";
 import musalliAttendanceDetailReport from "./musalli_attendance_detail_report.reducer";
 import activeMosqueBySession from "./activeMosqueBySession.reducer";
+import smsUtility from "./smsUtility.reducer";
 
 export default function reducer(state = appInitialState, action) {
   if (action.type === ACTIONS.APP_RESET) {
@@ -71,5 +72,6 @@ export default function reducer(state = appInitialState, action) {
     volunteerByMosqueAndSession: musalliVolunteerByMosqueAndSession(state.participantsByMosqueAndSession, action),
     musalliAttendanceDetailReport: musalliAttendanceDetailReport(state.musalliAttendanceDetailReport, action),
     activeMosqueBySession: activeMosqueBySession(state.activeMosqueBySession, action),
+    smsUtility: smsUtility(state.smsUtility, action),
   };
 }

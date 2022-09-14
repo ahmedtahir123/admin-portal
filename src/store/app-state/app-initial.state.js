@@ -208,6 +208,13 @@ const appInitialState = {
     list: [],
     selected: {},
   },
+  smsUtility: {
+    loading: false,
+    error: null,
+    value: {},
+    list: [],
+    selected: {},
+  },
   mosque: {
     loading: false,
     error: null,

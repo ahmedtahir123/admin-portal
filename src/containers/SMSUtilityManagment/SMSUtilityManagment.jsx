@@ -40,7 +40,7 @@ const columns = [
     key: "locationName",
   },
 ];
-const brandsArr = [
+const smsCategoryList = [
   { code: 1, name: "All Participant With Session" },
   { code: 2, name: "Participant With Session And Mosque" },
   { code: 3, name: "Participant" },
@@ -66,36 +66,16 @@ function SMSUtilityManagment(props) {
     getMusalliVolunteer,
     volunteerOptionLoading,
     volunteerOptionList,
+    smsUtilityPostLoading,
     getMusalliParticipantsByMosqueAndSession,
-    // participantsByMosqueAndSessionOptionLoading,
     participantsByMosqueAndSessionOptionList,
     getMusalliVolunteerByMosqueAndSession,
     volunteerByMosqueAndSessionOptionList,
+    postMusalliSmsUtility,
   } = props;
   const [mosqueValue, setMosqueValue] = useState(null);
-  // const [participantsToShow, setParticipantsToShow] = useState([]);
-  // const [dropdownCode, setDropdownCode] = useState(2);
   const [form] = Form.useForm();
-  const [fieldsToShow, setFieldsToShow] = useState(1);
-  //  useEffect(()=>{
-  //   if(fieldsToShow===2){
-  //     const getParticipant = async () => {
-  //       await getMusalliParticipant();
-  //     };
-  //     getParticipant();
-  //     console.log(participantOptionList,"acaaaaa");
-  //   }
-  //   else if(fieldsToShow===3){
-  //     const getParticipantsByMosque = async () => {
-  //       await getMusalliParticipantsByMosqueAndSession(mosqueValue);
-  //     };
-  //     getParticipantsByMosque();
-  //     console.log(participantsByMosqueOptionList,"12111")
-  //   }
-  //  },[fieldsToShow])
-  //  useEffect(()=>{
-  //     console.log(participantsToShow,"pllllllassa")
-  //  },[participantsToShow])
+  const [fieldsToShow, setFieldsToShow] = useState(0);
   const getList = async query => {
     await getAdminUsers(query);
   };
@@ -114,7 +94,6 @@ function SMSUtilityManagment(props) {
       if (fieldsToShow === 2) {
         await getMusalliParticipantsByMosqueAndSession(mosqueValue);
       } else if (fieldsToShow === 5) {
-        // console.log(volunteerByMosqueAndSessionOptionList,"pepepe")
         await getMusalliVolunteerByMosqueAndSession(mosqueValue);
       }
     };
@@ -163,7 +142,13 @@ function SMSUtilityManagment(props) {
   //   text: "Disable",
   // };
 
-  const onFormFinish = () => {};
+  const onFormFinish = async val => {
+    let payload = {};
+    if (fieldsToShow === 1 || fieldsToShow === 2 || fieldsToShow === 3) {
+      payload = { ...val, userType: "PARTICIPANT", sessionId: 1 };
+    } else payload = { ...val, userType: "VOLUNTEER", sessionId: 1 };
+    await postMusalliSmsUtility(payload, form);
+  };
   const { TextArea } = Input;
 
   return (
@@ -182,20 +167,24 @@ function SMSUtilityManagment(props) {
         layout="vertical"
         name="nest-messages"
         onFinish={onFormFinish}
-        validateMessages={VALIDATE_FORM_MESSAGES_TEMPLATE}
+        // validateMessages={VALIDATE_FORM_MESSAGES_TEMPLATE}
       >
         <Row className="fields-row" gutter={20} type="flex" justify="space-between">
           <Col span={12} xs={24} sm={12} lg={24}>
-            <Form.Item name="brandCode" rules={[{ required: true }]} label="Send Message to">
+            <Form.Item
+              name="userType"
+              rules={[{ required: true, message: "Please Select Category" }]}
+              label="Send Message to"
+            >
               <Select
                 showSearch
-                defaultValue={brandsArr[0].name}
+                placeholder="Select Category"
                 optionFilterProp="children"
                 loading={loading}
                 filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
                 onChange={value => setFieldsToShow(value)}
               >
-                {brandsArr.map(item => (
+                {smsCategoryList.map(item => (
                   <Select.Option key={item.code} value={item.code}>
                     {item.name}
                   </Select.Option>
@@ -205,7 +194,7 @@ function SMSUtilityManagment(props) {
           </Col>
           {(fieldsToShow === 2 || fieldsToShow === 5) && (
             <Col span={12} xs={24} sm={12} lg={24}>
-              <Form.Item name="mosque" rules={[{ required: false }]} label="Mosque">
+              <Form.Item name="mosqueId" rules={[{ required: true, message: "Please select Mosque" }]} label="Mosque">
                 <Select
                   showSearch
                   placeholder="Select Mosque"
@@ -226,14 +215,17 @@ function SMSUtilityManagment(props) {
           )}
           {(fieldsToShow === 2 || fieldsToShow === 3) && (
             <Col span={12} xs={24} sm={12} lg={24}>
-              <Form.Item name="participant" rules={[{ required: false }]} label="Participant">
+              <Form.Item
+                name="userId"
+                rules={[{ required: true, message: "Please select Participant" }]}
+                label="Participant"
+              >
                 <Select
                   showSearch
                   placeholder="All"
                   optionFilterProp="children"
                   loading={participantOptionLoading}
                   filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
-                  // onChange={(value)=>setFieldsToShow(value)}
                 >
                   {fieldsToShow === 3
                     ? participantOptionList?.length > 0 &&
@@ -254,14 +246,17 @@ function SMSUtilityManagment(props) {
           )}
           {(fieldsToShow === 5 || fieldsToShow === 6) && (
             <Col span={12} xs={24} sm={12} lg={24}>
-              <Form.Item name="volunteer" rules={[{ required: false }]} label="Volunteer">
+              <Form.Item
+                name="userId"
+                rules={[{ required: true, message: "Please select Volunteer" }]}
+                label="Volunteer"
+              >
                 <Select
                   showSearch
                   placeholder="Select Volunteer"
                   optionFilterProp="children"
                   loading={volunteerOptionLoading}
                   filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
-                  // onChange={(value)=>setFieldsToShow(value)}
                 >
                   {fieldsToShow === 6
                     ? volunteerOptionList?.length > 0 &&
@@ -281,12 +276,12 @@ function SMSUtilityManagment(props) {
             </Col>
           )}
           <Col span={8} xs={24} sm={12} lg={24}>
-            <Form.Item name="message" rules={[{ required: true }]} label="Message">
+            <Form.Item name="message" label="Message" rules={[{ required: true, message: "Please enter message!" }]}>
               <TextArea rows={4} />
             </Form.Item>
           </Col>
           <Col span={8} xs={24} sm={12} lg={4}>
-            <Button type="primary" onClick={() => {}}>
+            <Button type="primary" htmlType="submit" loading={smsUtilityPostLoading} onClick={() => {}}>
               Send <CustomIcon name="SendOutlined" />
             </Button>
           </Col>
@@ -303,6 +298,7 @@ SMSUtilityManagment.propTypes = {
   getMusalliVolunteer: PropTypes.func,
   getMusalliParticipantsByMosqueAndSession: PropTypes.func,
   getMusalliVolunteerByMosqueAndSession: PropTypes.func,
+  postMusalliSmsUtility: PropTypes.func,
   getAdminUsers: PropTypes.func,
   list: PropTypes.array,
   mosqueOptionlist: PropTypes.array,
@@ -312,6 +308,7 @@ SMSUtilityManagment.propTypes = {
   participantOptionLoading: PropTypes.bool,
   volunteerOptionList: PropTypes.array,
   volunteerOptionLoading: PropTypes.bool,
+  smsUtilityPostLoading: PropTypes.bool,
   volunteerByMosqueAndSessionOptionList: PropTypes.array,
   deleteAdminUsers: PropTypes.func,
   loading: PropTypes.bool,
