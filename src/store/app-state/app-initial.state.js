@@ -187,6 +187,27 @@ const appInitialState = {
     list: [],
     selected: {},
   },
+  participantsByMosqueAndSession: {
+    loading: false,
+    error: null,
+    value: {},
+    list: [],
+    selected: {},
+  },
+  volunteer: {
+    loading: false,
+    error: null,
+    value: {},
+    list: [],
+    selected: {},
+  },
+  volunteerByMosqueAndSession: {
+    loading: false,
+    error: null,
+    value: {},
+    list: [],
+    selected: {},
+  },
   mosque: {
     loading: false,
     error: null,

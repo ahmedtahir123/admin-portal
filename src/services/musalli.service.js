@@ -11,7 +11,9 @@ import { userTypes } from "../__mocks__/userTypes";
 
 const musalliService = {
   getAllParticipantUsers: query => get(`api/role-admin/v1/participant`),
+  getAllParticipantsByMosqueAndSession: query => get(`api/role-admin/v1/participant/mosque/${query}`),
   getMusalliVolunteer: query => get(`api/role-admin/v1/volunteer`),
+  getVolunteerByMosqueAndSession: query => get(`api/role-admin/v1/volunteer/mosque/${query}`),
   getAllMosque: query => get(`api/role-admin/v1/mosque`),
   getMusalliSession: query => get(`api/public/v1/session/active`),
   getMusalliAttendanceChangeRequest: query =>
