@@ -41,7 +41,6 @@ function MusalliAttendanceDetailReportManagment(props) {
     deleteAdminUsers,
     getAttendanceDetailReport,
     list,
-    getAllActiveMosqueBySession,
     mosqueOptionlist,
     mosqueOptionLoading,
     activeSessionList,
@@ -50,27 +49,6 @@ function MusalliAttendanceDetailReportManagment(props) {
   const [value, setValue] = useState([]);
 
   const getList = async query => {};
-
-  function sessionId() {
-    if (activeSessionList?.length > 0) {
-      return activeSessionList[0]?.id;
-    }
-    return null;
-  }
-
-  const sessionIdValue = sessionId();
-  console.log(sessionIdValue, "sessionIdValuesessionIdValuesessionIdValue");
-
-  // const sessionIdValue = sessionId();
-
-  useEffect(() => {
-    const getMosque = async id => {
-      await getAllActiveMosqueBySession(id);
-    };
-    if (sessionId() !== null) {
-      getMosque(sessionId());
-    }
-  }, [activeSessionList]);
 
   const canAddUser = permissionsUtil.checkAuth({
     category: "MusalliManagement",
@@ -208,7 +186,6 @@ function MusalliAttendanceDetailReportManagment(props) {
 }
 
 MusalliAttendanceDetailReportManagment.propTypes = {
-  getAllActiveMosqueBySession: PropTypes.func,
   getAttendanceDetailReport: PropTypes.func,
   list: PropTypes.array,
   mosqueOptionlist: PropTypes.array,

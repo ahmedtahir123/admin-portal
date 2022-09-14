@@ -8,13 +8,11 @@ import {
   // enableDisableAdmin,
   getMusalliAttendanceBulk,
 } from "../store/actions/musalli_AttendanceBulk.actions";
-import { getAllActiveMosqueBySession } from "../store/actions/musalli_attendanceDetailReport.action";
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       getMusalliAttendanceBulk,
-      getAllActiveMosqueBySession,
       // deleteAdminUsers,
       // enableDisableAdmin,
     },

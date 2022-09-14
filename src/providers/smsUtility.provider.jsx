@@ -4,7 +4,6 @@ import { bindActionCreators } from "redux";
 import MusalliAttendanceDetailReportManagment from "../containers/MusalliAttendanceDetailReportManagment/MusalliAttendanceDetailReportManagment";
 import SMSUtilityManagment from "../containers/SMSUtilityManagment/SMSUtilityManagment";
 import { deleteAdminUsers, enableDisableAdmin, getAdminUsers } from "../store/actions/admin.actions";
-import { getAllActiveMosqueBySession } from "../store/actions/musalli_attendanceDetailReport.action";
 import { getMusalliParticipant } from "../store/actions/musalli_participant.action";
 import { getMusalliVolunteer } from "../store/actions/musalli_volunteer.action";
 import { getMusalliParticipantsByMosqueAndSession } from "../store/actions/musalli_participantsByMosqueAndSession.action";
@@ -16,7 +15,6 @@ const mapDispatchToProps = dispatch =>
       getAdminUsers,
       deleteAdminUsers,
       enableDisableAdmin,
-      getAllActiveMosqueBySession,
       getMusalliParticipant,
       getMusalliVolunteer,
       getMusalliParticipantsByMosqueAndSession,

@@ -62,7 +62,6 @@ function MusalliAttendanceBulkManagment(props) {
     deleteAdminUsers,
     getMusalliAttendanceBulk,
     list,
-    getAllActiveMosqueBySession,
     mosqueOptionlist,
     mosqueOptionLoading,
   } = props;
@@ -71,13 +70,6 @@ function MusalliAttendanceBulkManagment(props) {
   const [value, setValue] = useState([]);
 
   const getList = async query => {};
-
-  useEffect(() => {
-    const getMosque = async () => {
-      await getAllActiveMosqueBySession();
-    };
-    getMosque();
-  }, []);
 
   const canAddUser = permissionsUtil.checkAuth({
     category: "MusalliManagement",
@@ -227,7 +219,6 @@ function MusalliAttendanceBulkManagment(props) {
 }
 
 MusalliAttendanceBulkManagment.propTypes = {
-  getAllActiveMosqueBySession: PropTypes.func,
   getMusalliAttendanceBulk: PropTypes.func,
   list: PropTypes.array,
   mosqueOptionlist: PropTypes.array,

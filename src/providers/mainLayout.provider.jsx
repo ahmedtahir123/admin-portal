@@ -5,7 +5,7 @@ import MainLayoutContainer from "../containers/MainLayout";
 import { showModal } from "../store/actions/ui.actions";
 import { getUserNotifications, logout, userSuccess, viewUserNotifications } from "../store/actions/user.actions";
 import { getLocations, getState } from "../store/actions/areaSegment.actions";
-import { musalliGetAllActiveSession } from "../store/actions/master.action";
+import { musalliGetAllActiveSession, getAllActiveMosqueBySession } from "../store/actions/master.action";
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
@@ -18,6 +18,7 @@ const mapDispatchToProps = dispatch =>
       getCities: getLocations,
       getStates: getState,
       musalliGetAllActiveSession,
+      getAllActiveMosqueBySession,
     },
     dispatch,
   );

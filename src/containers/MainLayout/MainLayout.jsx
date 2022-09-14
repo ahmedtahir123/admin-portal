@@ -22,9 +22,12 @@ const MainLayout = ({
   getStates,
   getCities,
   musalliGetAllActiveSession,
+  getAllActiveMosqueBySession,
+  activeSessionList,
 }) => {
   const [isFixedLayout, setIsFixedLayout] = useState(true);
   const [isMenuLoading, setIsMenuLoading] = useState(false);
+
   useEffect(() => {
     const _user = getUser();
     updateUserInStore(_user);
@@ -32,6 +35,13 @@ const MainLayout = ({
     // getCities();
     musalliGetAllActiveSession();
   }, []);
+
+  useEffect(() => {
+    if (activeSessionList?.length > 0) {
+      const sessionIdValue = activeSessionList[0]?.id;
+      getAllActiveMosqueBySession(sessionIdValue);
+    }
+  }, [activeSessionList]);
 
   const onBreakPoint = isBreak => {
     setIsFixedLayout(!isBreak);
@@ -108,7 +118,9 @@ MainLayout.propTypes = {
   isModalOpen: PropTypes.bool,
   getStates: PropTypes.func,
   getCities: PropTypes.func,
+  getAllActiveMosqueBySession: PropTypes.func,
   musalliGetAllActiveSession: PropTypes.func,
+  activeSessionList: PropTypes.array,
 };
 
 export default MainLayout;

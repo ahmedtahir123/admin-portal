@@ -57,7 +57,6 @@ function SMSUtilityManagment(props) {
     getAdminUsers,
     deleteAdminUsers,
     list,
-    getAllActiveMosqueBySession,
     mosqueOptionlist,
     mosqueOptionLoading,
     getMusalliParticipant,
@@ -102,7 +101,6 @@ function SMSUtilityManagment(props) {
 
   useEffect(() => {
     const getData = async () => {
-      await getAllActiveMosqueBySession();
       await getMusalliParticipant();
       await getMusalliVolunteer();
     };
@@ -298,7 +296,6 @@ function SMSUtilityManagment(props) {
 }
 
 SMSUtilityManagment.propTypes = {
-  getAllActiveMosqueBySession: PropTypes.func,
   getMusalliParticipant: PropTypes.func,
   getMusalliVolunteer: PropTypes.func,
   getMusalliParticipantsByMosqueAndSession: PropTypes.func,

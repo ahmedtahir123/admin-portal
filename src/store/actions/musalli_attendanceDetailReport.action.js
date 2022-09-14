@@ -24,46 +24,6 @@ export function selectedParticipantSuccess(response) {
   return { type: ACTIONS.SELECTED_PARTICIPANT_SUCCESS, response };
 }
 
-// Active mosque by session
-
-export function activeMosqueBySesionRequest() {
-  return { type: ACTIONS.ACTIVE_MOSQUE_BY_SESSION_REQUEST };
-}
-
-export function activeMosqueBySesionSuccess(response) {
-  return { type: ACTIONS.ACTIVE_MOSQUE_BY_SESSION_SECCESS, response };
-}
-
-export function activeMosqueBySesionError(error) {
-  return { type: ACTIONS.ACTIVE_MOSQUE_BY_SESSION_ERROR, error };
-}
-
-export function activeMosqueBySesionListSuccess(response) {
-  return { type: ACTIONS.ACTIVE_MOSQUE_BY_SESSION_LIST_SUCCESS, response };
-}
-
-export function selectedActiveMosqueBySesionSuccess(response) {
-  return { type: ACTIONS.SELECTED_ACTIVE_MOSQUE_BY_SESSION_SUCCESS, response };
-}
-
-/* Async Actions */
-
-export function getAllActiveMosqueBySession(query) {
-  return async dispatch => {
-    dispatch(activeMosqueBySesionRequest());
-    try {
-      const [err, response] = await to(musalliService.getAllActiveMosqueBySession(query));
-      if (err) throwError(err);
-      dispatch(activeMosqueBySesionSuccess(response));
-      dispatch(activeMosqueBySesionListSuccess(response.content));
-    } catch (error) {
-      dispatch(activeMosqueBySesionError(error));
-      toastMessage("error", ERROR_MESSAGE.LIST);
-      throwError(error);
-    }
-  };
-}
-
 export function getAttendanceDetailReport(query) {
   return async dispatch => {
     dispatch(participantRequest());
@@ -102,7 +62,7 @@ export function deleteParticipantUsers(ids, query) {
     try {
       const [err, response] = await to(musalliService.deleteParticipantUsers(ids));
       if (err) throwError(err);
-      dispatch(getAllActiveMosqueBySession(query));
+      dispatch(getAttendanceDetailReport(query));
       toastMessage("success", SUCCESS_MESSAGE.DELETED);
     } catch (error) {
       dispatch(participantError(error));
@@ -154,7 +114,7 @@ export function enableDisableParticipant(ids, enabled, query) {
         [err, response] = await to(musalliService.disableParticipant(ids));
       }
       if (err) throwError(err);
-      dispatch(getAllActiveMosqueBySession(query));
+      dispatch(getAttendanceDetailReport(query));
       toastMessage("success", SUCCESS_MESSAGE.ENABLED);
     } catch (error) {
       dispatch(participantError(error));

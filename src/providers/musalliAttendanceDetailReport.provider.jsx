@@ -5,14 +5,12 @@ import MusalliAttendanceDetailReportManagment from "../containers/MusalliAttenda
 import {
   // deleteAdminUsers,
   // enableDisableAdmin,
-  getAllActiveMosqueBySession,
   getAttendanceDetailReport,
 } from "../store/actions/musalli_attendanceDetailReport.action";
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      getAllActiveMosqueBySession,
       getAttendanceDetailReport,
       // deleteAdminUsers,
       // enableDisableAdmin,

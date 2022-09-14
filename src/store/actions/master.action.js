@@ -3,6 +3,8 @@ import { throwError, to, toastMessage } from "../../utils/utils";
 import musalliService from "../../services/musalli.service";
 import { SUCCESS_MESSAGE, ERROR_MESSAGE } from "../../utils/constants";
 
+// musalli Active Session
+
 export function activeSessionRequest() {
   return { type: ACTIONS.ACTIVE_SESSION_REQUEST };
 }
@@ -23,7 +25,31 @@ export function selectedActiveSessionSuccess(response) {
   return { type: ACTIONS.SELECTED_ACTIVE_SESSION_SUCCESS, response };
 }
 
+// Musalli Active mosque by session
+
+export function activeMosqueBySesionRequest() {
+  return { type: ACTIONS.ACTIVE_MOSQUE_BY_SESSION_REQUEST };
+}
+
+export function activeMosqueBySesionSuccess(response) {
+  return { type: ACTIONS.ACTIVE_MOSQUE_BY_SESSION_SECCESS, response };
+}
+
+export function activeMosqueBySesionError(error) {
+  return { type: ACTIONS.ACTIVE_MOSQUE_BY_SESSION_ERROR, error };
+}
+
+export function activeMosqueBySesionListSuccess(response) {
+  return { type: ACTIONS.ACTIVE_MOSQUE_BY_SESSION_LIST_SUCCESS, response };
+}
+
+export function selectedActiveMosqueBySesionSuccess(response) {
+  return { type: ACTIONS.SELECTED_ACTIVE_MOSQUE_BY_SESSION_SUCCESS, response };
+}
+
 /* Async Actions */
+
+// musalliGetAllActiveSession
 
 export function musalliGetAllActiveSession(query) {
   return async dispatch => {
@@ -37,6 +63,24 @@ export function musalliGetAllActiveSession(query) {
     } catch (error) {
       console.log(error, "responseresponseresponse");
       dispatch(activeSessionError(error));
+      toastMessage("error", ERROR_MESSAGE.LIST);
+      throwError(error);
+    }
+  };
+}
+
+// getAllActiveMosqueBySession
+
+export function getAllActiveMosqueBySession(query) {
+  return async dispatch => {
+    dispatch(activeMosqueBySesionRequest());
+    try {
+      const [err, response] = await to(musalliService.getAllActiveMosqueBySession(query));
+      if (err) throwError(err);
+      dispatch(activeMosqueBySesionSuccess(response));
+      dispatch(activeMosqueBySesionListSuccess(response.content));
+    } catch (error) {
+      dispatch(activeMosqueBySesionError(error));
       toastMessage("error", ERROR_MESSAGE.LIST);
       throwError(error);
     }
