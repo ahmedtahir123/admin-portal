@@ -25,6 +25,9 @@ const musalliService = {
   getAttendanceDetailReport: query => get(`api/role-admin/v1/session/attendance-detail/report/1?mosque-id=${query}`),
   getMusalliAttendanceBulk: query => get(`api/role-admin/v1/participant/mosque/${query}`),
   musalliGetAllActiveSession: query => get(`api/public/v1/session/active`),
+
+  // Post Requests
+  postSmsUtility: body => post(`api/role-admin/v1/session/send-message`, body),
 };
 export default musalliService;
 //

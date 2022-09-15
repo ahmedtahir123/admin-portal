@@ -136,6 +136,7 @@ export const SUCCESS_MESSAGE = {
   INFO: "Info retrieved Successfully",
   AUTHORIZED: "Authorized Successfully",
   EMAIL: "Email Sent Successfully",
+  MESSAGE: "Message Sent Successfully",
   CLONE: "Clone Successfully",
   RETIRED: "Retire Successfully",
   SUSPEND: "Suspend Successfully",
