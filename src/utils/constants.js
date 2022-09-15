@@ -8,6 +8,7 @@ export const USER = "CT_USER";
 export const CLIENT_ID = "bs-admin-client";
 export const DATE_FORMAT = "DD/MM/YYYY";
 export const DATE_FORMAT_TIME = "DD/MM/YYYY HH:mm";
+export const DATE_FORMAT_TIME_SEC = "DD/MM/YYYY HH:mm:ss";
 export const TIME_FORMAT = "HH:mm";
 export const MAP_API_KEY = "AIzaSyCapeS1Q26wpwAqBOS5KvDPTd0JsXXzneQ";
 export const DEFAULT_SORTER = { field: "updatedAt", order: "descend" };

@@ -22,19 +22,19 @@ const columns = [
     dataIndex: "description",
     key: "description",
     sorter: true,
-    width: 200,
+    width: 100,
   },
   {
     title: "Status",
     dataIndex: "status",
     key: "status",
-    width: 200,
+    width: 100,
   },
   {
     title: "Start Date",
     dataIndex: "startDate",
     key: "startDate",
-    width: 200,
+    width: 100,
     render: d =>
       d
         ?.slice(0, 3)
@@ -45,7 +45,7 @@ const columns = [
     title: "End Date",
     dataIndex: "endDate",
     key: "endDate",
-    width: 200,
+    width: 100,
     render: d =>
       d
         ?.slice(0, 3)
@@ -56,7 +56,7 @@ const columns = [
     title: "Mosque Regestration Start Date",
     dataIndex: "masjidRegistrationStartDate",
     key: "masjidRegistrationStartDate",
-    width: 200,
+    width: 100,
     render: d =>
       d
         ?.slice(0, 3)
@@ -67,7 +67,7 @@ const columns = [
     title: "Mosque Regestration End Date",
     dataIndex: "masjidRegistrationEndDate",
     key: "masjidRegistrationEndDate",
-    width: 200,
+    width: 100,
     render: d =>
       d
         ?.slice(0, 3)
@@ -78,7 +78,7 @@ const columns = [
     title: "Participant Regestration Start Date",
     dataIndex: "participantRegistrationStartDate",
     key: "participantRegistrationStartDate",
-    width: 200,
+    width: 100,
     render: d =>
       d
         ?.slice(0, 3)
@@ -89,7 +89,7 @@ const columns = [
     title: "Participant Regestration End Date",
     dataIndex: "participantRegistrationEndDate",
     key: "participantRegistrationEndDate",
-    width: 200,
+    width: 100,
     render: d =>
       d
         ?.slice(0, 3)
@@ -100,7 +100,7 @@ const columns = [
     title: "Maximum Participant DOB",
     dataIndex: "maximumParticipantDateOfBirth",
     key: "maximumParticipantDateOfBirth",
-    width: 200,
+    width: 100,
     render: d =>
       d
         ?.slice(0, 3)
@@ -111,7 +111,7 @@ const columns = [
     title: "Minimum Participant DOB",
     dataIndex: "minimumParticipantDateOfBirth",
     key: "minimumParticipantDateOfBirth",
-    width: 200,
+    width: 100,
     render: d =>
       d
         ?.slice(0, 3)
@@ -122,7 +122,7 @@ const columns = [
     title: "Competition Start Date",
     dataIndex: "competitionStartDate",
     key: "competitionStartDate",
-    width: 200,
+    width: 100,
     render: d =>
       d
         ?.slice(0, 3)
@@ -133,7 +133,7 @@ const columns = [
     title: "Competition End Date",
     dataIndex: "competitionEndDate",
     key: "competitionEndDate",
-    width: 200,
+    width: 100,
     render: d =>
       d
         ?.slice(0, 3)
@@ -144,19 +144,19 @@ const columns = [
     title: "Cost Per Cycle",
     dataIndex: "costPerCycle",
     key: "costPerCycle",
-    width: 200,
+    width: 100,
   },
   {
     title: "Percentage To Pay",
     dataIndex: "percentageToPay",
     key: "percentageToPay",
-    width: 200,
+    width: 100,
   },
   {
     title: "Payment Due Date",
     dataIndex: "paymentDueDate",
     key: "paymentDueDate",
-    width: 200,
+    width: 100,
     render: d =>
       d
         ?.slice(0, 3)
@@ -167,7 +167,7 @@ const columns = [
     title: "Second Payment Due Date",
     dataIndex: "secondPaymentDueDate",
     key: "secondPaymentDueDate",
-    width: 200,
+    width: 100,
     render: d =>
       d
         ?.slice(0, 3)
@@ -178,12 +178,13 @@ const columns = [
     title: "Payment Percentage Split On First Due Date ",
     dataIndex: "paymentPercentageSplitOnFirstDueDate",
     key: "paymentPercentageSplitOnFirstDueDate",
-    width: 200,
+    width: 100,
   },
   {
     title: "Action",
     key: "action",
     align: "center",
+    width: 100,
     render: record => (
       <Row>
         <Col span={12} xs={24} sm={12} lg={12}>
@@ -243,7 +244,6 @@ function MusalliSessionManagement(props) {
     handler: enableDisableAdmin,
     text: "Disable",
   };
-  console.log(list, "listlistlistlistlist");
   return (
     <>
       <PageTitle title="All Sessions" />
@@ -259,7 +259,7 @@ function MusalliSessionManagement(props) {
         enableButton={onEnable}
         // disableButton={onDisable}
         // canChangeStatus={canChangeStatus}
-        // canAdd={canAddUser}
+        canAdd={canAddUser}
         // canDelete={canDeleteUser}
         scroll={{ x: 200, y: 400 }}
       />
