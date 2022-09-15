@@ -148,6 +148,7 @@ function SMSUtilityManagment(props) {
       payload = { ...val, userType: "PARTICIPANT", sessionId: 1 };
     } else payload = { ...val, userType: "VOLUNTEER", sessionId: 1 };
     await postMusalliSmsUtility(payload, form);
+    setMosqueValue(null);
   };
   const { TextArea } = Input;
 
