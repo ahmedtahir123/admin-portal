@@ -18,10 +18,10 @@ const mapDispatchToProps = dispatch =>
   );
 
 const mapStateToProps = state => ({
-  loading: state.participant.loading,
-  list: state.participant.list,
-  error: state.participant.error,
-  pagination: state.participant.value,
+  loading: state.volunteer.loading,
+  list: state.volunteer.list,
+  error: state.volunteer.error,
+  pagination: state.volunteer.value,
 });
 
 const MusalliVolunteerManagementProvider = withRouter(

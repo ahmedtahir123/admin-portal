@@ -125,7 +125,6 @@ function MusalliPaymentManagement(props) {
   const sessionIdValue = sessionId();
 
   const getList = async query => {
-    console.log(query, "sessionIdValuesessionIdValue");
     await getMusalliPayment(query);
   };
 

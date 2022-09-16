@@ -8,6 +8,7 @@ import { getMusalliParticipant } from "../store/actions/musalli_participant.acti
 import { getMusalliVolunteer } from "../store/actions/musalli_volunteer.action";
 import { getMusalliParticipantsByMosqueAndSession } from "../store/actions/musalli_participantsByMosqueAndSession.action";
 import { getMusalliVolunteerByMosqueAndSession } from "../store/actions/musalli_volunteerByMosqueAndSession.action";
+import { postMusalliSmsUtility } from "../store/actions/musalli_smsUtility.action";
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
@@ -19,6 +20,7 @@ const mapDispatchToProps = dispatch =>
       getMusalliVolunteer,
       getMusalliParticipantsByMosqueAndSession,
       getMusalliVolunteerByMosqueAndSession,
+      postMusalliSmsUtility,
     },
     dispatch,
   );
@@ -34,6 +36,7 @@ const mapStateToProps = state => ({
   participantOptionList: state.participant.list,
   volunteerOptionLoading: state.volunteer.loading,
   volunteerOptionList: state.volunteer.list,
+  smsUtilityPostLoading: state.smsUtility.loading,
   participantsByMosqueAndSessionOptionLoading: state.participantsByMosqueAndSession.loading,
   participantsByMosqueAndSessionOptionList: state.participantsByMosqueAndSession.list,
   volunteerByMosqueAndSessionOptionList: state.volunteerByMosqueAndSession.list,

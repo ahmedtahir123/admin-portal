@@ -8,6 +8,7 @@ export const USER = "CT_USER";
 export const CLIENT_ID = "bs-admin-client";
 export const DATE_FORMAT = "DD/MM/YYYY";
 export const DATE_FORMAT_TIME = "DD/MM/YYYY HH:mm";
+export const DATE_FORMAT_TIME_SEC = "DD/MM/YYYY HH:mm:ss";
 export const TIME_FORMAT = "HH:mm";
 export const MAP_API_KEY = "AIzaSyCapeS1Q26wpwAqBOS5KvDPTd0JsXXzneQ";
 export const DEFAULT_SORTER = { field: "updatedAt", order: "descend" };
@@ -135,6 +136,7 @@ export const SUCCESS_MESSAGE = {
   INFO: "Info retrieved Successfully",
   AUTHORIZED: "Authorized Successfully",
   EMAIL: "Email Sent Successfully",
+  MESSAGE: "Message Sent Successfully",
   CLONE: "Clone Successfully",
   RETIRED: "Retire Successfully",
   SUSPEND: "Suspend Successfully",

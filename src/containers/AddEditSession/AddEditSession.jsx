@@ -22,7 +22,13 @@ import _get from "lodash/get";
 import _map from "lodash/map";
 import "./AddEditSession.scss";
 import { getBase64, beforeUpload } from "../../utils/utils";
-import { VALIDATE_FORM_MESSAGES_TEMPLATE, CONFIRM_MESSAGE, DATE_FORMAT_TIME } from "../../utils/constants";
+import {
+  VALIDATE_FORM_MESSAGES_TEMPLATE,
+  CONFIRM_MESSAGE,
+  DATE_FORMAT_TIME,
+  DATE_FORMAT,
+  DATE_FORMAT_TIME_SEC,
+} from "../../utils/constants";
 import BrandLogo from "../../images/avatar.png";
 import listingPageCardImage from "../../images/listing-card.svg";
 import PageTitle from "../../components/PageTitle/PageTitle";
@@ -91,18 +97,94 @@ const AddEditSession = ({
   };
 
   const onFormFinish = fieldsValue => {
-    const rangeTimeValue = fieldsValue.date;
+    console.log(fieldsValue, "fieldsValuefieldsValue");
+    // const rangeTimeValue = fieldsValue.date;
+    // if (isEditView) {
+    //   updateCampaign(id, values);
+    // } else {
+    //   addCampaign(values);
+    // }
+
+    const {
+      sessionStartAndEndDate,
+      mosqueStartAndEndDate,
+      participantStartAndEndDate,
+      participantMinAndMaxDOB,
+      paymentFirstAndLast,
+      compStartAndEndDate,
+      costPerCycle,
+      percentageToPay,
+      paymentPercentageSplitOnFirstDueDate,
+    } = fieldsValue;
     const values = {
-      ...fieldsValue,
-      startDate: rangeTimeValue[0].valueOf(),
-      endDate: rangeTimeValue[1].valueOf(),
+      // ...fieldsValue,
+      sessionStartAndEndDate: [
+        sessionStartAndEndDate[0].format("YYYY-MM-DD HH:mm:ss"),
+        sessionStartAndEndDate[1].format("YYYY-MM-DD HH:mm:ss"),
+      ],
+      // mosqueStartAndEndDate: [
+      //   mosqueStartAndEndDate[0].format("YYYY-MM-DD HH:mm:ss"),
+      //   mosqueStartAndEndDate[1].format("YYYY-MM-DD HH:mm:ss"),
+      // ],
+      // participantStartAndEndDate: [
+      //   participantStartAndEndDate[0].format("YYYY-MM-DD HH:mm:ss"),
+      //   participantStartAndEndDate[1].format("YYYY-MM-DD HH:mm:ss"),
+      // ],
+      // participantMinAndMaxDOB: [
+      //   participantMinAndMaxDOB[0].format("YYYY-MM-DD HH:mm:ss"),
+      //   participantMinAndMaxDOB[1].format("YYYY-MM-DD HH:mm:ss"),
+      // ],
+      // paymentFirstAndLast: [
+      //   paymentFirstAndLast[0].format("YYYY-MM-DD HH:mm:ss"),
+      //   paymentFirstAndLast[1].format("YYYY-MM-DD HH:mm:ss"),
+      // ],
+      // compStartAndEndDate: [
+      //   compStartAndEndDate[0].format("YYYY-MM-DD HH:mm:ss"),
+      //   compStartAndEndDate[1].format("YYYY-MM-DD HH:mm:ss"),
+      // ],
     };
-    if (isEditView) {
-      updateCampaign(id, values);
-    } else {
-      addCampaign(values);
-    }
+
+    console.log(values, "valuesvalues");
+
+    const payload = {
+      startDate: sessionStartAndEndDate[0].format("YYYY-MM-DD HH:mm:ss"),
+      endDate: sessionStartAndEndDate[1].format("YYYY-MM-DD HH:mm:ss"),
+      masjidRegistrationStartDate: mosqueStartAndEndDate[0].format("YYYY-MM-DD HH:mm:ss"),
+      masjidRegistrationEndDate: mosqueStartAndEndDate[1].format("YYYY-MM-DD HH:mm:ss"),
+      participantRegistrationStartDate: participantStartAndEndDate[0].format("YYYY-MM-DD HH:mm:ss"),
+      participantRegistrationEndDate: participantStartAndEndDate[1].format("YYYY-MM-DD HH:mm:ss"),
+
+      minimumParticipantDateOfBirth: participantMinAndMaxDOB[0].format("YYYY-MM-DD"),
+      maximumParticipantDateOfBirth: participantMinAndMaxDOB[1].format("YYYY-MM-DD"),
+      competitionStartDate: compStartAndEndDate[0].format("YYYY-MM-DD"),
+      competitionEndDate: compStartAndEndDate[1].format("YYYY-MM-DD"),
+      paymentDueDate: paymentFirstAndLast[0].format("YYYY-MM-DD"),
+      secondPaymentDueDate: paymentFirstAndLast[1].format("YYYY-MM-DD"),
+      costPerCycle: fieldsValue.costPerCycle,
+      percentageToPay: fieldsValue.percentageToPay,
+      paymentPercentageSplitOnFirstDueDate: fieldsValue.paymentPercentageSplitOnFirstDueDate,
+    };
+    console.log(payload, "payload");
   };
+
+  //   {
+  //     "description": "Test Session 2", ---
+  //     "startDate": "2023-01-05 00:00:00", ---
+  //     "endDate": "2023-12-30 23:59:59", ---
+  //     "masjidRegistrationStartDate": "2023-12-02 00:00:00", ---
+  //     "masjidRegistrationEndDate": "2023-12-06 23:59:59",
+  //     "participantRegistrationStartDate": "2023-12-07 00:00:00",
+  //     "participantRegistrationEndDate": "2023-12-14 23:59:59",
+  //     "minimumParticipantDateOfBirth": "2000-01-01",
+  //     "maximumParticipantDateOfBirth": "2002-01-01",
+  //     "competitionStartDate": "2023-12-15",
+  //     "competitionEndDate": "2023-12-29",
+  //     "paymentDueDate" : "2023-12-05",
+  //     "secondPaymentDueDate" : "2023-12-15",
+  //     "costPerCycle" : 10000,
+  //     "percentageToPay" : 50,
+  //     "paymentPercentageSplitOnFirstDueDate" : "25"
+  //  }
 
   const handleImageChange = info => {
     if (info.fileList.length >= 0) {
@@ -120,12 +202,20 @@ const AddEditSession = ({
     console.log("Formatted Selected Time: ", dateString);
   };
 
-  const onDateOk = value => {
-    console.log("onOk: ", value);
+  const onDateOk = (value, dateString) => {
+    console.log("onOk: ", dateString, value);
   };
 
   const onPromotionDrawerClose = () => {
     setPromotionDrawerVisible(false);
+  };
+
+  const config = {
+    rules: [
+      {
+        required: true,
+      },
+    ],
   };
 
   return (
@@ -137,6 +227,7 @@ const AddEditSession = ({
       ) : null}
       <PageTitle title={isEditView ? "Edit Session" : "Add Session"} />
       <Form
+        hideRequiredMark
         form={form}
         className="AddSession"
         layout="vertical"
@@ -150,43 +241,51 @@ const AddEditSession = ({
             <Form.Item label="Session Id" name="sessionId">
               <Input readOnly placeholder="Session Id" />
             </Form.Item>
-            <Form.Item label="Description" name="description">
+            <Form.Item label="Cost Per Cycle" name="costPerCycle" {...config}>
+              <Input type="number" placeholder="Cost Per Cycle" />
+            </Form.Item>
+            <Form.Item label="Percentage To Pay" name="percentageToPay" {...config}>
+              <Input type="number" placeholder="Percentage To Pay" />
+            </Form.Item>
+            <Form.Item label="Payment Percentage Due Date" name="paymentPercentageDueDate" {...config}>
+              <Input type="number" placeholder="Payment Percentage Due Date" />
+            </Form.Item>
+            <Form.Item label="Description" name="description" {...config}>
               <Input.TextArea maxLength="500" rows={3} placeholder="Description" />
             </Form.Item>
-            <Form.Item label="Session Start and End Date" name="date" rules={[{ required: true }]}>
-              <RangePicker showTime format={DATE_FORMAT_TIME} onChange={onDateChange} onOk={onDateOk} />
-            </Form.Item>
-            <Form.Item label="Mosque Start and End Date" name="date" rules={[{ required: true }]}>
-              <RangePicker showTime format={DATE_FORMAT_TIME} onChange={onDateChange} onOk={onDateOk} />
-            </Form.Item>
-            <Form.Item label="Participant Registration Start and End Date" name="date" rules={[{ required: true }]}>
-              <RangePicker showTime format={DATE_FORMAT_TIME} onChange={onDateChange} onOk={onDateOk} />
-            </Form.Item>
-            <Form.Item label="Participant Minimum and Maximum DOB" name="date" rules={[{ required: true }]}>
-              <RangePicker showTime format={DATE_FORMAT_TIME} onChange={onDateChange} onOk={onDateOk} />
-            </Form.Item>
-            <Form.Item label="Competition Start and End Date" name="date" rules={[{ required: true }]}>
-              <RangePicker showTime format={DATE_FORMAT_TIME} onChange={onDateChange} onOk={onDateOk} />
-            </Form.Item>
-            <Form.Item label="Paymennt First and Last Due Date" name="date" rules={[{ required: true }]}>
-              <RangePicker showTime format={DATE_FORMAT_TIME} onChange={onDateChange} onOk={onDateOk} />
-            </Form.Item>
           </Col>
-          <Col span={8} xs={24} sm={12} lg={12} className="mg-top-40">
-            <Form.Item className="text-left" name="enabled">
-              <Radio.Group>
-                <Radio.Button value>Enabled</Radio.Button>
-                <Radio.Button value={false}>Disabled</Radio.Button>
-              </Radio.Group>
+          <Col span={8} xs={24} sm={12} lg={12}>
+            <Form.Item label="Session Start and End Date" name="sessionStartAndEndDate" {...config}>
+              <RangePicker showTime format={DATE_FORMAT_TIME_SEC} onChange={onDateChange} onOk={onDateOk} />
             </Form.Item>
-            <Form.Item label="Cost Per Cycle" name="costPerCycle">
-              <Input readOnly placeholder="Cost Per Cycle" />
+            <Form.Item label="Mosque Registration Start and End Date" name="mosqueStartAndEndDate" {...config}>
+              <RangePicker showTime format={DATE_FORMAT_TIME_SEC} onChange={onDateChange} onOk={onDateOk} />
             </Form.Item>
-            <Form.Item label="Percentage To Pay" name="percentageToPay">
-              <Input readOnly placeholder="Percentage To Pay" />
+            <Form.Item
+              label="Participant Registration Start and End Date"
+              name="participantStartAndEndDate"
+              {...config}
+            >
+              <RangePicker showTime format={DATE_FORMAT_TIME_SEC} onChange={onDateChange} onOk={onDateOk} />
             </Form.Item>
-            <Form.Item label="Payment Percentage Due Date" name="paymentPercentageDueDate">
-              <Input readOnly placeholder="Payment Percentage Due Date" />
+            <Form.Item label="Participant Minimum and Maximum DOB" name="participantMinAndMaxDOB" {...config}>
+              <RangePicker
+                placeholder={["Minimum", "Maximum"]}
+                format={DATE_FORMAT}
+                onChange={onDateChange}
+                onOk={onDateOk}
+              />
+            </Form.Item>
+            <Form.Item label="Competition Start and End Date" name="compStartAndEndDate" {...config}>
+              <RangePicker format={DATE_FORMAT} onChange={onDateChange} onOk={onDateOk} />
+            </Form.Item>
+            <Form.Item label="Paymennt First and Last Due Date" name="paymentFirstAndLast" {...config}>
+              <RangePicker
+                placeholder={["First", "Last"]}
+                format={DATE_FORMAT}
+                onChange={onDateChange}
+                onOk={onDateOk}
+              />
             </Form.Item>
           </Col>
         </Row>
