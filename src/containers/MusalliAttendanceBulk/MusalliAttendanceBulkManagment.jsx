@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
+import PropTypes, { func } from "prop-types";
 import { Link } from "react-router-dom";
 import { DownOutlined } from "@ant-design/icons";
 import { Button, Col, DatePicker, Divider, Form, Row, Select } from "antd";
@@ -12,48 +12,6 @@ import CustomIcon from "../../components/CustomIcon/CustomIcon";
 import { VALIDATE_FORM_MESSAGES_TEMPLATE } from "../../utils/constants";
 
 const { Option } = Select;
-const columns = [
-  {
-    title: "ID",
-    dataIndex: "id",
-    key: "id",
-    sorter: true,
-  },
-  {
-    title: "Name",
-    dataIndex: "name",
-    key: "name",
-  },
-  {
-    title: "Father Name",
-    dataIndex: "fatherName",
-    key: "fatherName",
-  },
-  {
-    title: "Email",
-    dataIndex: "email",
-    key: "email",
-  },
-  {
-    title: "Attendance",
-    key: "attendance",
-    render: record => (
-      <Row>
-        <Col span={12} xs={24} sm={12} lg={12}>
-          <Select
-            defaultValue="present"
-            // disabled="true"
-          >
-            {/* style={{ width: 120 }} onChange={handleChange} */}
-            <Option value="present">Present</Option>
-            <Option value="absent">Absent</Option>
-          </Select>
-        </Col>
-      </Row>
-    ),
-  },
-];
-
 function MusalliAttendanceBulkManagment(props) {
   const {
     loading,
@@ -65,12 +23,80 @@ function MusalliAttendanceBulkManagment(props) {
     mosqueOptionlist,
     mosqueOptionLoading,
   } = props;
+  const array = [];
   const [form] = Form.useForm();
   const [date, setDate] = useState("");
   const [value, setValue] = useState([]);
-
+  const [rows, setRows] = useState([]);
+  const [payload, setPayload] = useState([]);
   const getList = async query => {};
-
+  const [columns, setColumns] = useState([]);
+  useEffect(() => {
+    console.log(payload, "payloadpayload");
+  }, [payload]);
+  useEffect(() => {
+    value.map(currentElement =>
+      array.push({
+        sessionIdPk: 1,
+        participantIdPk: currentElement.id,
+        attendanceDate: "",
+        attendanceStatus: "PRESENT",
+      }),
+    );
+    setPayload(array);
+  }, [value]);
+  useEffect(() => {
+    setColumns([
+      {
+        title: "ID",
+        dataIndex: "id",
+        key: "id",
+        sorter: true,
+      },
+      {
+        title: "Name",
+        dataIndex: "name",
+        key: "name",
+      },
+      {
+        title: "Father Name",
+        dataIndex: "fatherName",
+        key: "fatherName",
+      },
+      {
+        title: "Email",
+        dataIndex: "email",
+        key: "email",
+      },
+      {
+        title: "Attendance",
+        key: "attendance",
+        render: (text, record) => (
+          <Select
+            key={record.id}
+            onChange={val => attendanceChange(val, record.id)}
+            defaultValue="PRESENT"
+            disabled={!rows.includes(record && record.id)}
+          >
+            <Option value="PRESENT">Present</Option>
+            <Option value="ABSENT">Absent</Option>
+          </Select>
+        ),
+      },
+    ]);
+  }, [rows]);
+  const attendanceChange = (val, id) => {
+    payload.map(currentElement => {
+      if (currentElement.participantIdPk === id) {
+        currentElement.attendanceStatus = val;
+      }
+      return 0;
+    });
+  };
+  const saveTableValues = () => {
+    // if(date!==""){
+    // }
+  };
   const canAddUser = permissionsUtil.checkAuth({
     category: "MusalliManagement",
     subCategory: "Musalli",
@@ -92,6 +118,13 @@ function MusalliAttendanceBulkManagment(props) {
     route: ROUTES.ADD_MUSALLI_MOSQUE_USER.path,
   };
 
+  const getRowIds = ids => {
+    setRows(ids);
+    // ids.map((x)=>{
+    // console.log(form.getFieldValue("attendance"),"aaaaa")
+    // })
+    console.log(ids, "idid");
+  };
   // useEffect(() => {
   //   if (pagination.pageable) {
   //     {
@@ -201,15 +234,13 @@ function MusalliAttendanceBulkManagment(props) {
         // disableButton={onDisable}
         canChangeStatus={canChangeStatus}
         rowSelection={false}
+        getRowIds={getRowIds}
         // canAdd={canAddUser}
         // canDelete={canDeleteUser}
       />
       <Row className="fields-row" type="flex" justify="center">
         <Col span={4} xs={24} sm={12} lg={4}>
-          <Button
-            type="primary"
-            //   disabled="true"
-          >
+          <Button type="primary" disabled={rows.length === 0} onClick={saveTableValues}>
             Save
           </Button>
         </Col>
