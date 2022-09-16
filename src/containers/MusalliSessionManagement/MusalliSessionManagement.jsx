@@ -35,110 +35,65 @@ const columns = [
     dataIndex: "startDate",
     key: "startDate",
     width: 100,
-    render: d =>
-      d
-        ?.slice(0, 3)
-        ?.reverse()
-        ?.join("-"),
   },
   {
     title: "End Date",
     dataIndex: "endDate",
     key: "endDate",
     width: 100,
-    render: d =>
-      d
-        ?.slice(0, 3)
-        ?.reverse()
-        ?.join("-"),
   },
   {
     title: "Mosque Regestration Start Date",
     dataIndex: "masjidRegistrationStartDate",
     key: "masjidRegistrationStartDate",
     width: 100,
-    render: d =>
-      d
-        ?.slice(0, 3)
-        ?.reverse()
-        ?.join("-"),
+    // render: d =>
+    //   d
+    //     ?.slice(0, 3)
+    //     ?.reverse()
+    //     ?.join("-"),
   },
   {
     title: "Mosque Regestration End Date",
     dataIndex: "masjidRegistrationEndDate",
     key: "masjidRegistrationEndDate",
     width: 100,
-    render: d =>
-      d
-        ?.slice(0, 3)
-        ?.reverse()
-        ?.join("-"),
   },
   {
     title: "Participant Regestration Start Date",
     dataIndex: "participantRegistrationStartDate",
     key: "participantRegistrationStartDate",
     width: 100,
-    render: d =>
-      d
-        ?.slice(0, 3)
-        ?.reverse()
-        ?.join("-"),
   },
   {
     title: "Participant Regestration End Date",
     dataIndex: "participantRegistrationEndDate",
     key: "participantRegistrationEndDate",
     width: 100,
-    render: d =>
-      d
-        ?.slice(0, 3)
-        ?.reverse()
-        ?.join("-"),
   },
   {
     title: "Maximum Participant DOB",
     dataIndex: "maximumParticipantDateOfBirth",
     key: "maximumParticipantDateOfBirth",
     width: 100,
-    render: d =>
-      d
-        ?.slice(0, 3)
-        ?.reverse()
-        ?.join("-"),
   },
   {
     title: "Minimum Participant DOB",
     dataIndex: "minimumParticipantDateOfBirth",
     key: "minimumParticipantDateOfBirth",
     width: 100,
-    render: d =>
-      d
-        ?.slice(0, 3)
-        ?.reverse()
-        ?.join("-"),
   },
   {
     title: "Competition Start Date",
     dataIndex: "competitionStartDate",
     key: "competitionStartDate",
     width: 100,
-    render: d =>
-      d
-        ?.slice(0, 3)
-        ?.reverse()
-        ?.join("-"),
   },
   {
     title: "Competition End Date",
     dataIndex: "competitionEndDate",
     key: "competitionEndDate",
     width: 100,
-    render: d =>
-      d
-        ?.slice(0, 3)
-        ?.reverse()
-        ?.join("-"),
   },
   {
     title: "Cost Per Cycle",
@@ -157,22 +112,12 @@ const columns = [
     dataIndex: "paymentDueDate",
     key: "paymentDueDate",
     width: 100,
-    render: d =>
-      d
-        ?.slice(0, 3)
-        ?.reverse()
-        ?.join("-"),
   },
   {
     title: "Second Payment Due Date",
     dataIndex: "secondPaymentDueDate",
     key: "secondPaymentDueDate",
     width: 100,
-    render: d =>
-      d
-        ?.slice(0, 3)
-        ?.reverse()
-        ?.join("-"),
   },
   {
     title: "Payment Percentage Split On First Due Date ",
@@ -188,7 +133,7 @@ const columns = [
     render: record => (
       <Row>
         <Col span={12} xs={24} sm={12} lg={12}>
-          <Link to={`/landing-designer/${record.id}`}>
+          <Link to={`${ROUTES.EDIT_MUSALLI_SESSION_USER.path}/${record.id}`}>
             <Button type="link">
               <CustomIcon name="EditOutlined" />
             </Button>

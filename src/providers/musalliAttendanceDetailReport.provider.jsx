@@ -25,7 +25,7 @@ const mapStateToProps = state => ({
   pagination: state.participant.value,
 
   mosqueOptionLoading: state.activeMosqueBySession.mosqueOptionLoading,
-  mosqueOptionlist: state.activeMosqueBySession.mosqueOptionvalue,
+  mosqueOptionlist: state.activeMosqueBySession.mosqueOptionlist,
 
   activeSessionLoading: state.musalliGetAllActiveSession.loading,
   activeSessionList: state.musalliGetAllActiveSession.list,

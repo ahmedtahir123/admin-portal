@@ -245,6 +245,14 @@ const appInitialState = {
     list: [],
     selected: {},
   },
+
+  musalliSession: {
+    loading: false,
+    error: null,
+    value: {},
+    list: [],
+    selected: {},
+  },
 };
 
 export default appInitialState;

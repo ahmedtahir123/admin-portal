@@ -23,6 +23,10 @@ export function selectedVolunteerSuccess(response) {
   return { type: ACTIONS.SELECTED_VOLUNTEER_SUCCESS, response };
 }
 
+export function resetSelectedData() {
+  return { type: ACTIONS.RESET_SESSION_SELECTED_DATA };
+}
+
 /* Async Actions */
 
 export function getMusalliVolunteer(query) {
@@ -40,6 +44,29 @@ export function getMusalliVolunteer(query) {
       toastMessage("error", ERROR_MESSAGE.LIST);
       throwError(error);
     }
+  };
+}
+
+// Get Volunteer By Id
+
+export function getMusalliVolunteerById(id) {
+  return async dispatch => {
+    dispatch(volunteerRequest());
+    try {
+      const [err, response] = await to(musalliService.getMusalliVolunteerById(id));
+      if (err) throwError(err);
+      dispatch(selectedVolunteerSuccess(response));
+    } catch (error) {
+      dispatch(volunteerError(error));
+      toastMessage("error", ERROR_MESSAGE.INFO);
+      throwError(error);
+    }
+  };
+}
+
+export function resetData() {
+  return async dispatch => {
+    dispatch(resetSelectedData());
   };
 }
 

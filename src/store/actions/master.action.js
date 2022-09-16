@@ -78,7 +78,7 @@ export function getAllActiveMosqueBySession(query) {
       const [err, response] = await to(musalliService.getAllActiveMosqueBySession(query));
       if (err) throwError(err);
       dispatch(activeMosqueBySesionSuccess(response));
-      dispatch(activeMosqueBySesionListSuccess(response.content));
+      dispatch(activeMosqueBySesionListSuccess(response));
     } catch (error) {
       dispatch(activeMosqueBySesionError(error));
       toastMessage("error", ERROR_MESSAGE.LIST);

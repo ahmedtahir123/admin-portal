@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import {
   Form,
   Input,
@@ -21,7 +21,7 @@ import _isEmpty from "lodash/isEmpty";
 import _get from "lodash/get";
 import _map from "lodash/map";
 import "./AddEditSession.scss";
-import { getBase64, beforeUpload } from "../../utils/utils";
+import { getBase64, beforeUpload, numberOnly } from "../../utils/utils";
 import {
   VALIDATE_FORM_MESSAGES_TEMPLATE,
   CONFIRM_MESSAGE,
@@ -37,16 +37,20 @@ const { RangePicker } = DatePicker;
 
 const AddEditSession = ({
   loading,
-  campaign,
-  getCampaignById,
-  updateCampaign,
-  addCampaign,
-  getVoucherList,
-  vouchers,
+  data,
+  getMusalliSessionById,
+  updateMusalliSession,
+  createMusalliSession,
+  resetData,
+  // updateCampaign,
+  // addCampaign,
+  // getVoucherList,
+  // vouchers,
 }) => {
   const [form] = Form.useForm();
   const [bannerImageUrl, setBannerImageUrl] = useState(listingPageCardImage);
   const [promotionDrawerVisible, setPromotionDrawerVisible] = useState(false);
+  const history = useHistory();
   const { id } = useParams();
   const isEditView = !!id;
   const currentStatus = ["Planned", "Scheduled", "In-Execution", "Completed", "Terminated"];
@@ -58,53 +62,58 @@ const AddEditSession = ({
 
   useEffect(() => {
     if (id) {
-      fetchCampaign(id);
-      fetchVouchers();
+      // fetchVouchers();
+      fetchSessionData();
     }
   }, [id]);
 
   useEffect(() => {
-    if (!_isEmpty(campaign) && !loading) {
+    if (!_isEmpty(data) && !loading && id) {
       setFormValues();
     }
-  }, [campaign, loading]);
+  }, [data, loading]);
 
-  const fetchCampaign = async campaignId => {
-    await getCampaignById(campaignId);
-  };
-  const fetchVouchers = async () => {
-    await getVoucherList();
+  // const fetchCampaign = async campaignId => {
+  //   await getSessionById(campaignId);
+  // };
+  // const fetchVouchers = async () => {
+  //   await getVoucherList();
+  // };
+
+  const fetchSessionData = async () => {
+    await getMusalliSessionById(id);
   };
 
   const setFormValues = () => {
+    const {
+      // eslint-disable-next-line no-shadow
+      id,
+      costPerCycle,
+      percentageToPay,
+      paymentPercentageSplitOnFirstDueDate,
+      description,
+      startDate,
+      endDate,
+    } = data;
     form.setFieldsValue({
-      campaignId: campaign.campaignId,
-      campaignName: campaign.campaignName,
-      description: campaign.description,
-      eventName: campaign.eventName,
-      startDate: moment(campaign.startDate),
-      endDate: moment(campaign.endDate),
-      price: campaign.price,
-      locationName: campaign.locationName,
-      areaSegment: campaign.areaSegment,
-      location: campaign.location,
-      isTransferable: campaign.isTransferable,
-      categoriesCount: campaign.categoriesCount,
-      brandsCount: campaign.brandsCount,
-      vouchersCount: campaign.vouchersCount,
+      sessionId: id,
+      costPerCycle,
+      percentageToPay,
+      paymentPercentageSplitOnFirstDueDate,
+      description,
+      sessionStartAndEndDate: [
+        moment(`${startDate.slice(0, 3).join("-")} ${startDate.slice(3, 6).join(":")}`),
+        moment(`${endDate.slice(0, 3).join("-")} ${endDate.slice(3, 6).join(":")}`),
+      ],
     });
-    if (campaign.bannerImage) setBannerImageUrl(campaign.bannerImage);
+    // * date console.log(endDate.slice(0, 3).join("-"), "startDatestartDate");
+    // * time console.log(endDate.slice(3, 6).join(":"), "startDatestartDate");
+
+    // if (data.bannerImage) setBannerImageUrl(data.bannerImage);
   };
 
   const onFormFinish = fieldsValue => {
     console.log(fieldsValue, "fieldsValuefieldsValue");
-    // const rangeTimeValue = fieldsValue.date;
-    // if (isEditView) {
-    //   updateCampaign(id, values);
-    // } else {
-    //   addCampaign(values);
-    // }
-
     const {
       sessionStartAndEndDate,
       mosqueStartAndEndDate,
@@ -116,35 +125,6 @@ const AddEditSession = ({
       percentageToPay,
       paymentPercentageSplitOnFirstDueDate,
     } = fieldsValue;
-    const values = {
-      // ...fieldsValue,
-      sessionStartAndEndDate: [
-        sessionStartAndEndDate[0].format("YYYY-MM-DD HH:mm:ss"),
-        sessionStartAndEndDate[1].format("YYYY-MM-DD HH:mm:ss"),
-      ],
-      // mosqueStartAndEndDate: [
-      //   mosqueStartAndEndDate[0].format("YYYY-MM-DD HH:mm:ss"),
-      //   mosqueStartAndEndDate[1].format("YYYY-MM-DD HH:mm:ss"),
-      // ],
-      // participantStartAndEndDate: [
-      //   participantStartAndEndDate[0].format("YYYY-MM-DD HH:mm:ss"),
-      //   participantStartAndEndDate[1].format("YYYY-MM-DD HH:mm:ss"),
-      // ],
-      // participantMinAndMaxDOB: [
-      //   participantMinAndMaxDOB[0].format("YYYY-MM-DD HH:mm:ss"),
-      //   participantMinAndMaxDOB[1].format("YYYY-MM-DD HH:mm:ss"),
-      // ],
-      // paymentFirstAndLast: [
-      //   paymentFirstAndLast[0].format("YYYY-MM-DD HH:mm:ss"),
-      //   paymentFirstAndLast[1].format("YYYY-MM-DD HH:mm:ss"),
-      // ],
-      // compStartAndEndDate: [
-      //   compStartAndEndDate[0].format("YYYY-MM-DD HH:mm:ss"),
-      //   compStartAndEndDate[1].format("YYYY-MM-DD HH:mm:ss"),
-      // ],
-    };
-
-    console.log(values, "valuesvalues");
 
     const payload = {
       startDate: sessionStartAndEndDate[0].format("YYYY-MM-DD HH:mm:ss"),
@@ -160,31 +140,18 @@ const AddEditSession = ({
       competitionEndDate: compStartAndEndDate[1].format("YYYY-MM-DD"),
       paymentDueDate: paymentFirstAndLast[0].format("YYYY-MM-DD"),
       secondPaymentDueDate: paymentFirstAndLast[1].format("YYYY-MM-DD"),
-      costPerCycle: fieldsValue.costPerCycle,
-      percentageToPay: fieldsValue.percentageToPay,
-      paymentPercentageSplitOnFirstDueDate: fieldsValue.paymentPercentageSplitOnFirstDueDate,
+      costPerCycle,
+      percentageToPay,
+      paymentPercentageSplitOnFirstDueDate,
     };
     console.log(payload, "payload");
-  };
 
-  //   {
-  //     "description": "Test Session 2", ---
-  //     "startDate": "2023-01-05 00:00:00", ---
-  //     "endDate": "2023-12-30 23:59:59", ---
-  //     "masjidRegistrationStartDate": "2023-12-02 00:00:00", ---
-  //     "masjidRegistrationEndDate": "2023-12-06 23:59:59",
-  //     "participantRegistrationStartDate": "2023-12-07 00:00:00",
-  //     "participantRegistrationEndDate": "2023-12-14 23:59:59",
-  //     "minimumParticipantDateOfBirth": "2000-01-01",
-  //     "maximumParticipantDateOfBirth": "2002-01-01",
-  //     "competitionStartDate": "2023-12-15",
-  //     "competitionEndDate": "2023-12-29",
-  //     "paymentDueDate" : "2023-12-05",
-  //     "secondPaymentDueDate" : "2023-12-15",
-  //     "costPerCycle" : 10000,
-  //     "percentageToPay" : 50,
-  //     "paymentPercentageSplitOnFirstDueDate" : "25"
-  //  }
+    // if (isEditView) {
+    //   updateMusalliSession(id, payload);
+    // } else {
+    //   createMusalliSession(payload);
+    // }
+  };
 
   const handleImageChange = info => {
     if (info.fileList.length >= 0) {
@@ -192,10 +159,10 @@ const AddEditSession = ({
     }
   };
 
-  const initialValues = {
-    isTransferable: !!campaign.isTransferable,
-    status: campaign.status,
-  };
+  // const initialValues = {
+  //   isTransferable: !!data.isTransferable,
+  //   status: data.status,
+  // };
 
   const onDateChange = (value, dateString) => {
     console.log("Selected Time: ", value);
@@ -206,8 +173,10 @@ const AddEditSession = ({
     console.log("onOk: ", dateString, value);
   };
 
-  const onPromotionDrawerClose = () => {
-    setPromotionDrawerVisible(false);
+  const onCancel = () => {
+    form.resetFields();
+    history.goBack();
+    resetData();
   };
 
   const config = {
@@ -232,23 +201,54 @@ const AddEditSession = ({
         className="AddSession"
         layout="vertical"
         name="nest-messages"
-        initialValues={initialValues}
+        // initialValues={initialValues}
         onFinish={onFormFinish}
         validateMessages={VALIDATE_FORM_MESSAGES_TEMPLATE}
       >
         <Row className="fields-row" gutter={20} type="flex">
           <Col span={8} xs={24} sm={12} lg={12}>
-            <Form.Item label="Session Id" name="sessionId">
-              <Input readOnly placeholder="Session Id" />
+            {isEditView && (
+              <Form.Item label="Session Id" name="sessionId">
+                <Input readOnly placeholder="Session Id" />
+              </Form.Item>
+            )}
+            <Form.Item
+              label="Cost Per Cycle"
+              name="costPerCycle"
+              rules={[
+                {
+                  required: true,
+                  // max: 20,
+                },
+                numberOnly,
+              ]}
+            >
+              <Input placeholder="Cost Per Cycle" />
             </Form.Item>
-            <Form.Item label="Cost Per Cycle" name="costPerCycle" {...config}>
-              <Input type="number" placeholder="Cost Per Cycle" />
+            <Form.Item
+              label="Percentage To Pay"
+              name="percentageToPay"
+              rules={[
+                {
+                  required: true,
+                },
+                numberOnly,
+              ]}
+            >
+              <Input placeholder="Percentage To Pay" />
             </Form.Item>
-            <Form.Item label="Percentage To Pay" name="percentageToPay" {...config}>
-              <Input type="number" placeholder="Percentage To Pay" />
-            </Form.Item>
-            <Form.Item label="Payment Percentage Due Date" name="paymentPercentageDueDate" {...config}>
-              <Input type="number" placeholder="Payment Percentage Due Date" />
+            <Form.Item
+              label="Payment Percentage Due Date"
+              name="paymentPercentageSplitOnFirstDueDate"
+              rules={[
+                {
+                  required: true,
+                  // max: 20,
+                },
+                numberOnly,
+              ]}
+            >
+              <Input placeholder="Payment Percentage Due Date" />
             </Form.Item>
             <Form.Item label="Description" name="description" {...config}>
               <Input.TextArea maxLength="500" rows={3} placeholder="Description" />
@@ -293,13 +293,13 @@ const AddEditSession = ({
         {isEditView ? (
           <Row className="fields-row" gutter={20}>
             <Col span={8} xs={24} sm={12} lg={12}>
-              Created By: {_get(campaign, "createdBy", "")}
+              {/* Created By: {_get(data, "createdBy", "")}
               <br />
-              Created At: {_get(campaign, "createdAt", "")}
+              Created At: {_get(data, "createdAt", "")}
               <br />
-              Last Modify By: {_get(campaign, "lastModifiedBy", "")}
+              Last Modify By: {_get(data, "lastModifiedBy", "")}
               <br />
-              Last Modify At: {_get(campaign, "lastModifiedAt", "")}
+              Last Modify At: {_get(data, "lastModifiedAt", "")} */}
             </Col>
             <Col span={8} xs={24} sm={12} lg={12}>
               <Row className="fields-row" gutter={24} type="flex">
@@ -321,7 +321,7 @@ const AddEditSession = ({
                 </Col>
                 <Col span={8} xs={24} sm={8} lg={8} className="text-right">
                   <Form.Item>
-                    <Button type="info" onClick={() => form.resetFields()}>
+                    <Button type="info" onClick={onCancel}>
                       Cancel
                     </Button>
                   </Form.Item>
@@ -339,7 +339,7 @@ const AddEditSession = ({
         ) : (
           <Row className="fields-row" justify="end" type="flex">
             <Col>
-              <Button className="action-btn mg-right-50" type="info" onClick={() => form.resetFields()}>
+              <Button className="action-btn mg-right-50" type="info" onClick={onCancel}>
                 Cancel
               </Button>
               <Button className="action-btn" type="primary" htmlType="submit" loading={loading}>
@@ -358,8 +358,12 @@ AddEditSession.propTypes = {
   updateCampaign: PropTypes.func,
   addCampaign: PropTypes.func,
   getVoucherList: PropTypes.func,
-  campaign: PropTypes.object,
+  data: PropTypes.object,
   loading: PropTypes.bool,
   vouchers: PropTypes.array,
+  getMusalliSessionById: PropTypes.func,
+  updateMusalliSession: PropTypes.func,
+  createMusalliSession: PropTypes.func,
+  resetData: PropTypes.func,
 };
 export default AddEditSession;

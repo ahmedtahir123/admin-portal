@@ -46,7 +46,6 @@ const columns = [
     dataIndex: "dateOfBirth",
     key: "dateOfBirth",
     width: 100,
-    render: record => <>{record?.join("-")}</>,
   },
   {
     title: "Address",
@@ -67,7 +66,7 @@ const columns = [
     render: record => (
       <Row>
         <Col span={12} xs={24} sm={12} lg={12}>
-          <Link to={`/landing-designer/${record.id}`}>
+          <Link to={`${ROUTES.EDIT_MUSALLI_VOLUNTEER_USER.path}/${record.id}`}>
             <Button type="link">
               <CustomIcon name="EditOutlined" />
             </Button>
@@ -123,7 +122,7 @@ function MusalliVolunteerManagement(props) {
     handler: enableDisableAdmin,
     text: "Disable",
   };
-  console.log(list, "listAAA");
+
   return (
     <>
       <PageTitle title="All Volunteers" />
@@ -139,7 +138,7 @@ function MusalliVolunteerManagement(props) {
         // enableButton={onEnable}
         // disableButton={onDisable}
         // canChangeStatus={canChangeStatus}
-        // canAdd={canAddUser}
+        canAdd={canAddUser}
         // canDelete={canDeleteUser}
       />
     </>

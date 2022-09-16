@@ -1,44 +1,43 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import {
-  Form,
-  Input,
-  Button,
-  Row,
-  Col,
-  Radio,
-  DatePicker,
-  Upload,
-  message,
-  Divider,
-  Spin,
-  Switch,
-  Popconfirm,
-} from "antd";
-import PropTypes from "prop-types";
+import { Button, Col, DatePicker, Divider, Form, Input, Popconfirm, Row, Select, Spin } from "antd";
+import TextArea from "antd/lib/input/TextArea";
 import * as moment from "dayjs";
-import _isEmpty from "lodash/isEmpty";
 import _get from "lodash/get";
-import _map from "lodash/map";
-import "./AddEditVolunteer.scss";
-import { getBase64, beforeUpload, numberOnly } from "../../utils/utils";
-import { VALIDATE_FORM_MESSAGES_TEMPLATE, CONFIRM_MESSAGE, DATE_FORMAT_TIME, DATE_FORMAT } from "../../utils/constants";
-import BrandLogo from "../../images/avatar.png";
-import listingPageCardImage from "../../images/listing-card.svg";
+import _isEmpty from "lodash/isEmpty";
+import PropTypes from "prop-types";
+import React, { useEffect, useState } from "react";
+import { useHistory, useParams } from "react-router-dom";
 import PageTitle from "../../components/PageTitle/PageTitle";
-import AddRemoveDealProvider from "../../providers/addRemoveDeal.provider";
-const { RangePicker } = DatePicker;
+import listingPageCardImage from "../../images/listing-card.svg";
+import { CONFIRM_MESSAGE, DATE_FORMAT, VALIDATE_FORM_MESSAGES_TEMPLATE } from "../../utils/constants";
+import { getBase64, numberOnly } from "../../utils/utils";
+import "./AddEditVolunteer.scss";
+
+const cityList = [
+  { name: "Karachi", id: 1, code: 10 },
+  { name: "Lahore", id: 2, code: 20 },
+  { name: "Islamabad", id: 3, code: 30 },
+  { name: "Peshawar", id: 4, code: 40 },
+  { name: "Faisalabad", id: 5, code: 50 },
+  { name: "Quetta", id: 6, code: 60 },
+  { name: "Mirpur khas", id: 7, code: 70 },
+];
 
 const AddEditVolunteer = ({
   loading,
   campaign,
-  getCampaignById,
+  data,
+  resetData,
   updateCampaign,
   addCampaign,
   getVoucherList,
   vouchers,
+  getMusalliVolunteerById,
+
+  mosqueOptionLoading,
+  mosqueOptionlist,
 }) => {
   const [form] = Form.useForm();
+  const history = useHistory();
   const [bannerImageUrl, setBannerImageUrl] = useState(listingPageCardImage);
   const [promotionDrawerVisible, setPromotionDrawerVisible] = useState(false);
   const { id } = useParams();
@@ -52,68 +51,60 @@ const AddEditVolunteer = ({
 
   useEffect(() => {
     if (id) {
-      fetchCampaign(id);
-      fetchVouchers();
+      fetchVolunteerDataById();
     }
   }, [id]);
 
+  const fetchVolunteerDataById = async () => {
+    await getMusalliVolunteerById(id);
+  };
+
   useEffect(() => {
-    if (!_isEmpty(campaign) && !loading) {
+    if (!_isEmpty(data) && !loading && id) {
       setFormValues();
     }
-  }, [campaign, loading]);
+  }, [data, loading]);
 
-  const fetchCampaign = async campaignId => {
-    await getCampaignById(campaignId);
-  };
-  const fetchVouchers = async () => {
-    await getVoucherList();
-  };
+  // const fetchCampaign = async campaignId => {
+  //   await getCampaignById(campaignId);
+  // };
+  // const fetchVouchers = async () => {
+  //   await getVoucherList();
+  // };
 
   const setFormValues = () => {
     form.setFieldsValue({
-      campaignId: campaign.campaignId,
-      campaignName: campaign.campaignName,
-      description: campaign.description,
-      eventName: campaign.eventName,
-      startDate: moment(campaign.startDate),
-      endDate: moment(campaign.endDate),
-      price: campaign.price,
-      locationName: campaign.locationName,
-      areaSegment: campaign.areaSegment,
-      location: campaign.location,
-      isTransferable: campaign.isTransferable,
-      categoriesCount: campaign.categoriesCount,
-      brandsCount: campaign.brandsCount,
-      vouchersCount: campaign.vouchersCount,
+      volunteerName: data.name,
+      cellPhoneNumber: data.contact,
+      status: data.status,
     });
-    if (campaign.bannerImage) setBannerImageUrl(campaign.bannerImage);
   };
 
   const onFormFinish = fieldsValue => {
-    const rangeTimeValue = fieldsValue.date;
-    const values = {
-      ...fieldsValue,
-      startDate: rangeTimeValue[0].valueOf(),
-      endDate: rangeTimeValue[1].valueOf(),
-    };
-    if (isEditView) {
-      updateCampaign(id, values);
-    } else {
-      addCampaign(values);
-    }
+    console.log(fieldsValue, "fieldsValue");
+    // const rangeTimeValue = fieldsValue.date;
+    // const values = {
+    //   ...fieldsValue,
+    //   startDate: rangeTimeValue[0].valueOf(),
+    //   endDate: rangeTimeValue[1].valueOf(),
+    // };
+    // if (isEditView) {
+    //   updateCampaign(id, values);
+    // } else {
+    //   addCampaign(values);
+    // }
   };
 
-  const handleImageChange = info => {
-    if (info.fileList.length >= 0) {
-      getBase64(info.fileList[0].originFileObj, imageUrl => setBannerImageUrl(imageUrl));
-    }
-  };
+  // const handleImageChange = info => {
+  //   if (info.fileList.length >= 0) {
+  //     getBase64(info.fileList[0].originFileObj, imageUrl => setBannerImageUrl(imageUrl));
+  //   }
+  // };
 
-  const initialValues = {
-    isTransferable: !!campaign.isTransferable,
-    status: campaign.status,
-  };
+  // const initialValues = {
+  //   isTransferable: !!campaign.isTransferable,
+  //   status: campaign.status,
+  // };
 
   const onDateChange = (value, dateString) => {
     console.log("Selected Time: ", value);
@@ -126,6 +117,12 @@ const AddEditVolunteer = ({
 
   const onPromotionDrawerClose = () => {
     setPromotionDrawerVisible(false);
+  };
+
+  const onCancel = () => {
+    form.resetFields();
+    history.goBack();
+    resetData();
   };
 
   return (
@@ -141,24 +138,30 @@ const AddEditVolunteer = ({
         className="AddVolunteer"
         layout="vertical"
         name="nest-messages"
-        initialValues={initialValues}
+        // initialValues={initialValues}
         onFinish={onFormFinish}
         validateMessages={VALIDATE_FORM_MESSAGES_TEMPLATE}
       >
         <Row className="fields-row" gutter={20} type="flex">
           <Col span={8} xs={24} sm={12} lg={12}>
-            <Form.Item label="Volunteer Code" name="volunteerId">
-              <Input readOnly placeholder="Volunteer Code" />
-            </Form.Item>
+            {/* {isEditView && (
+              <Form.Item label="Volunteer Code" name="volunteerId">
+                <Input readOnly placeholder="Volunteer Code" />
+              </Form.Item>
+            )} */}
             <Form.Item label="Volunteer Name" name="volunteerName" rules={[{ required: true }]}>
               <Input placeholder="Volunteer Name" />
             </Form.Item>
-            <Form.Item label="Email" name="emailAddress" rules={[{ required: true, type: "email" }]}>
-              <Input placeholder="Email" readOnly={isEditView} />
-            </Form.Item>
-            <Form.Item label="Date Of Birth" name="dateOfBirth" rules={[{ required: true }]}>
-              <DatePicker format={DATE_FORMAT} />
-            </Form.Item>
+            {!isEditView && (
+              <>
+                <Form.Item label="Email" name="emailAddress" rules={[{ required: true, type: "email" }]}>
+                  <Input placeholder="Email" readOnly={isEditView} />
+                </Form.Item>
+                <Form.Item label="Password" name="password" rules={[{ required: true }]}>
+                  <Input.Password placeholder="Password" />
+                </Form.Item>
+              </>
+            )}
             <Form.Item
               label="Cell Number"
               name="cellPhoneNumber"
@@ -172,35 +175,126 @@ const AddEditVolunteer = ({
             >
               <Input placeholder="03001234567" />
             </Form.Item>
-            <Form.Item label="Address" name="address" rules={[{ required: true }]}>
-              <Input placeholder="Address" />
-            </Form.Item>
+            {isEditView && (
+              <Form.Item
+                label="Status"
+                name="status"
+                rules={[
+                  {
+                    required: true,
+                  },
+                ]}
+              >
+                <Select allowClear placeholder="Select Status">
+                  <Select.Option value="ACTIVE">ACTIVE</Select.Option>
+                  <Select.Option value="IN_ACTIVE">IN_ACTIVE</Select.Option>
+                </Select>
+              </Form.Item>
+            )}
+            {!isEditView && (
+              <>
+                <Form.Item label="Date Of Birth" name="dateOfBirth" rules={[{ required: true }]}>
+                  <DatePicker style={{ width: "100%" }} format={DATE_FORMAT} />
+                </Form.Item>
+                <Form.Item label="Address" name="address" rules={[{}]}>
+                  <TextArea rows={4} placeholder="Address" maxLength={6} />
+                </Form.Item>
+              </>
+            )}
           </Col>
-          <Col span={8} xs={24} sm={12} lg={12} className="mg-top-40">
-            <Form.Item className="text-left" name="enabled">
-              <Radio.Group>
-                <Radio.Button value>Enabled</Radio.Button>
-                <Radio.Button value={false}>Disabled</Radio.Button>
-              </Radio.Group>
-            </Form.Item>
-            <Form.Item label="Mobile Banner">
-              <div className="text-center">
-                <div className="bg-gray">
-                  <img src={bannerImageUrl || BrandLogo} alt="avatar" width={250} />
-                  <div className="upload-container">
-                    <Upload showUploadList={false} beforeUpload={beforeUpload} onChange={handleImageChange}>
-                      <Button>Upload</Button>
-                    </Upload>
-                  </div>
-                </div>
-              </div>
-            </Form.Item>
-          </Col>
+          {!isEditView && (
+            <Col span={8} xs={24} sm={12} lg={12}>
+              <Form.Item label="Select Mosque" name="mosque" rules={[{ required: false }]}>
+                <Select
+                  showSearch
+                  allowClear
+                  placeholder="Select Mosque"
+                  optionFilterProp="children"
+                  loading={mosqueOptionLoading}
+                  filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+                >
+                  {mosqueOptionlist?.length > 0 &&
+                    mosqueOptionlist?.map(item => (
+                      <Select.Option key={item.code} value={item.id}>
+                        {item.name}
+                      </Select.Option>
+                    ))}
+                </Select>
+              </Form.Item>
+              <Form.Item label="Select City" name="city" rules={[{ required: false }]}>
+                <Select
+                  showSearch
+                  allowClear
+                  placeholder="Select City"
+                  optionFilterProp="children"
+                  loading={mosqueOptionLoading}
+                  filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+                >
+                  {cityList?.length > 0 &&
+                    cityList?.map(item => <Select.Option key={item.code}>{item.name}</Select.Option>)}
+                </Select>
+              </Form.Item>
+              <Form.Item
+                label="NIC"
+                name="nic"
+                rules={[
+                  {
+                    required: false,
+                  },
+                  numberOnly,
+                ]}
+              >
+                <Input placeholder="42400-1111111-1" />
+              </Form.Item>
+              <Form.Item
+                label="Age"
+                name="age"
+                rules={[
+                  {
+                    required: false,
+                  },
+                  numberOnly,
+                ]}
+              >
+                <Input placeholder="Age" readOnly={isEditView} />
+              </Form.Item>
+              <Form.Item label="Location" name="location">
+                <Row className="fields-row" gutter={20} type="flex">
+                  <Col span={8} xs={24} sm={12} lg={12}>
+                    <Form.Item
+                      name="Lang"
+                      rules={[
+                        {
+                          required: false,
+                        },
+                        numberOnly,
+                      ]}
+                    >
+                      <Input placeholder="Long" />
+                    </Form.Item>
+                  </Col>
+                  <Col span={8} xs={24} sm={12} lg={12}>
+                    <Form.Item
+                      name="Long"
+                      rules={[
+                        {
+                          required: false,
+                        },
+                        numberOnly,
+                      ]}
+                    >
+                      <Input placeholder="Lang" />
+                    </Form.Item>
+                  </Col>
+                </Row>
+              </Form.Item>
+            </Col>
+          )}
         </Row>
         <Divider />
         {isEditView ? (
           <Row className="fields-row" gutter={20}>
-            <Col span={8} xs={24} sm={12} lg={12}>
+            {/* <Col span={8} xs={24} sm={12} lg={12}>
               Created By: {_get(campaign, "createdBy", "")}
               <br />
               Created At: {_get(campaign, "createdAt", "")}
@@ -208,7 +302,7 @@ const AddEditVolunteer = ({
               Last Modify By: {_get(campaign, "lastModifiedBy", "")}
               <br />
               Last Modify At: {_get(campaign, "lastModifiedAt", "")}
-            </Col>
+            </Col> */}
             <Col span={8} xs={24} sm={12} lg={12}>
               <Row className="fields-row" gutter={24} type="flex">
                 <Col span={8} xs={24} sm={8} lg={8} className="text-right">
@@ -229,7 +323,7 @@ const AddEditVolunteer = ({
                 </Col>
                 <Col span={8} xs={24} sm={8} lg={8} className="text-right">
                   <Form.Item>
-                    <Button type="info" onClick={() => form.resetFields()}>
+                    <Button type="info" onClick={onCancel}>
                       Cancel
                     </Button>
                   </Form.Item>
@@ -247,7 +341,7 @@ const AddEditVolunteer = ({
         ) : (
           <Row className="fields-row" justify="end" type="flex">
             <Col>
-              <Button className="action-btn mg-right-50" type="info" onClick={() => form.resetFields()}>
+              <Button className="action-btn mg-right-50" type="info" onClick={onCancel}>
                 Cancel
               </Button>
               <Button className="action-btn" type="primary" htmlType="submit" loading={loading}>
@@ -262,12 +356,18 @@ const AddEditVolunteer = ({
 };
 
 AddEditVolunteer.propTypes = {
-  getCampaignById: PropTypes.func,
+  // getCampaignById: PropTypes.func,
   updateCampaign: PropTypes.func,
   addCampaign: PropTypes.func,
   getVoucherList: PropTypes.func,
   campaign: PropTypes.object,
   loading: PropTypes.bool,
   vouchers: PropTypes.array,
+
+  data: PropTypes.object,
+  resetData: PropTypes.func,
+  getMusalliVolunteerById: PropTypes.func,
+  mosqueOptionLoading: PropTypes.bool,
+  mosqueOptionlist: PropTypes.array,
 };
 export default AddEditVolunteer;

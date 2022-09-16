@@ -18,10 +18,10 @@ const mapDispatchToProps = dispatch =>
   );
 
 const mapStateToProps = state => ({
-  loading: state.participant.loading,
-  list: state.participant.list,
-  error: state.participant.error,
-  pagination: state.participant.value,
+  loading: state.musalliSession.loading,
+  list: state.musalliSession.list,
+  error: state.musalliSession.error,
+  pagination: state.musalliSession.value,
 });
 
 const MusalliSessionManagementProvider = withRouter(
