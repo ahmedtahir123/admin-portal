@@ -64,6 +64,43 @@ export function getMusalliVolunteerById(id) {
   };
 }
 
+export function updateVolunteer(id, body, params, onCancel) {
+  return async dispatch => {
+    dispatch(volunteerRequest());
+    try {
+      const [err, response] = await to(musalliService.updateVolunteer(id, body, params));
+      if (err) throwError(err);
+      // dispatch(getMusalliVolunteerById(id));
+      onCancel();
+      toastMessage("success", SUCCESS_MESSAGE.EDITED);
+    } catch (error) {
+      dispatch(volunteerError(error));
+      toastMessage("error", ERROR_MESSAGE.EDITED);
+      throwError(error);
+    }
+  };
+}
+
+export function addVolunteer(body, params, onCancel) {
+  console.log(body, "responseresponseresponseresponse");
+  return async dispatch => {
+    dispatch(volunteerRequest());
+    try {
+      const [err, response] = await to(musalliService.addVolunteer(body, params));
+      if (err) throwError(err);
+      // dispatch(participantSuccess(response));
+      onCancel();
+      console.log(response, "responseresponseresponseresponse");
+      toastMessage("success", SUCCESS_MESSAGE.ADDED);
+    } catch (error) {
+      dispatch(volunteerError(error));
+      toastMessage("error", ERROR_MESSAGE.ADDED);
+      console.log(error, "responseresponseresponseresponse");
+      throwError(error);
+    }
+  };
+}
+
 export function resetData() {
   return async dispatch => {
     dispatch(resetSelectedData());

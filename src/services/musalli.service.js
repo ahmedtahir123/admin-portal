@@ -30,11 +30,16 @@ const musalliService = {
   getMusalliVolunteerById: id => get(`api/public/v1/volunteer/${id}?session-id=1`),
 
   // Post Requests
+  //* Musalli
   postSmsUtility: body => post(`api/role-admin/v1/session/send-message`, body),
-  createMusalliSession: body => put(`api/role-admin/v1/session`, body),
+  createMusalliSession: body => post(`api/role-admin/v1/session`, body),
+  addVolunteer: body => post(`api/role-admin/v1/volunteer`, body),
 
-  // Put Requests
-  updateMusalliSession: body => post(`api/role-admin/v1/session`, body),
+  // Patch Requests
+  updateMusalliSession: body => patch(`api/role-admin/v1/session`, body),
+
+  // Put request
+  updateVolunteer: (id, body, params) => put(`api/role-admin/v1/volunteer/${id}`, body),
 };
 export default musalliService;
 //

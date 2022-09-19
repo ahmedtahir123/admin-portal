@@ -1,7 +1,5 @@
 import { Button, Col, DatePicker, Divider, Form, Input, Popconfirm, Row, Select, Spin } from "antd";
 import TextArea from "antd/lib/input/TextArea";
-import * as moment from "dayjs";
-import _get from "lodash/get";
 import _isEmpty from "lodash/isEmpty";
 import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
@@ -9,17 +7,17 @@ import { useHistory, useParams } from "react-router-dom";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import listingPageCardImage from "../../images/listing-card.svg";
 import { CONFIRM_MESSAGE, DATE_FORMAT, VALIDATE_FORM_MESSAGES_TEMPLATE } from "../../utils/constants";
-import { getBase64, numberOnly } from "../../utils/utils";
+import { numberOnly } from "../../utils/utils";
 import "./AddEditVolunteer.scss";
 
 const cityList = [
-  { name: "Karachi", id: 1, code: 10 },
-  { name: "Lahore", id: 2, code: 20 },
-  { name: "Islamabad", id: 3, code: 30 },
-  { name: "Peshawar", id: 4, code: 40 },
-  { name: "Faisalabad", id: 5, code: 50 },
-  { name: "Quetta", id: 6, code: 60 },
-  { name: "Mirpur khas", id: 7, code: 70 },
+  { name: "Karachi", id: 1, code: "Karachi" },
+  { name: "Lahore", id: 2, code: "Lahore" },
+  { name: "Islamabad", id: 3, code: "Islamabad" },
+  { name: "Peshawar", id: 4, code: "Peshawar" },
+  { name: "Faisalabad", id: 5, code: "Faisalabad" },
+  { name: "Quetta", id: 6, code: "Quetta" },
+  { name: "Mirpur khas", id: 7, code: "Mirpur khas" },
 ];
 
 const AddEditVolunteer = ({
@@ -32,9 +30,12 @@ const AddEditVolunteer = ({
   getVoucherList,
   vouchers,
   getMusalliVolunteerById,
-
+  updateVolunteer,
+  addVolunteer,
   mosqueOptionLoading,
   mosqueOptionlist,
+
+  activeSessionList,
 }) => {
   const [form] = Form.useForm();
   const history = useHistory();
@@ -82,17 +83,57 @@ const AddEditVolunteer = ({
 
   const onFormFinish = fieldsValue => {
     console.log(fieldsValue, "fieldsValue");
+    const {
+      status,
+      Lang,
+      Long,
+      address,
+      age,
+      cellPhoneNumber,
+      city,
+      dateOfBirth,
+      emailAddress,
+      mosque,
+      nic,
+      password,
+      volunteerName,
+    } = fieldsValue;
     // const rangeTimeValue = fieldsValue.date;
     // const values = {
     //   ...fieldsValue,
     //   startDate: rangeTimeValue[0].valueOf(),
     //   endDate: rangeTimeValue[1].valueOf(),
     // };
-    // if (isEditView) {
-    //   updateCampaign(id, values);
-    // } else {
-    //   addCampaign(values);
-    // }
+    if (isEditView) {
+      const payload = {
+        name: volunteerName,
+        contact: cellPhoneNumber,
+        status,
+      };
+      updateVolunteer(id, payload, "", onCancel);
+    } else {
+      const payload = {
+        name: volunteerName,
+        email: emailAddress,
+        password,
+        dateOfBirth: dateOfBirth.format("YYYY-MM-DD"),
+        age,
+        address: {
+          addressLine: address,
+          city,
+          countryCode: "PK",
+          location: {
+            lat: Lang,
+            lng: Long,
+          },
+        },
+        contact: cellPhoneNumber,
+        sessionId: activeSessionList[0]?.id,
+        mosqueId: mosque,
+      };
+      console.log(payload, "addPayload");
+      addVolunteer(payload, "", onCancel);
+    }
   };
 
   // const handleImageChange = info => {
@@ -197,7 +238,7 @@ const AddEditVolunteer = ({
                   <DatePicker style={{ width: "100%" }} format={DATE_FORMAT} />
                 </Form.Item>
                 <Form.Item label="Address" name="address" rules={[{}]}>
-                  <TextArea rows={4} placeholder="Address" maxLength={6} />
+                  <TextArea rows={4} placeholder="Address" />
                 </Form.Item>
               </>
             )}
@@ -294,15 +335,15 @@ const AddEditVolunteer = ({
         <Divider />
         {isEditView ? (
           <Row className="fields-row" gutter={20}>
-            {/* <Col span={8} xs={24} sm={12} lg={12}>
-              Created By: {_get(campaign, "createdBy", "")}
+            <Col span={8} xs={24} sm={12} lg={12}>
+              {/* Created By: {_get(campaign, "createdBy", "")}
               <br />
               Created At: {_get(campaign, "createdAt", "")}
               <br />
               Last Modify By: {_get(campaign, "lastModifiedBy", "")}
               <br />
-              Last Modify At: {_get(campaign, "lastModifiedAt", "")}
-            </Col> */}
+              Last Modify At: {_get(campaign, "lastModifiedAt", "")} */}
+            </Col>
             <Col span={8} xs={24} sm={12} lg={12}>
               <Row className="fields-row" gutter={24} type="flex">
                 <Col span={8} xs={24} sm={8} lg={8} className="text-right">
@@ -365,8 +406,11 @@ AddEditVolunteer.propTypes = {
   vouchers: PropTypes.array,
 
   data: PropTypes.object,
-  resetData: PropTypes.func,
   getMusalliVolunteerById: PropTypes.func,
+  updateVolunteer: PropTypes.func,
+  addVolunteer: PropTypes.func,
+  resetData: PropTypes.func,
+  activeSessionList: PropTypes.func,
   mosqueOptionLoading: PropTypes.bool,
   mosqueOptionlist: PropTypes.array,
 };
