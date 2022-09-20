@@ -28,6 +28,7 @@ const musalliService = {
 
   // Post Requests
   postSmsUtility: body => post(`api/role-admin/v1/session/send-message`, body),
+  postAttendanceBulk: body => post(`api/role-admin/v1/volunteer/participant-attendance/mark-attendance-in-bulk`, body),
 };
 export default musalliService;
 //

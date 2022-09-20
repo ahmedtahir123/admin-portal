@@ -215,6 +215,13 @@ const appInitialState = {
     list: [],
     selected: {},
   },
+  musalliAttendanceBulk: {
+    loading: false,
+    error: null,
+    value: {},
+    list: [],
+    selected: {},
+  },
   mosque: {
     loading: false,
     error: null,

@@ -129,6 +129,7 @@ export const MERCHANT_USER_TYPE = {
 export const SUCCESS_MESSAGE = {
   DELETED: "Deleted Successfully",
   ADDED: "Added Successfully",
+  ATTENDANCE: "Attendance Marked Successfully",
   EDITED: "Updated Successfully",
   ENABLED: "Enabled / Disabled Successfully",
   PUBLISHED: "Published / Un Published Successfully",
