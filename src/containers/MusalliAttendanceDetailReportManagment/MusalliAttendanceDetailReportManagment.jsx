@@ -12,7 +12,7 @@ const columns = [
     title: "Attendance Date",
     dataIndex: "attendanceDate",
     key: "attendanceDate",
-    render: record => record?.join("-"),
+    // render: record => record?.join("-"),
     sorter: true,
   },
   {
@@ -29,7 +29,7 @@ const columns = [
     title: "Participant Contact",
     dataIndex: "participantContact",
     key: "participantContact",
-    render: record => `${record}`,
+    // render: record => `${record}`,
   },
 ];
 

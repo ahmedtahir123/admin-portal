@@ -24,6 +24,10 @@ const mapStateToProps = state => ({
   list: state.participant.list,
   error: state.participant.error,
   pagination: state.participant.value,
+
+  mosqueOptionLoading: state.activeMosqueBySession.mosqueOptionLoading,
+  mosqueOptionlist: state.activeMosqueBySession.mosqueOptionlist,
+  activeSessionList: state.musalliGetAllActiveSession.list,
 });
 
 const MusalliParticipantManagementProvider = withRouter(

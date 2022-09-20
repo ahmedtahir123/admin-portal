@@ -34,7 +34,7 @@ const columns = [
     dataIndex: "dateRequest",
     key: "dateRequest",
     width: 150,
-    render: record => record?.join("-"),
+    // render: record => record?.join("-"),
   },
   {
     title: "Participant Comment",

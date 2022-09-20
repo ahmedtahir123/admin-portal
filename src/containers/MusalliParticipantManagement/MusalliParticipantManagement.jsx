@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { Button, Col, Row } from "antd";
+import { Button, Col, DatePicker, Divider, Form, Row, Select } from "antd";
 import ROUTES from "../../routes/constant.route";
 import ListView from "../../components/ListView/ListView";
 import permissionsUtil from "../../utils/permissions.util";
@@ -72,7 +72,20 @@ const columns = [
 ];
 
 function MusalliMosqueManagement(props) {
-  const { loading, enableDisableAdmin, pagination, getMusalliParticipant, deleteAdminUsers, list } = props;
+  const {
+    loading,
+    enableDisableAdmin,
+    pagination,
+    getMusalliParticipant,
+    deleteAdminUsers,
+    list,
+    mosqueOptionlist,
+    mosqueOptionLoading,
+    activeSessionList,
+  } = props;
+  const [form] = Form.useForm();
+  const [date, setDate] = useState("");
+  const [value, setValue] = useState([]);
   const getList = async query => {
     await getMusalliParticipant(query);
   };
@@ -117,8 +130,87 @@ function MusalliMosqueManagement(props) {
     text: "Disable",
   };
 
+  const onFormFinish = async val => {
+    console.log(val, "valval");
+
+    // https://dev-api.baitussalam.org:8450/api/role-admin/v1/participant/mosque/3/session/1
+  };
+
+  const onClear = () => {
+    form.resetFields();
+  };
+
+  console.log(activeSessionList, "activeSessionList");
+
   return (
     <>
+      <Form
+        hideRequiredMark
+        className="add-remove-voucher"
+        form={form}
+        initialValues={{
+          selectedBrand: "Select Masjid",
+          selectedLocation: "Select Location",
+          selectedOutlet: "Select Outlet",
+        }}
+        layout="vertical"
+        name="nest-messages"
+        onFinish={onFormFinish}
+      >
+        <Row className="fields-row" gutter={[20, 12]} type="flex">
+          <Col span={12} xs={24} sm={12} lg={12}>
+            <Form.Item name="mosque" rules={[{ required: true, message: "Mosque is required!" }]}>
+              <Select
+                showSearch
+                placeholder="Select Mosque"
+                optionFilterProp="children"
+                loading={mosqueOptionLoading}
+                filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+              >
+                {mosqueOptionlist?.length > 0 &&
+                  mosqueOptionlist?.map(item => (
+                    <Select.Option key={item.code} value={item.id}>
+                      {item.name}
+                    </Select.Option>
+                  ))}
+              </Select>
+            </Form.Item>
+          </Col>
+          <Col span={12} xs={24} sm={12} lg={12}>
+            <Form.Item name="session" rules={[{ required: true, message: "Session is required!" }]}>
+              <Select
+                showSearch
+                placeholder="Select Session"
+                optionFilterProp="children"
+                loading={mosqueOptionLoading}
+                filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+              >
+                {activeSessionList?.length > 0 &&
+                  activeSessionList?.map(item => (
+                    <Select.Option key={item.id} value={item.id}>
+                      {item.description}
+                    </Select.Option>
+                  ))}
+              </Select>
+            </Form.Item>
+          </Col>
+          {/* <Divider /> */}
+          <Col span={4} xs={24} sm={12} lg={4}>
+            <Button type="primary" htmlType="submit" onClick={() => {}}>
+              Get Participant
+            </Button>
+          </Col>
+          <Col span={4} xs={24} sm={12} lg={4}>
+            <Button onClick={onClear}>Clear</Button>
+          </Col>
+          {/* <Col span={4} xs={24} sm={12} lg={4}>
+            <Button type="primary" onClick={() => {}}>
+              Export Attendance
+            </Button>
+          </Col> */}
+        </Row>
+      </Form>
+      <Divider />
       <PageTitle title="All Participant" />
       <ListView
         dataSource={list}
@@ -146,6 +238,9 @@ MusalliMosqueManagement.propTypes = {
   loading: PropTypes.bool,
   pagination: PropTypes.object,
   enableDisableAdmin: PropTypes.func,
+  mosqueOptionlist: PropTypes.func,
+  mosqueOptionLoading: PropTypes.func,
+  activeSessionList: PropTypes.func,
 };
 
 export default MusalliMosqueManagement;
