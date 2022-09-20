@@ -1,18 +1,20 @@
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { bindActionCreators } from "redux";
-import MusalliAttendanceChangeRequestManagment from "../containers/MusalliAttendanceChangeRequestManagment/MusalliAttendanceChangeRequestManagment";
+// import MusalliAttendanceChangeRequestManagment from "../containers/MusalliAttendanceChangeRequestManagment/MusalliAttendanceChangeRequestManagment";
 import MusalliAttendanceBulkManagment from "../containers/MusalliAttendanceBulk/MusalliAttendanceBulkManagment";
 import {
   // deleteAdminUsers,
   // enableDisableAdmin,
   getMusalliAttendanceBulk,
-} from "../store/actions/musalli_AttendanceBulk.actions";
+  postMusalliAttendanceBulk,
+} from "../store/actions/musalli_AttendanceBulk.action";
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       getMusalliAttendanceBulk,
+      postMusalliAttendanceBulk,
       // deleteAdminUsers,
       // enableDisableAdmin,
     },
@@ -26,11 +28,8 @@ const mapStateToProps = state => ({
   pagination: state.participant.value,
 
   mosqueOptionLoading: state.activeMosqueBySession.mosqueOptionLoading,
-  // mosqueOptionvalue: state.activeMosqueBySession.value,
   mosqueOptionlist: state.activeMosqueBySession.mosqueOptionlist,
-
-  // activeSessionLoading: state.musalliGetAllActiveSession.loading,
-  // activeSessionList: state.musalliGetAllActiveSession.list,
+  attendanceBulkPostLoading: state.musalliAttendanceBulk.loading,
 });
 
 const MusalliAttendanceBulkProvider = withRouter(

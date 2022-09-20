@@ -37,6 +37,7 @@ const ListView = props => {
     suspendButton,
     cloneButton,
     sessionIdValue,
+    getRowIds,
   } = props;
 
   const [rowsSelected, setRowsSelected] = useState([]);
@@ -87,8 +88,8 @@ const ListView = props => {
     const _query = { ...queryGenerator(sorterFilterPage), ...(sessionIdValue ? { sessionId: sessionIdValue } : {}) };
     getList(_query);
   }, []);
-
   const onSelectChange = selectedRowKeys => {
+    getRowIds(selectedRowKeys);
     const selectedCount = selectedRowKeys.length || 0;
     if (selectedCount === 1) {
       setDeleteText(`Delete Selected`);
@@ -632,6 +633,7 @@ ListView.propTypes = {
   loading: PropTypes.bool,
   deleteAllData: PropTypes.func,
   sessionIdValue: PropTypes.number,
+  getRowIds: PropTypes.func,
   enableButton: PropTypes.shape({
     text: PropTypes.string.isRequired,
     handler: PropTypes.func.isRequired,

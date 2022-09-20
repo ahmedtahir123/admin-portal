@@ -31,7 +31,7 @@ export function postMusalliSmsUtility(body, form) {
     try {
       const [err, response] = await to(musalliService.postSmsUtility(body));
       if (err) throwError(err);
-      toastMessage("success", SUCCESS_MESSAGE.MESSAGE);
+      toastMessage("success", SUCCESS_MESSAGE.ATTENDANCE);
       form.resetFields();
       dispatch(smsUtilitySuccess(response));
       dispatch(smsUtilityListSuccess(response.content));

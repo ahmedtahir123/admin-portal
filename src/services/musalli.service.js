@@ -40,6 +40,7 @@ const musalliService = {
 
   // Put request
   updateVolunteer: (id, body, params) => put(`api/role-admin/v1/volunteer/${id}`, body),
+  postAttendanceBulk: body => post(`api/role-admin/v1/volunteer/participant-attendance/mark-attendance-in-bulk`, body),
 };
 export default musalliService;
 //

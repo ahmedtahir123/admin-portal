@@ -23,6 +23,26 @@ export function selectedParticipantSuccess(response) {
   return { type: ACTIONS.SELECTED_PARTICIPANT_SUCCESS, response };
 }
 
+export function attendanceBulkRequest() {
+  return { type: ACTIONS.MUSALLI_ATTENDANCE_BULK_REQUEST };
+}
+
+export function attendanceBulkSuccess(response) {
+  return { type: ACTIONS.MUSALLI_ATTENDANCE_BULK_SUCCESS, response };
+}
+
+export function attendanceBulkError(error) {
+  return { type: ACTIONS.MUSALLI_ATTENDANCE_BULK_ERROR, error };
+}
+
+export function attendanceBulkListSuccess(response) {
+  return { type: ACTIONS.MUSALLI_ATTENDANCE_BULK_LIST_SUCCESS, response };
+}
+
+export function selectedattendanceBulkSuccess(response) {
+  return { type: ACTIONS.SELECTED_MUSALLI_ATTENDANCE_BULK_SUCCESS, response };
+}
+
 /* Async Actions */
 
 export function getMusalliAttendanceBulk(query) {
@@ -35,6 +55,24 @@ export function getMusalliAttendanceBulk(query) {
       dispatch(ParticipantListSuccess(response.content));
     } catch (error) {
       dispatch(participantError(error));
+      toastMessage("error", ERROR_MESSAGE.LIST);
+      throwError(error);
+    }
+  };
+}
+
+export function postMusalliAttendanceBulk(body, form) {
+  return async dispatch => {
+    dispatch(attendanceBulkRequest());
+    try {
+      const [err, response] = await to(musalliService.postAttendanceBulk(body));
+      if (err) throwError(err);
+      toastMessage("success", SUCCESS_MESSAGE.ATTENDANCE);
+      form.resetFields();
+      dispatch(attendanceBulkSuccess(response));
+      dispatch(attendanceBulkListSuccess(response.content));
+    } catch (error) {
+      dispatch(attendanceBulkError(error));
       toastMessage("error", ERROR_MESSAGE.LIST);
       throwError(error);
     }
