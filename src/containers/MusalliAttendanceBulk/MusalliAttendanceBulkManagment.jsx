@@ -35,9 +35,6 @@ function MusalliAttendanceBulkManagment(props) {
   const getList = async query => {};
   const [columns, setColumns] = useState([]);
   useEffect(() => {
-    console.log(payload, "payloadpayload");
-  }, [payload]);
-  useEffect(() => {
     value.map(currentElement =>
       array.push({
         sessionIdPk: 1,
